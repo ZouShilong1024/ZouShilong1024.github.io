@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+	<title>Shilong Zou's Homepage</title>
+
+	<link href="res/css/bootstrap.min.css" rel="stylesheet">
+
+	<style>
+      body {
+        background-color: #f0f0f0;
+        margin: 0;
+        padding: 0;
+      }
+      .main-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        background: white;
+        min-height: 100vh;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      }
+      .navbar-custom {
+        background-color: #527bbd !important;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      }
+      .navbar-custom .navbar-brand,
+      .navbar-custom .nav-link {
+        color: white !important;
+        font-size: 1.05rem;
+        font-weight: 500;
+        letter-spacing: 0.5px;
+      }
+      .navbar-custom .nav-link {
+        margin: 0 12px;
+        padding: 10px 0;
+        position: relative;
+      }
+      .navbar-custom .nav-link::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background-color: white;
+        transition: width 0.3s ease;
+      }
+      .navbar-custom .nav-link:hover::after,
+      .navbar-custom .nav-link:focus::after {
+        width: 100%;
+      }
+      .navbar-custom .nav-link.active {
+        background-color: #3a5f9a;
+        border-radius: 4px;
+      }
+      #news, #papers, #projects, #honors, #competition, #hobbies, #education {
+        scroll-margin-top: 70px;
+        padding-top: 20px;
+      }
+      h3 {
+        color: #2c3e50;
+        padding-bottom: 10px;
+        border-bottom: 2px solid #e0e0e0;
+        margin-bottom: 20px;
+      }
+      .header {
+        width: auto;
+        max-width: auto;
+        font-family: Arial;
+        padding: 2rem 1rem;
+      }
+
+      a:link,a:visited
+      {
+        color: #0071bc;
+        text-decoration: none;
+      }
+      a:hover {
+        color: #208799;
+      }
+
+      hr {
+        border: 10;
+        height: 1px;
+        background-image: linear-gradient(to right, rgba(0, 113, 188, 0.2), rgba(0, 0, 0, 0.1), rgba(0, 113, 188, 0.2));
+      }
+
+      .gap-20 {height:20px;}
+      .gap-10 {height:10px;}
+      .hgap-6perc {width: 6%;}
+      .hgap-7perc {width: 7%;}
+
+      ::selection {
+        background: rgba(220, 220, 220);
+	  }
+
+      .section-div {height: 3em}
+      .content-div {height: 2em}
+      .small-div {height: 0.5em}
+
+	</style>
+	<style>
+      .back-to-top {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        width: 50px;
+        height: 50px;
+        background-color: #527bbd;
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+        cursor: pointer;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        user-select: none;
+        -webkit-user-select: none;
+        outline: none;
+        -webkit-tap-highlight-color: transparent;
+      }
+      .back-to-top.show {
+        opacity: 1;
+        visibility: visible;
+      }
+      .back-to-top:hover {
+        background-color: #3a5f9a;
+      }
+	</style>
+	<!-- Bootstrap -->
+
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	<script>
+    // Back to top button
+    document.addEventListener("DOMContentLoaded", function() {
+        const backToTopButton = document.createElement('button');
+        backToTopButton.className = 'back-to-top';
+        backToTopButton.innerHTML = '↑';
+        backToTopButton.setAttribute('aria-label', 'Back to top');
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        });
+        document.body.appendChild(backToTopButton);
+
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.add('show');
+            } else {
+                backToTopButton.classList.remove('show');
+            }
+        });
+        const videos = document.querySelectorAll("video[data-src]");
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const video = entry.target;
+                    video.src = video.getAttribute("data-src");
+                    video.autoplay = true;
+                    video.loop = true;
+                    observer.unobserve(video);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        videos.forEach(video => observer.observe(video));
+    });
+	</script>
+	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 9]>
+	<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+
+
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<!-- Include all compiled plugins (below), or include individual files as needed -->
+	<script src="res/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+<div class="main-content">
+<nav class="navbar navbar-expand-lg navbar-custom fixed-top shadow-sm">
+  <div class="container">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav mx-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="#news">News</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#papers">Papers</a>
+        </li>
+        <li class="nav-item">
+			<a class="nav-link" href="#projects">Projects</a>
+		  </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#honors">Honors</a>
+        </li>
+        <li class="nav-item">
+			<a class="nav-link" href="#competition">Competition Awards</a>
+		</li>
+        <li class="nav-item">
+          <a class="nav-link" href="#education">Education</a>
+        </li>
+        <li class="nav-item">
+			<a class="nav-link" href="#hobbies">Hobbies</a>
+		</li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="header" style="margin-top: 56px;">
+	<div class="container">
+		<div class="content-div"></div>
+		<div class="row align-items-center">
+			<div class="col-md-3 align-column-center">
+				<center>
+					<img class="img-fluid" src="profile1.jpg"
+					     style="border-radius:20px; border:1px; margin-bottom: 5px" width=85%" alt="">
+				</center>
+			</div>
+			<div class="col-md-9 align-column-center">
+				<h2> Shilong Zou  </h2>
+				Email: zoushilong AT nudt.edu.cn<br>
+				<!-- <a href="./cv.pdf"> CV </a> & -->
+				<!-- <a href="https://scholar.google.com/citations?user=iyVHKkcAAAAJ&hl=en" target="_blank"> Google Scholar </a> -->
+				<!-- &  -->
+				<a href="https://github.com/ZouShilong1024" target="_blank"> GitHub </a>
+
+				<div class="small-div"></div>
+				<!-- I am a Ph.D. Candidate at UC Berkeley advised by <a href="https://people.eecs.berkeley.edu/~yima/"
+				                                                    target="_blank">
+				Prof. Yi Ma </a> and <a href="http://people.eecs.berkeley.edu/~malik" target="_blank">Prof. Jitendra Malik</a>, and
+				a visiting researcher at Meta FAIR. My research lies at the intersection of robotics, computer vision, tactile sensing, and machine learning. -->
+				I am currently pursuing the master's degree at the National University of Defense Technology advised by <a
+						href="https://kevinkaixu.net/" target="_blank"> Prof. Kai Xu</a>. and <a
+						href="https://www.zhuchenyang.net/"
+						target="_blank"> Prof. Chenyang Zhu</a>.
+				I received the bachelor's degree from the University of Dalian Maritime University, Dalian, 2023.
+				<div class="small-div"></div>
+				My research lies at the intersection of robotics, computer vision, tactile sensing, and deep learning.
+				<!-- <div class="small-div"></div>
+				I received my Bachelor's degree from Hong Kong University of Science and Technology (HKUST), where I was advised by <a
+						href="http://www.cs.ust.hk/~cktang/" target="_blank"> Prof. Chi-Keung Tang</a>.
+				I also spent two years at Microsoft Research Asia (MSRA), working on computer vision with <a
+						href="http://www.jifengdai.org/" target="_blank"> Dr. Jifeng Dai </a> and <a
+						href="https://yichenwei.github.io/"
+						target="_blank"> Dr. Yichen Wei</a>. -->
+
+				<!-- <div class="small-div"></div>
+				<b> I'm on the job market! </b> -->
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="container" id="news">
+	<h3> News </h3>
+	<ul>
+		<li>
+			[05/2025] 🎉🎉 One paper was accepted by TVCG 2025!
+		</li>
+		<li>
+			[05/2025] 🎉🎉 Our AEG-bot project page was accessible at <a href="https://davit666.github.io/AEG-bot/" target="_blank">link</a>.
+		</li>
+	</ul>
+	<div class="content-div"></div>
+</div>
+
+
+<div class="container" id="papers">
+	<!-- publications come here -->
+	<h3> Papers <font size="3" style="font-weight:normal">(*indicates equal technical contribution)</font></h3>
+
+	<div style="text-align: center; position: relative; margin-bottom: 50px; margin-top: 20px;">
+		<span style="position: absolute; top: 50%; left: 0; right: 0; transform: translateY(-50%); background-color: rgba(128, 128, 128, 0.3); padding: 0 10px;">
+			<b>Full List</b>
+		</span>
+		<!-- <hr style="border: 0; height: 1px; background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0)); width: 100%;"> -->
+	</div>
+
+	<!-- <div style="background-color: #edf2fd; padding-left: 20px; padding-right: 20px">
+		<p><b>First/Co-First Author:</b> TII × 1, <i>Under Review × 2</i></p>
+		<p><b>Co-author:</b> TVCG × 1, <i>Under Review × 1</i></p>
+	</div> -->
+
+	<!---- Last Count is Jul 10 ---->
+	<div style="color:white"> <font size="3"> Code Release Progress: 17 / 20 (85.0%). </font></div>
+	<div class="small-div"></div>
+
+	<!------------------------- arXiv 25 --------------------------------->
+	<div class="row align-items-center">
+		<div class="col-md-3">
+			<img src="res/figs/partdiff.png" width="250px" style="box-shadow: 4px 4px 4px #888888; margin-left: 5px; margin-right: 5px;">
+		</div>
+		<div class="col-md-9">
+			<font size="4"> <b> Part-aware Shape Generation with Latent 3D Diffusion of Neural Voxel Fields </b></font><br>
+			<font size="3">
+				<a href="https://scholar.google.com/citations?user=Ecy6lXwAAAAJ&hl=en" target="_blank"> Yuhang huang</a>,
+				<b> Shilong Zou</b>,
+				<a href="https://xinwangliu.github.io/" target="_blank"> Xinwang Liu</a>,
+				<a href="https://kevinkaixu.net/" target="_blank"> Kai Xu</a>
+			</font>
+			<br>
+			IEEE Transactions on Visualization and Computer Graphics (<b>TVCG</b>), 2025<br>
+			<a href="https://ieeexplore.ieee.org/abstract/document/10973321" target="_blank"> [Paper] </a>
+			[Code]
+			[Website]
+		</div>
+	</div>
+	<div class="content-div"></div>
+
+	<div class="row align-items-center">
+		<div class="col-md-3">
+			<!-- style="border:0px solid black" -->
+			<img src="res/figs/Cyclediff.jpg" width="250px" style="box-shadow: 4px 4px 4px #888888; margin-left: 5px; margin-right: 5px;">
+		</div>
+		<div class="col-md-9">
+			<font size="4"> <b> CycleDiff: Cycle Diffusion Models for Unpaired Image-to-image Translation </b></font><br>
+			<font size="3">
+				<b> Shilong Zou</b>*,
+				<a href="https://scholar.google.com/citations?user=Ecy6lXwAAAAJ&hl=en" target="_blank"> Yuhang huang*</a>,
+				<a href="https://renjiaoyi.github.io/" target="_blank"> Renjiao Yi</a>,
+				<a href="https://www.zhuchenyang.net/" target="_blank"> Chenyang Zhu</a>,
+				<a href="https://kevinkaixu.net/" target="_blank"> Kai Xu</a>
+			</font>
+			<br>
+			IEEE Transactions on Image Processing (<b>TIP</b> Under Review), 2025<br>
+			<!-- <a href="https://arxiv.org/abs/2404.16823" target="_blank">  </a> -->
+			[Paper]
+			[Code]
+			<a href="https://zoushilong1024.github.io/CycleDiff.github.io/" target="_blank"> [Website] </a>
+		</div>
+	</div>
+	<div class="content-div"></div>
+
+	<div class="row align-items-center">
+		<div class="col-md-3">
+			<!-- style="border:0px solid black" -->
+			<img src="res/figs/ladiwm.png" width="250px" style="box-shadow: 4px 4px 4px #888888; margin-left: 5px; margin-right: 5px;">
+		</div>
+		<div class="col-md-9">
+			<font size="4"> <b> LaDi-WM: A Latent Diffusion-based World Model for Predictive Manipulation </b></font><br>
+			<font size="3">
+				<a href="https://scholar.google.com/citations?user=Ecy6lXwAAAAJ&hl=en" target="_blank"> Yuhang huang</a>,
+				<a href="https://scholar.google.com/citations?user=Ecy6lXwAAAAJ&hl=en" target="_blank"> Jiazhao Zhang</a>,
+				<b> Shilong Zou</b>,
+				<a href="https://xinwangliu.github.io/" target="_blank"> Xinwang Liu</a>,
+				<a href="https://csse.szu.edu.cn/staff/ruizhenhu/index.htm" target="_blank"> Ruizhen Hu</a>,
+				<a href="https://kevinkaixu.net/" target="_blank"> Kai Xu</a>
+			</font>
+			<br>
+			Arxiv, 2025<br>
+			<a href="https://arxiv.org/abs/2505.11528" target="_blank"> [Paper] </a>
+			[Code]
+			[Website]
+			<!-- <a href="https://github.com/ToruOwO/hato" target="_blank"> [Code] </a> -->
+			<!-- <a href="https://zoushilong1024.github.io/CycleDiff.github.io/" target="_blank"> [Website] </a> -->
+		</div>
+	</div>
+	<div class="content-div"></div>
+
+	<div class="row align-items-center">
+		<div class="col-md-3">
+			<!-- style="border:0px solid black" -->
+			<img src="res/figs/ms2a.png" width="250px" style="box-shadow: 4px 4px 4px #888888; margin-left: 5px; margin-right: 5px;">
+		</div>
+		<div class="col-md-9">
+			<font size="4"> <b> * </b></font><br>
+			<font size="3">
+				<a href="https://scholar.google.com/citations?user=Ecy6lXwAAAAJ&hl=en" target="_blank"> Yuhang huang*</a>,
+				<b> Shilong Zou*</b>,
+				<a href="https://xinwangliu.github.io/" target="_blank"> Xinwang Liu</a>,
+				<a href="https://kevinkaixu.net/" target="_blank"> Kai Xu</a>
+			</font>
+			<br>
+			IEEE Transactions on Industrial Informatics (<b>TII</b> Under Review), 2025<br>
+			<!-- <a href="https://arxiv.org/abs/2505.11528" target="_blank">  </a> -->
+			[Paper]
+			[Code]
+			[Website]
+		</div>
+	</div>
+	<div class="content-div"></div>
+
+</div>
+
+<div class="container" id="projects">
+	<!-- publications come here -->
+	<h3> Projects <font size="3" style="font-weight:normal">(*indicates equal technical contribution)</font></h3>
+
+	<div style="text-align: center; position: relative; margin-bottom: 50px; margin-top: 20px;">
+		<span style="position: absolute; top: 50%; left: 0; right: 0; transform: translateY(-50%); background-color: rgba(128, 128, 128, 0.3); padding: 0 10px;">
+			<b>Full List </b>
+		</span>
+		<!-- <hr style="border: 0; height: 1px; background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0)); width: 100%;"> -->
+	</div>
+
+	<!---- Last Count is Jul 10 ---->
+	<div style="color:white"> <font size="3"> Code Release Progress: 17 / 20 (85.0%). </font></div>
+	<div class="small-div"></div>
+
+	<div class="row align-items-center">
+		<!-- <div class="col-md-3">
+			<img src="res/figs/grasp.png" width="250px" style="box-shadow: 4px 4px 4px #888888; margin-left: 5px; margin-right: 5px;">
+		</div> -->
+		<div class="col-md-3 align-column-center">
+			<center>
+				<video playsinline autoplay loop muted data-src="res/figs/video2.mp4" width="98%" preload="metadata"
+				       style="border-radius:10px;"></video>
+			</center>
+		</div>
+		<div class="col-md-9">
+			<font size="4"> <b> AEG-bot: A mobile humanoid robot for Household Rearrangement </b></font><br>
+			<font size="3">
+				Wenhao Li*,
+				<b> Shilong Zou*</b>,
+				Zhinan Yu*,
+				Zheng Zhou*,
+				Wenxuan Li,
+				<a href="https://www.zhuchenyang.net/" target="_blank"> Chenyang Zhu</a>,
+				<a href="https://csse.szu.edu.cn/staff/ruizhenhu/index.htm" target="_blank"> Ruizhen Hu</a>,
+				<a href="https://kevinkaixu.net/" target="_blank"> Kai Xu</a>
+			</font>
+			<br>
+			<a href="https://davit666.github.io/AEG-bot/" target="_blank"> [Website] </a>
+			[Code]
+		</div>
+	</div>
+	<div class="content-div"></div>
+
+</div>
+
+<div class="container" id="honors">
+	<h3> Honors and Awards </h3>
+	<div style="text-align: center; position: relative; margin-bottom: 50px; margin-top: 20px;">
+		<span style="position: absolute; top: 50%; left: 0; right: 0; transform: translateY(-50%); background-color: rgba(128, 128, 128, 0.3); padding: 0 10px;">
+			<b>Received more than 20 scholarships and grants totaling more than 100,000 RMB</b>
+		</span>
+		<!-- <hr style="border: 0; height: 1px; background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0)); width: 100%;"> -->
+	</div>
+	<!-- <font size="3" style="font-weight:normal"> <i> Received more than 20 scholarships and grants totaling more than 10w RMB </i></font>
+	<p></p> -->
+	<!-- <table style="border-spacing:2px; font-size: 15px;"> -->
+	<!-- <i style="font-size: small;">During college (up to now 3 years), I have received a total of 25 scholarships, totaling <i style="color: red; display: inline;">CNY 200,000</i>. I have received a total of 3 personal honors.</i> -->
+	<!-- </table> -->
+	<!-- <p></p> -->
+	<div style="height: 160px; overflow: auto; font-size: medium;">
+	<ul>
+		<li>
+			[01/2025] Outstanding Second Prize Scholarship of National University of Defense Technology (Top 3%)
+		</li>
+		<li>
+			[12/2023] Starting Point First Prize Scholarship of National University of Defense Technology (Top 3%)
+		</li>
+		<li>
+			[12/2024] Outstanding student of National University of Defense Technology (Top 3%)
+		</li>
+		<li>
+			[08/2023] Outstanding College Student Party Member Pacesetters of Liaoning Province (10 in total in the province)
+		</li>
+		<li>
+			[05/2023] Outstanding Graduates of Liaoning Province (Top 3%)
+		</li>
+		<li>
+			[10/2022] "Top Ten College Students" and "President's Scholarship" of Dalian Maritime University (10 people in the school)
+		</li>
+		<li>
+			[05/2023] Star of "Youthful Character" of Dalian Maritime University (1 people in the school)
+		</li>
+		<li>
+			[11/2022] "Pioneer of Science and Technology Innovation of COSCO Shipping" of Dalian Maritime University (10 people in the school)
+		</li>
+		<li>
+			[10/2022] Xiaomi Extraordinary Scholarship (5 people in the school)
+		</li>
+	</ul>
+	</div>
+	<div style="margin-top: 5px; font-size: small; margin-bottom: 0px;">⬆ scrollable</div>
+
+	<div class="content-div"></div>
+</div>
+
+<div class="container" id="competition">
+	<!-- publications come here -->
+	<h3> Competition Awards </h3>
+	<div style="text-align: center; position: relative; margin-bottom: 50px; margin-top: 20px;">
+		<span style="position: absolute; top: 50%; left: 0; right: 0; transform: translateY(-50%); background-color: rgba(128, 128, 128, 0.3); padding: 0 10px;">
+			<b>Received more than 70 awards at international, national, provincial, and university level or above</b>
+		</span>
+		<!-- <hr style="border: 0; height: 1px; background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0)); width: 100%;"> -->
+	</div>
+	<!-- <font size="3" style="font-weight:normal"> <i> Won more than 70 awards at international, national, provincial, school level and above </i></font>
+	<p></p> -->
+	<div class="small-div"></div>
+
+	<div class="row align-items-center">
+		<div class="col-md-3">
+			<img src="res/figs/computer design.jpg" width="250px" style="box-shadow: 4px 4px 4px #888888; margin-left: 5px; margin-right: 5px;">
+		</div>
+		<div class="col-md-9">
+			<font size="4"> <b> National First Prize in the China College Students Computer Design Competition (only two teams in China) </b></font><br>
+			<font size="3">
+				Haobin Wang, <b>Shilong Zou</b>, Mengyue Deng
+			</font>
+			<br>
+			China College Students Computer Design Competition<br>
+		</div>
+	</div>
+
+	<div class="small-div"></div>
+
+	<div style="text-align: center; position: relative; margin-bottom: 50px; margin-top: 20px;">
+		<span style="position: absolute; top: 50%; left: 0; right: 0; transform: translateY(-50%); background-color: rgba(128, 128, 128, 0.3); padding: 0 10px;">
+			<b>Others (Selected)</b>
+		</span>
+		<!-- <hr style="border: 0; height: 1px; background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0)); width: 100%;"> -->
+	</div>
+	<div style="height: 100px; overflow: auto; font-size: medium;">
+	<ul>
+		<li>
+			[07/2022] National First Prize in the National Undergraduate Transportation Science and Technology Competition
+		</li>
+		<li>
+			[10/2021] National First Prize in the National College Business Elite Challenge
+		</li>
+		<li>
+			[12/2020] National Second Prize in the National College Students Mathematics Competition
+		</li>
+		<li>
+			[11/2023] Third Prize of “Huawei Cup” 20th China Graduate Student Mathematical Modeling Competition at National Level
+		</li>
+	</ul>
+	</div>
+	<div style="margin-top: 5px; font-size: small; margin-bottom: 0px;">⬆ scrollable</div>
+
+	<div class="content-div"></div>
+
+</div>
+
+<div class="container" id="education">
+	<h3> Education </h3>
+	<div class="small-div"></div>
+
+	<div class="row align-items-center">
+		<div class="col-md-3">
+			<center>
+				<img class="img-fluid " src="nudt.png" width="60%" style="border:0px solid black" alt="">
+			</center>
+		</div>
+		<div class="col-md-7">
+			<font size="4"> <b> M.S. in Computer Vision and Robotics </b></font><br>
+			<font size="3">
+				School of Computer Science
+			</font>
+			<br><br>
+			National University of Defense Technology<br>
+		</div>
+		<div class="col-md-2">
+			<font size="3">
+				2023 - present
+			</font>
+		</div>
+	</div>
+
+	<div class="content-div"></div>
+
+	<div class="row align-items-center">
+		<div class="col-md-3">
+			<center>
+				<img class="img-fluid " src="dmu.png" width="60%" style="border:0px solid black" alt="">
+			</center>
+		</div>
+		<div class="col-md-7">
+			<font size="4"> <b> Bachelor of Engineering </b></font><br>
+			<font size="3">
+				School of Information Science and Technology
+				<br>
+				Served as a squadron study committee member
+			</font>
+			<br><br>
+			Dalian Maritime University<br>
+		</div>
+		<div class="col-md-2">
+			<font size="3">
+				2019 - 2023
+			</font>
+		</div>
+	</div>
+
+	<div class="content-div"></div>
+</div>
+
+<div class="container" id="hobbies">
+	<!-- publications come here -->
+	<h3> Hobbies </h3>
+	<font size="3" style="font-weight:normal"> <i> Travel enthusiast and marathon runner </i></font>
+	<p></p>
+
+	<ur style="font-size: medium">
+		<li>[01/2025] Completed the first half marathon with a score of <b>138 (average 4.40)</b> - Songya Lake New Year Half Marathon</li>
+		<div style="height: 4px"></div>
+		<li>[03/2025] Ranked <b>50th </b>(average score of 4.05) in the Campus Run, National University of Defense Technology</li>
+		<div style="height: 4px"></div>
+		<li>[03/2025] Completed the first A1 marathon with a score of <b>135 (average 4.30)</b> - Zhangjiajie Wulingyuan Half Marathon</li>
+		<div style="height: 4px"></div>
+		<li>[04/2025] <b>Bronze Medalist🥉 </b>in the Men's 800 Meters at the Sports Meet of Cadet Second Battalion, College of Computer Science, National University of Defense Technology</li>
+		<div style="height: 4px"></div>
+	</ur>
+	<div class="content-div"></div>
+</div>
+
+<!-- <div class="container" id="clubs">
+	<h3> Clubs </h3>
+
+	<ur style="font-size: medium">
+		<li>[01/2025] President of Delta Society</li>  
+		<div style="height: 4px"></div>	
+	</ur>
+	<div class="content-div"></div>
+</div> -->
+
+<div class="container">
+	<div class="small-div"></div>
+	<center>Updated July 2025. </center>
+	<p></p><center> © Shilong Zou</center>
+	<div class="content-div"></div>
+</div>
+
+</div>
+</body>
+</html>
