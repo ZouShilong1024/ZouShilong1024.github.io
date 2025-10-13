@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <!-- Meta tags for social media banners, these should be filled in appropriatly as they are your "business card" -->
+  <!-- Replace the content tag with appropriate information -->
+  <meta name="description" content="DESCRIPTION META TAG">
+  <meta property="og:title" content="SOCIAL MEDIA TITLE TAG" />
+  <meta property="og:description" content="SOCIAL MEDIA DESCRIPTION TAG TAG" />
+  <meta property="og:url" content="URL OF THE WEBSITE" />
+  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X630-->
+  <meta property="og:image" content="static/image/your_banner_image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+
+
+  <meta name="twitter:title" content="TWITTER BANNER TITLE META TAG">
+  <meta name="twitter:description" content="TWITTER BANNER DESCRIPTION META TAG">
+  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X600-->
+  <meta name="twitter:image" content="static/images/your_twitter_banner_image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- Keywords for your paper to be indexed by-->
+  <meta name="keywords" content="KEYWORDS SHOULD BE PLACED HERE">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <title>Learning Visuotactile Policy for Fast and Stable Placement</title>
+  <link rel="icon" type="image/x-icon" href="static/images/robot_icon.png">
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"rel="stylesheet">
+
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+  <!-- <link rel="stylesheet" href="static/css/fontawesome.all.min.css"> -->
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script src="static/js/bulma-carousel.min.js"></script>
+  <script src="static/js/bulma-slider.min.js"></script>
+  <script src="static/js/index.js"></script>
+</head>
+
+
+<body>
+  <!----- cover ----->
+  <section class="hero is-link is-fullheight video" 
+  style="overflow: hidden; position:relative; background-image: url('./static/images/cover.png'); background-size: cover; background-position: center;">
+    <!-- <div class="hero-video" style="height: 100%; width: 160.77777778vh; min-width: 70%;min-height: 46.25vw;">
+      <video playsinline autoplay muted loop>
+        <source src="./static/cover.mp4" type="video/mp4">
+      </video>
+    </div> -->
+    <!-- <video autoplay muted loop style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1;">
+      <source src="./static/cover.mp4" type="video/mp4">
+    </video> -->
+    <!-- <div class="hero-video is-hidden-tablet is-inline-block-mobile"
+      style="height: 154.28571428vw; width: 100%; min-width:64.81481481vh;min-height:100%;">
+      <video playsinline autoplay muted loop>
+        <source src="./static/cover.mp4" type="video/mp4">
+      </video>
+    </div> -->
+    <div class="hero-body">
+      <div class="container has-text-centered">
+        <h1 class="subtitle is-1 publication-title is-size-1-mobile" style="font-size: 6rem; color: black;">
+          Learning Visuotactile Policy for Fast and Stable Placement
+        </h1>
+        <h1 class="is-2 is-italic is-size-4-mobile" style="font-size: 3rem; opacity: 80%; color: black;">
+          Under Review
+        </h1>
+      </div>
+    </div>
+    </div>
+  </section>
+
+
+  <!----- Main content ----->
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="container has-text-centered">
+            <!-- Paper title -->
+            <h1 class="title is-1 publication-title" style="color:#27639b; font-size: 3rem;">
+              Learning Visuotactile Policy for Fast and Stable Placement
+            </h1>
+
+            <!-- Paper authors -->
+            <!-- <div class="is-size-5 publication-authors">
+              <span class="author-block">
+                <a href="https://github.com/XuAdventurer" target="_blank">Shilong Zou<sup>1,∗</sup> </a>,</span>
+              <a href="http://alexfrom0815.github.io" target="_blank">Hang Zhao<sup>2,∗</sup> </a>,</span>
+              <a href="FIRST AUTHOR PERSONAL LINK" target="_blank">Yuhang Huang<sup>1</sup> </a>,</span>
+              <a href="FIRST AUTHOR PERSONAL LINK" target="_blank">Zhigao Zeng<sup>2</sup> </a>,</span>
+              <a href="FIRST AUTHOR PERSONAL LINK" target="_blank">Wenhao Li<sup>1</sup> </a>,</span>
+              <a href="FIRST AUTHOR PERSONAL LINK" target="_blank">Min Liu<sup>1</sup> </a>,</span>
+              <a href="https://shenyujun.github.io/" target="_blank">Yujun Shen<sup>4</sup> </a>,</span>
+              <a href="FIRST AUTHOR PERSONAL LINK" target="_blank">Xing Zhu<sup>4</sup> </a>,</span>
+              <a href="https://www.zhuchenyang.net/" target="_blank">Chenyang Zhu<sup>1</sup> </a>,</span>
+              <a href="https://csse.szu.edu.cn/staff/ruizhenhu/" target="_blank">Ruizhen Hu<sup>3,&dagger;</sup></a>,</span>
+              <a href="http://kevinkaixu.net" target="_blank">Kai Xu<sup>1,&dagger;</sup> </a></span>
+            </div> -->
+
+            <!-- Paper authors other infos-->
+            <!-- <div class="is-size-5 publication-authors">
+              <span class="author-block"><sup>1</sup>National University of Defense Technology &nbsp;&nbsp;&nbsp;
+                <sup>2</sup>Wuhan University&nbsp;&nbsp;&nbsp; <sup>3</sup>Shenzhen University</span>
+              <span class="author-block"><sup>4</sup>Ant Group</span>
+              <span class="eql-cntrb"><br><sup>*</sup>Equal
+                contributions&nbsp;&nbsp;&nbsp;&nbsp;<sup>&dagger;</sup>Corresponding author</span>
+            </div> -->
+
+            <!-- conference info -->
+            <!-- <div class="is-size-5 publication-authors">
+              <img
+              src="static/images/RSS_icon.png"
+              alt="icon"
+              style="width:1em; height:auto; vertical-align:middle; margin-right:0.3em;margin-top: -0.3em;"
+              />
+              <a href="https://roboticsconference.org" target="_blank">
+                <span class="author-block" style="color: #F7CE46; font-weight: bold;">
+                  ICRA 2026
+                </span>
+              </a>
+            </div> -->
+
+
+            <!-- school logo-->
+            <!-- <div class="column has-text-centered">
+              <image src="./static/images/nudt_logo.png" style="width: 24%;"></image>
+              <image src="./static/images/whu_log.png" style="width: 24%;"></image>
+              <image src="./static/images/szu_logo.png" style="width: 24%;"></image>
+              <image src="./static/images/ant_logo.png" style="width: 24%;"></image>
+            </div> -->
+
+            <!-- Links and videos-->
+            <div class="column has-text-centered">
+              <!-- Links-->
+              <div class="publication-links">
+                <!-- Arxiv PDF link -->
+                <span class="link-block">
+                  <a href="./static/pdfs/" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                    </span>
+                    <span>Paper</span>
+                  </a>
+                </span>
+
+                <!-- ArXiv link -->
+                <span class="link-block">
+                  <a href="https://arxiv.org/" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                    </span>
+                    <span>ArXiv</span>
+                  </a>
+                </span>
+                
+                <!-- Video link -->
+                <span class="link-block">
+                  <a href="./static/videos/video_final.mp4" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fas fa-video"></i>
+                    </span>
+                    <span>Video</span>
+                  </a>
+                </span>
+
+                <!-- Github link -->
+                <span class="link-block">
+                  <a href="https://github.com/" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fab fa-github"></i>
+                    </span>
+                    <span>Code</span>
+                  </a>
+                </span>
+              </div>
+
+              <div>
+                <div class="is-size-3">
+                  <h2 class="title is-3" style="margin-top: 30px;"> </h2>
+                </div>
+              </div>
+            </div>
+  </section>
+
+  <section class="hero teaser" style="margin-top: -50px; padding-top: 0;">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <div style="text-align: center; margin-bottom: 20px;">
+            <img src="./static/images/teaser_01.png" alt="Image description" style="max-height: 60%; height: auto;">
+          </div>
+          <div class="content has-text-justified">
+            <p style="font-size: 1.1rem">
+          Traditional goal-reaching placement leads to toppling under complex contact dynamics. 
+          Our FSP policy attains stability by online adjusting the end-effector's local configurations and 
+          global velocity once the object contacts the table, and retracts back to the initial position afterwards.
+            </p>
+          </div>
+          </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Paper abstract -->
+  <section class="section hero" style="margin-top: 30px; padding-top: 0;">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Abstract</h2>
+          <div class="content has-text-justified">
+            <p style="font-size: 1.1rem">
+              Placement is an essential yet underexplored component of robotic manipulation. Its contact-rich 
+              nature poses significant challenges for perception and control, making it inherently difficult 
+              to balance efficiency and stability. We present <b>Fast and Stable Placement (FSP)</b>, a visuotactile policy learning framework that 
+              leverages multimodal sensing for enhanced contact perception and achieves reliable placement 
+              through online adjustment. FSP adopts a two-stage curriculum for robust placement skill learning.
+              An oracle policy is first trained with privileged information; then, it is distilled into a 
+              deployable policy that operates on carefully designed domain-invariant modalities, enabling direct sim-to-real policy transfer.
+              These comprehensive modalities are tokenized and fused with the attention mechanism to support 
+              end-to-end policy learning. 
+              Extensive evaluations in both simulation and on real robots demonstrate 
+              that the learned FSP policy achieves a superior trade-off between efficiency and stability. 
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container is-max-widescreen" style="margin-top: -5em;">
+      <hr width="100%" size="2">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Overview</h2>
+          <div class="column has-text-centered">
+            <video id="dist1" controls muted autoplay controlsList="nodownload nofullscreen noplaybackrate" width="99%">
+              <source src="./static/videos/video_final.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Paper mthod -->
+  <section class="hero teaser">
+    <div class="container is-max-desktop">
+      <div class="hero-body">
+        <h2 class="title is-3  has-text-centered">Method</h2>
+        <img src="static/images/pipeline_01.png" alt="Banner Image" style="width: 100%; height: auto;">
+        <div class="content">
+          <p style="font-size: 1.1rem">
+        Overview of the FSP policy learning framework. An oracle FSP policy &pi;<sup>*</sup> is first trained with 
+        privileged knowledge (a), which is then distilled into a deployable policy &pi;<sup>†</sup> that operates 
+        on domain-invariant observations (b). Given the real-world setup (c), the policy trained in the 
+        aligned simulated environment can be directly deployed on real robots (d).
+          </p>
+        </div>
+        <div style="text-align: center; padding: 20px;">
+            <img src="static/images/MAE_archi_01.png" alt="Banner Image" 
+                style="max-width: 70%; height: auto; display: inline-block;">
+        </div>
+        <div class="content">
+          <p style="font-size: 1.1rem">
+        To actively complete missing details, we incorporate multi-view observations and pretrain a masked autoencoder 
+        (MAE) on multi-view depth maps, enhancing the policy’s spatial reasoning. Fig. (a) provides details of the architecture.
+         The MAE module is required to reconstruct the masked portion of the image based on visible patches, enforcing 
+         the policy to infer the unobserved geometry.  For the FSP policy, we also segment out the object region, 
+         which may be partially occluded during placement, and the pretrained MAE encoder leverages these observations 
+         to implicitly imagine the complete geometry, as shown in Fig. (b). For efficiency,  we adopt a lightweight 
+         U-Net to conduct segmentation, which is trained with mask labels provided by SAM2.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Paper dataset -->
+  <section class="hero teaser">
+    <div class="container is-max-desktop">
+      <div class="hero-body">
+        <h2 class="title is-3  has-text-centered">Dataset</h2>
+        <div style="text-align: center; padding: 20px;">
+            <img src="static/images/dataset.png" alt="Banner Image" 
+                style="max-width: 80%; height: auto; display: inline-block;">
+        </div>
+        <div class="content">
+          <p>
+        We consider three categories of objects that present distinct challenges for placement:
+        <i>slender</i>, <i>heavy-top</i>, and <i>daily</i> objects. <i>Slender</i> objects have a high center of mass 
+        and a small support area, making them susceptible to failure from even minor disturbances during placement. 
+        <i>Heavy-top</i> objects, such as an inverted slender-neck bottle, further amplify this challenge by 
+        concentrating the center of mass further higher.
+        Finally, <i>Daily</i> objects represent common household items, included to assess whether our method can 
+        generalize across a diverse range of shapes.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="container is-max-widescreen">
+  <hr style="margin-top: 1em;">
+  <div class="rows is-centered has-text-centered">
+    <h2 class="title is-3" style="margin-bottom: 0.5em">Comparisons on <i>slender</i> objects</h2>
+    </br>
+
+    <div class="rows">
+
+      <div class="columns video-columns" style="margin-bottom: 0.5rem;">
+        <div class="column has-text-centered">
+          <h3 class="title is-4 has-text-centered" style="margin-bottom: 0.2em">Goal Reaching (Fast)</h3>
+          <video id="dist1"
+            controls
+            muted
+            autoplay
+            controlsList="nodownload nofullscreen noplaybackrate"
+            width="99%">
+            <source src="./static/videos/compare/slender_1_fast.mp4" 
+            type="video/mp4">
+          </video>
+        </div>
+
+        <div class="column has-text-centered">
+          <h3 class="title is-4 has-text-centered" style="margin-bottom: 0.2em">GR (Slow)</h3>
+          <video id="dist1"
+            controls
+            muted
+            autoplay
+            controlsList="nodownload nofullscreen noplaybackrate"
+            width="99%">
+            <source src="./static/videos/compare/slender_1_slow.mp4" 
+            type="video/mp4">
+          </video>
+        </div>
+
+        <div class="column has-text-centered">
+          <h3 class="title is-4 has-text-centered" style="margin-bottom: 0.2em">Ours</h3>
+          <video id="dist1"
+            controls
+            muted
+            autoplay
+            controlsList="nodownload nofullscreen noplaybackrate"
+            width="99%">
+            <source src="./static/videos/compare/slender_1_our.mp4" 
+            type="video/mp4">
+          </video>
+        </div>
+      </div>
+
+      <div class="columns video-columns" style="margin-bottom: 0.5rem;">
+        <div class="column has-text-centered">
+          <video id="dist1"
+            controls
+            muted
+            autoplay
+            controlsList="nodownload nofullscreen noplaybackrate"
+            width="99%">
+            <source src="./static/videos/compare/slender_2_fast.mp4" 
+            type="video/mp4">
+          </video>
+        </div>
+
+        <div class="column has-text-centered">
+          <video id="dist1"
+            controls
+            muted
+            autoplay
+            controlsList="nodownload nofullscreen noplaybackrate"
+            width="99%">
+            <source src="./static/videos/compare/slender_2_slow.mp4" 
+            type="video/mp4">
+          </video>
+        </div>
+
+        <div class="column has-text-centered">
+          <video id="dist1"
+            controls
+            muted
+            autoplay
+            controlsList="nodownload nofullscreen noplaybackrate"
+            width="99%">
+            <source src="./static/videos/compare/slender_2_our.mp4" 
+            type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <div class="container is-max-widescreen">
+  <hr style="margin-top: 1em;">
+  <div class="rows is-centered has-text-centered">
+    <h2 class="title is-3" style="margin-bottom: 0.5em">Comparisons on <i>heavytop</i> objects</h2>
+    </br>
+
+    <div class="rows">
+
+      <div class="columns video-columns" style="margin-bottom: 0.5rem;">
+        <div class="column has-text-centered">
+          <h3 class="title is-4 has-text-centered" style="margin-bottom: 0.2em">GR (Fast)</h3>
+          <video id="dist1"
+            controls
+            muted
+            autoplay
+            controlsList="nodownload nofullscreen noplaybackrate"
+            width="99%">
+            <source src="./static/videos/compare/heavytop_1_fast.mp4" 
+            type="video/mp4">
+          </video>
+        </div>
+
+        <div class="column has-text-centered">
+          <h3 class="title is-4 has-text-centered" style="margin-bottom: 0.2em">GR (Slow)</h3>
+          <video id="dist1"
+            controls
+            muted
+            autoplay
+            controlsList="nodownload nofullscreen noplaybackrate"
+            width="99%">
+            <source src="./static/videos/compare/heavytop_1_slow.mp4" 
+            type="video/mp4">
+          </video>
+        </div>
+
+        <div class="column has-text-centered">
+          <h3 class="title is-4 has-text-centered" style="margin-bottom: 0.2em">Ours</h3>
+          <video id="dist1"
+            controls
+            muted
+            autoplay
+            controlsList="nodownload nofullscreen noplaybackrate"
+            width="99%">
+            <source src="./static/videos/compare/heavytop_1_our.mp4" 
+            type="video/mp4">
+          </video>
+        </div>
+      </div>
+      
+      <div class="columns video-columns" style="margin-bottom: 0.5rem;">
+        <div class="column has-text-centered">
+          <video id="dist1"
+            controls
+            muted
+            autoplay
+            controlsList="nodownload nofullscreen noplaybackrate"
+            width="99%">
+            <source src="./static/videos/compare/heavytop_2_fast.mp4" 
+            type="video/mp4">
+          </video>
+        </div>
+
+        <div class="column has-text-centered">
+          <video id="dist1"
+            controls
+            muted
+            autoplay
+            controlsList="nodownload nofullscreen noplaybackrate"
+            width="99%">
+            <source src="./static/videos/compare/heavytop_2_slow.mp4" 
+            type="video/mp4">
+          </video>
+        </div>
+
+        <div class="column has-text-centered">
+          <video id="dist1"
+            controls
+            muted
+            autoplay
+            controlsList="nodownload nofullscreen noplaybackrate"
+            width="99%">
+            <source src="./static/videos/compare/heavytop_2_our.mp4" 
+            type="video/mp4">
+          </video>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  </div>
+
+  <div class="container is-max-widescreen">
+  <hr style="margin-top: 1em;">
+  <div class="rows is-centered has-text-centered">
+    <h2 class="title is-3" style="margin-bottom: 0.5em">Comparisons on <i>daily</i> objects</h2>
+    </br>
+
+    <div class="rows">
+
+      <div class="columns video-columns" style="margin-bottom: 0.5rem;">
+        <div class="column has-text-centered">
+          <h3 class="title is-4 has-text-centered" style="margin-bottom: 0.2em">GR (Fast)</h3>
+          <video id="dist1"
+            controls
+            muted
+            autoplay
+            controlsList="nodownload nofullscreen noplaybackrate"
+            width="99%">
+            <source src="./static/videos/compare/daily_1_fast.mp4" 
+            type="video/mp4">
+          </video>
+        </div>
+
+        <div class="column has-text-centered">
+          <h3 class="title is-4 has-text-centered" style="margin-bottom: 0.2em">GR (Slow)</h3>
+          <video id="dist1"
+            controls
+            muted
+            autoplay
+            controlsList="nodownload nofullscreen noplaybackrate"
+            width="99%">
+            <source src="./static/videos/compare/daily_1_slow.mp4" 
+            type="video/mp4">
+          </video>
+        </div>
+
+        <div class="column has-text-centered">
+          <h3 class="title is-4 has-text-centered" style="margin-bottom: 0.2em">Ours</h3>
+          <video id="dist1"
+            controls
+            muted
+            autoplay
+            controlsList="nodownload nofullscreen noplaybackrate"
+            width="99%">
+            <source src="./static/videos/compare/daily_1_our.mp4" 
+            type="video/mp4">
+          </video>
+        </div>
+      </div>
+      
+      <div class="columns video-columns" style="margin-bottom: 0.5rem;">
+        <div class="column has-text-centered">
+          <video id="dist1"
+            controls
+            muted
+            autoplay
+            controlsList="nodownload nofullscreen noplaybackrate"
+            width="99%">
+            <source src="./static/videos/compare/daily_2_fast.mp4" 
+            type="video/mp4">
+          </video>
+        </div>
+
+        <div class="column has-text-centered">
+          <video id="dist1"
+            controls
+            muted
+            autoplay
+            controlsList="nodownload nofullscreen noplaybackrate"
+            width="99%">
+            <source src="./static/videos/compare/daily_2_slow.mp4" 
+            type="video/mp4">
+          </video>
+        </div>
+
+        <div class="column has-text-centered">
+          <video id="dist1"
+            controls
+            muted
+            autoplay
+            controlsList="nodownload nofullscreen noplaybackrate"
+            width="99%">
+            <source src="./static/videos/compare/daily_2_our.mp4" 
+            type="video/mp4">
+          </video>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  </div>
+
+  <div class="container is-max-widescreen">
+  <hr style="margin-top: 1em;">
+  <div class="rows is-centered has-text-centered">
+    <h2 class="title is-3" style="margin-bottom: 0.5em">Comparisons on <i>higher target location</i></h2>
+    </br>
+
+    <div class="rows">
+
+      <div class="columns video-columns" style="margin-bottom: 0.5rem;">
+        <div class="column has-text-centered">
+          <h3 class="title is-4 has-text-centered" style="margin-bottom: 0.2em">GR (Fast)</h3>
+          <video id="dist1"
+            controls
+            muted
+            autoplay
+            controlsList="nodownload nofullscreen noplaybackrate"
+            width="99%">
+            <source src="./static/videos/compare/height_1_fast.mp4" 
+            type="video/mp4">
+          </video>
+        </div>
+
+        <div class="column has-text-centered">
+          <h3 class="title is-4 has-text-centered" style="margin-bottom: 0.2em">GR (Slow)</h3>
+          <video id="dist1"
+            controls
+            muted
+            autoplay
+            controlsList="nodownload nofullscreen noplaybackrate"
+            width="99%">
+            <source src="./static/videos/compare/height_1_slow.mp4" 
+            type="video/mp4">
+          </video>
+        </div>
+
+        <div class="column has-text-centered">
+          <h3 class="title is-4 has-text-centered" style="margin-bottom: 0.2em">Ours</h3>
+          <video id="dist1"
+            controls
+            muted
+            autoplay
+            controlsList="nodownload nofullscreen noplaybackrate"
+            width="99%">
+            <source src="./static/videos/compare/height_1_our.mp4" 
+            type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <div class="container is-max-widescreen">
+  <hr style="margin-top: 1em;">
+  <div class="rows is-centered has-text-centered">
+    <h2 class="title is-3" style="margin-bottom: 0.5em">More real-world experiments</h2>
+    </br>
+
+    <div class="rows">
+
+      <div class="columns video-columns" style="margin-bottom: 0.5rem;">
+        <div class="column has-text-centered">
+          <video id="dist1"
+            controls
+            muted
+            autoplay
+            controlsList="nodownload nofullscreen noplaybackrate"
+            width="99%">
+            <source src="./static/videos/more/object1.mp4" 
+            type="video/mp4">
+          </video>
+        </div>
+
+        <div class="column has-text-centered">
+          <video id="dist1"
+            controls
+            muted
+            autoplay
+            controlsList="nodownload nofullscreen noplaybackrate"
+            width="99%">
+            <source src="./static/videos/more/object2.mp4" 
+            type="video/mp4">
+          </video>
+        </div>
+
+        <div class="column has-text-centered">
+          <video id="dist1"
+            controls
+            muted
+            autoplay
+            controlsList="nodownload nofullscreen noplaybackrate"
+            width="99%">
+            <source src="./static/videos/more/object3.mp4" 
+            type="video/mp4">
+          </video>
+        </div>
+      </div>
+
+      <div class="columns video-columns" style="margin-bottom: 0.5rem;">
+        <div class="column has-text-centered">
+          <video id="dist1"
+            controls
+            muted
+            autoplay
+            controlsList="nodownload nofullscreen noplaybackrate"
+            width="99%">
+            <source src="./static/videos/more/object4.mp4" 
+            type="video/mp4">
+          </video>
+        </div>
+
+        <div class="column has-text-centered">
+          <video id="dist1"
+            controls
+            muted
+            autoplay
+            controlsList="nodownload nofullscreen noplaybackrate"
+            width="99%">
+            <source src="./static/videos/more/object5.mp4" 
+            type="video/mp4">
+          </video>
+        </div>
+
+        <div class="column has-text-centered">
+          <video id="dist1"
+            controls
+            muted
+            autoplay
+            controlsList="nodownload nofullscreen noplaybackrate"
+            width="99%">
+            <source src="./static/videos/more/object6.mp4" 
+            type="video/mp4">
+          </video>
+        </div>
+      </div>
+
+      <div class="content">
+        <p style="font-size: 1.1rem">
+      FSP enables robust placement across diverse object shapes and goals.
+        </p>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <br></br>
+  <!-- BibTex citation -->
+  <!-- <section class="section" style="margin-top: -50px;" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <h2 class="title has-text-centered">BibTeX</h2>
+      <pre><code>@article{li2025pin,
+        title={PIN-WM: Learning Physics-INformed World Models for Non-Prehensile Manipulation},
+        author={Li, Wenxuan and Zhao, Hang and Yu, Zhiyuan and Du, Yu and Zou, Qin and Hu, Ruizhen and Xu, Kai},
+        journal={arXiv preprint arXiv:2504.16693},
+        year={2025}
+      }</code></pre>
+    </div>
+  </section> -->
+
+  <footer class="footer">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-8">
+          <div class="content">
+  
+            <p>
+              This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a> which was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
+              You are free to borrow the source code of this website, we just ask that you link back to this page in the footer. <br> This website is licensed under a <a rel="license"  href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
+              Commons Attribution-ShareAlike 4.0 International License</a>.
+            </p>
+  
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+  
+</body>
+
+</html>
