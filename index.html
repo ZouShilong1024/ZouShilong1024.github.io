@@ -166,16 +166,22 @@
 		}
       
       .news-container {
-        background-color: white;
-        border-radius: 12px;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-        padding: 10px;
-        margin-bottom: 10px;
-        transition: box-shadow 0.3s ease;
-      }
+		background: linear-gradient(180deg, #ffffff 0%, #fafafa 100%);
+		border-radius: 16px;
+		box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+		padding: 18px 20px;
+		margin-bottom: 14px;
+		border: 1px solid rgba(230, 230, 230, 0.8);
+		transition: 
+			box-shadow 0.3s ease,
+			transform 0.25s ease,
+			border-color 0.3s ease;
+	}
       
       .news-container:hover {
-        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+		box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+		transform: translateY(-3px);
+		border-color: rgba(180, 180, 255, 0.6);
       }
       
       .publication-item {
@@ -191,6 +197,43 @@
         box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
         transform: translateY(-2px);
       }
+      
+      /* .section-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 25px;
+        padding: 15px 20px;
+        background-color: #527bbd;
+        border-radius: 4px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        position: relative;
+        overflow: hidden;
+      }
+      
+      .section-header i {
+        font-size: 20px;
+        color: white;
+        margin-right: 12px;
+      }
+      
+      .section-header h3 {
+        color: white;
+        font-size: 1.05rem;
+        font-weight: 500;
+        margin: 0;
+        padding: 0;
+        border: none;
+        letter-spacing: 0.5px;
+      }
+      
+      .header-decoration {
+        flex: 1;
+        height: 2px;
+        background-color: rgba(255,255,255,0.3);
+        margin-left: 15px;
+        border-radius: 2px;
+      } */
+
 	</style>
 
 	<script>
@@ -273,7 +316,10 @@
 			<div class="col-md-3 align-column-center">
 				<center>
 					<img class="img-fluid" src="res/figs/profile1.jpg"
-					     style="border-radius:20px; border:1px; margin-bottom: 5px" width=85%" alt="">
+					     style="border-radius:20px; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15); border: 1px solid rgba(0, 0, 0, 0.05);
+						margin-bottom: 10px; transition: transform 0.3s ease, box-shadow 0.3s ease;" width=85%" alt="">
+						<!-- onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 12px 30px rgba(0,0,0,0.2)';" -->
+						<!-- onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 8px 25px rgba(0,0,0,0.15)';"> -->
 				</center>
 			</div>
 			<div class="col-md-9 align-column-center">
@@ -318,6 +364,7 @@
 <div class="container" id="news">
 	<h3> News </h3>
 		<div class="news-container">
+		<div style="height: 140px; overflow: auto; font-size: medium;">
 		<ul>
 			<li>
 				[09/2025] 🎉🎉 The code of <a href="https://github.com/ZouShilong1024/CycleDiff" target="_blank">CycleDiff</a> has been released now!
@@ -331,7 +378,14 @@
 			<li>
 				[05/2025] 🎉🎉 Our 🤖AEG-bot project page is accessible at <a href="https://davit666.github.io/AEG-bot/" target="_blank">link</a>.
 			</li>
+			<li>
+				[12/2024] 🎉🎉 I receive "Outstanding Second Prize Scholarship" of National University of Defense Technology.
+			</li>
+			<li>
+				[10/2022] 🎉🎉 I receive the highest undergraduate award — "President's Scholarship" and "Top Ten College Students". View details at <a href="https://mp.weixin.qq.com/s/7G6hpUVVvDYBl9V_vcpBsw" target="_blank">link</a>.
+			</li>
 		</ul>
+		</div>
 		</div>
 </div>
 <!-- <div class="news-box" data-title="🔥 News">
