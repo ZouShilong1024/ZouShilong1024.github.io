@@ -160,10 +160,37 @@
 		border-radius: 8px;
 		transition: transform 0.3s ease, box-shadow 0.3s ease;
 		}
-	  .custom-img:hover {
+      .custom-img:hover {
 		transform: scale(1.03);
 		box-shadow: 6px 6px 10px #666666;
 		}
+      
+      .news-container {
+        background-color: white;
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        padding: 10px;
+        margin-bottom: 10px;
+        transition: box-shadow 0.3s ease;
+      }
+      
+      .news-container:hover {
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+      }
+      
+      .publication-item {
+        background-color: white;
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        padding: 5px;
+        margin-bottom: 5px;
+        transition: box-shadow 0.3s ease, transform 0.2s ease;
+      }
+      
+      .publication-item:hover {
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+        transform: translateY(-2px);
+      }
 	</style>
 
 	<script>
@@ -290,22 +317,33 @@
 
 <div class="container" id="news">
 	<h3> News </h3>
-	<ul>
-		<li>
-			[09/2025] 🎉🎉 The code of <a href="https://github.com/ZouShilong1024/CycleDiff" target="_blank">CycleDiff</a> has been released now!
-		</li>
-		<li>
-			[08/2025] 🎉🎉 One paper is accepted by CoRL 2025!
-		</li>
-		<li>
-			[05/2025] 🎉🎉 One paper is accepted by TVCG 2025!
-		</li>
-		<li>
-			[05/2025] 🎉🎉 Our 🤖AEG-bot project page is accessible at <a href="https://davit666.github.io/AEG-bot/" target="_blank">link</a>.
-		</li>
-	</ul>
-	<!-- <div class="content-div"></div> -->
+		<div class="news-container">
+		<ul>
+			<li>
+				[09/2025] 🎉🎉 The code of <a href="https://github.com/ZouShilong1024/CycleDiff" target="_blank">CycleDiff</a> has been released now!
+			</li>
+			<li>
+				[08/2025] 🎉🎉 One paper is accepted by CoRL 2025!
+			</li>
+			<li>
+				[05/2025] 🎉🎉 One paper is accepted by TVCG 2025!
+			</li>
+			<li>
+				[05/2025] 🎉🎉 Our 🤖AEG-bot project page is accessible at <a href="https://davit666.github.io/AEG-bot/" target="_blank">link</a>.
+			</li>
+		</ul>
+		</div>
 </div>
+<!-- <div class="news-box" data-title="🔥 News">
+  <div class="scroll-window">
+    <ul>
+      <li>[09/2025] 🎉🎉 The code of <a href="https://github.com/ZouShilong1024/CycleDiff" target="_blank">CycleDiff</a> has been released now!</li>
+      <li>[08/2025] 🎉🎉 One paper is accepted by CoRL 2025!</li>
+      <li>[05/2025] 🎉🎉 One paper is accepted by TVCG 2025!</li>
+      <li>[05/2025] 🎉🎉 Our 🤖AEG-bot project page is accessible at <a href="https://davit666.github.io/AEG-bot/" target="_blank">link</a>.</li>
+    </ul>
+  </div>
+</div> -->
 
 
 <div class="container" id="publications">
@@ -321,7 +359,7 @@
 		<p><b>First/Co-First Author:</b> TII × 1, <i>Under Review × 2</i></p>
 		<p><b>Co-author:</b> TVCG × 1, <i>Under Review × 1</i></p>
 	</div> -->
-
+	<div class="news-container">
 	<div class="row align-items-center">
 		<div class="col-md-3 align-column-center">
 			<img class="img-fluid " src="res/figs/fsp_pipeline.png" width="250px" style="box-shadow: 4px 4px 4px #888888; margin-left: 5px; margin-right: 5px;" alt="">
@@ -329,7 +367,7 @@
 				<video playsinline autoplay loop muted data-src="res/figs/fsp.mp4" width="98%" preload="metadata"
 				style="box-shadow: 4px 4px 4px #888888; margin-left: 5px; margin-right: 5px;" style="border-radius:10px;"></video>
 			</center> -->
-			<div class="badge" style="position: absolute; top: 4px; left: 2px;"><span class="cvpr-badge">Under review</span></div>
+			<div class="badge" style="position: absolute; top: 4px; left: 8px;"><span class="cvpr-badge">Under review</span></div>
 		</div>
 		<div class="col-md-9">
 			<font size="4"> <b> Learning Visuotactile Policy for Fast and Stable Placement </b></font><br>
@@ -346,12 +384,13 @@
 			<a href="https://zoushilong1024.github.io/FSP-policy/" target="_blank"> [Website]</a>
 		</div>
 	</div>
-	<div class="content-div"></div>
+	</div>
 
+	<div class="news-container">
 	<div class="row align-items-center">
 		<div class="col-md-3 align-column-center">
 			<img class="img-fluid " src="res/figs/partdiff.png" width="250px" style="box-shadow: 4px 4px 4px #888888; margin-left: 5px; margin-right: 5px;" alt="">
-			<div class="badge" style="position: absolute; top: 4px; left: 2px;"><span class="cvpr-badge">TVCG 2025</span></div>
+			<div class="badge" style="position: absolute; top: 4px; left: 8px;"><span class="cvpr-badge">TVCG 2025</span></div>
 		</div>
 		<div class="col-md-9">
 			<font size="4"> <b> Part-aware Shape Generation with Latent 3D Diffusion of Neural Voxel Fields </b></font><br>
@@ -367,12 +406,13 @@
 			<a href="https://github.com/GuHuangAI/DIffPart" target="_blank"> [Code]</a>
 		</div>
 	</div>
-	<div class="content-div"></div>
+	</div>
 
+	<div class="news-container">
 	<div class="row align-items-center">
 		<div class="col-md-3 align-column-center">
 			<img class="img-fluid " src="res/figs/Cyclediff.png" width="250px" style="box-shadow: 4px 4px 4px #888888; margin-left: 5px; margin-right: 5px;" alt="">
-			<div class="badge" style="position: absolute; top: 4px; left: 2px;"><span class="cvpr-badge">Under review</span></div>
+			<div class="badge" style="position: absolute; top: 4px; left: 8px;"><span class="cvpr-badge">Under review</span></div>
 		</div>
 		<div class="col-md-9">
 			<font size="4"> <b> CycleDiff: Cycle Diffusion Models for Unpaired Image-to-image Translation </b></font><br>
@@ -394,12 +434,13 @@
 			style="margin-left: 6px; vertical-align: middle;">
 		</div>
 	</div>
-	<div class="content-div"></div>
+	</div>
 
+	<div class="news-container">
 	<div class="row align-items-center">
 		<div class="col-md-3 align-column-center">
 			<img class="img-fluid " src="res/figs/ladiwm_02.png" width="250px" style="object-fit: fill; box-shadow: 4px 4px 4px #888888; margin-left: 5px; margin-right: 5px;">
-			<div class="badge" style="position: absolute; top: 4px; left: 2px;"><span class="cvpr-badge">CoRL 2025</span></div>
+			<div class="badge" style="position: absolute; top: 4px; left: 8px;"><span class="cvpr-badge">CoRL 2025</span></div>
 		</div>
 		<div class="col-md-9">
 			<font size="4"> <b> LaDi-WM: A Latent Diffusion-based World Model for Predictive Manipulation </b></font><br>
@@ -422,12 +463,13 @@
 			style="margin-left: 6px; vertical-align: middle;">
 		</div>
 	</div>
-	<div class="content-div"></div>
+	</div>
 
+	<div class="news-container">
 	<div class="row align-items-center">
 		<div class="col-md-3 align-column-center">
 			<img class="img-fluid " src="res/figs/ms2a.png" width="250px" style="box-shadow: 4px 4px 4px #888888; margin-left: 5px; margin-right: 5px;" alt="">
-			<div class="badge" style="position: absolute; top: 4px; left: 2px;"><span class="cvpr-badge">Under review</span></div>
+			<div class="badge" style="position: absolute; top: 4px; left: 8px;"><span class="cvpr-badge">Under review</span></div>
 		</div>
 		<div class="col-md-9">
 			<font size="4"> <b> MS2A: Memory Storage-to-Adaptation for Cross-domain Few-annotation Object Detection </b></font><br>
@@ -451,7 +493,7 @@
 			style="margin-left: 6px; vertical-align: middle;">
 		</div>
 	</div>
-	<div class="content-div"></div>
+	</div>
 </div>
 
 <div class="container" id="projects">
@@ -463,13 +505,14 @@
 		</span>
 	</div>
 
+	<div class="news-container">
 	<div class="row align-items-center">
 		<div class="col-md-3 align-column-center">
 			<center>
 				<video playsinline autoplay loop muted data-src="res/figs/video2.mp4" width="98%" preload="metadata" style="box-shadow: 4px 4px 4px #888888; margin-left: 5px; margin-right: 5px;"
 				       style="border-radius:10px;"></video>
 			</center>
-			<div class="badge" style="position: absolute; top: 4px; left: 2px;"><span class="cvpr-badge">AEG-bot</span></div>
+			<div class="badge" style="position: absolute; top: 4px; left: 8px;"><span class="cvpr-badge">AEG-bot</span></div>
 		</div>
 		<div class="col-md-9">
 			<font size="4"> <b> 🤖 AEG-bot: A mobile humanoid robot for Scene Graph guided Household Rearrangement </b></font><br>
@@ -508,6 +551,7 @@
 			}
 			</style>
 		</div>
+	</div>
 	</div>
 	<div class="content-div"></div>
 
@@ -589,6 +633,7 @@
 	<!-- <i style="font-size: small;">During college (up to now 3 years), I have received a total of 25 scholarships, totaling <i style="color: red; display: inline;">CNY 200,000</i>. I have received a total of 3 personal honors.</i> -->
 	<!-- </table> -->
 	<!-- <p></p> -->
+	<div class="news-container">
 	<div style="height: 160px; overflow: auto; font-size: medium;">
 	<ul>
 		<li>
@@ -620,6 +665,7 @@
 		</li>
 	</ul>
 	</div>
+	</div>
 	<div style="margin-top: 5px; font-size: small; margin-bottom: 0px;">⬆ scrollable</div>
 
 	<div class="content-div"></div>
@@ -635,6 +681,7 @@
 	<!-- <font size="3" style="font-weight:normal"> <i> Won more than 70 awards at international, national, provincial, school level and above </i></font>
 	<p></p> -->
 
+	<div class="news-container">
 	<div class="row align-items-center">
 		<div class="col-md-3 align-column-center">
 			<img class="img-fluid " src="res/figs/computer design.jpg" width="250px" style="box-shadow: 4px 4px 4px #888888; margin-left: 5px; margin-right: 5px;" alt="">
@@ -649,6 +696,7 @@
 			China College Students Computer Design Competition<br>
 		</div>
 	</div>
+	</div>
 
 	<div class="small-div"></div>
 
@@ -657,6 +705,8 @@
 			<b>Others (Selected)</b>
 		</span>
 	</div>
+	
+	<div class="news-container">
 	<div style="height: 100px; overflow: auto; font-size: medium;">
 	<ul>
 		<li>
@@ -673,8 +723,9 @@
 		</li>
 	</ul>
 	</div>
+	</div>
 	<div style="margin-top: 5px; font-size: small; margin-bottom: 0px;">⬆ scrollable</div>
-
+	
 	<div class="content-div"></div>
 
 </div>
@@ -683,6 +734,7 @@
 	<h3> Education </h3>
 	<div class="small-div"></div>
 
+	<div class="news-container">
 	<div class="row align-items-center">
 		<div class="col-md-3">
 			<center>
@@ -705,9 +757,11 @@
 			</font>
 		</div>
 	</div>
+	</div>
 
-	<div class="content-div"></div>
+	<div class="small-div"></div>
 
+	<div class="news-container">
 	<div class="row align-items-center">
 		<div class="col-md-3">
 			<center>
@@ -731,6 +785,7 @@
 			</font>
 		</div>
 	</div>
+	</div>
 
 	<div class="content-div"></div>
 </div>
@@ -740,6 +795,7 @@
 	<font size="3" style="font-weight:normal"> <i> Travel enthusiast</i> 🏞️ <i>and marathon runner </i>🏃</font>
 	<p></p>
 
+	<div class="news-container">
 	<ul>
 		<li>[01/2025] 🏃 Completed the first half marathon with a score of <b>138 (average 4.40)</b> - Songya Lake New Year Half Marathon</li>
 		<div style="height: 4px"></div>
@@ -750,6 +806,7 @@
 		<li>[04/2025] 🏃 <b>Bronze Medalist🥉 </b>in the Men's 800 Meters at the Sports Meet of Cadet Second Battalion, College of Computer Science, National University of Defense Technology</li>
 		<div style="height: 4px"></div>
 	</ul>
+	</div>
 	<div class="content-div"></div>
 </div>
 
