@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <!-- Meta tags for social media banners, these should be filled in appropriatly as they are your "business card" -->
+  <!-- Replace the content tag with appropriate information -->
+  <meta name="description" content="DESCRIPTION META TAG">
+  <meta property="og:title" content="SOCIAL MEDIA TITLE TAG"/>
+  <meta property="og:description" content="SOCIAL MEDIA DESCRIPTION TAG TAG"/>
+  <meta property="og:url" content="URL OF THE WEBSITE"/>
+  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X630-->
+  <meta property="og:image" content="static/image/your_banner_image.png" />
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+
+
+  <meta name="twitter:title" content="TWITTER BANNER TITLE META TAG">
+  <meta name="twitter:description" content="TWITTER BANNER DESCRIPTION META TAG">
+  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X600-->
+  <meta name="twitter:image" content="static/images/your_twitter_banner_image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- Keywords for your paper to be indexed by-->
+  <meta name="keywords" content="KEYWORDS SHOULD BE PLACED HERE">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <title>CycleDiff: Cycle Diffusion Models for Unpaired Image-to-image Translation</title>
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+  rel="stylesheet">
+
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script src="static/js/bulma-carousel.min.js"></script>
+  <script src="static/js/bulma-slider.min.js"></script>
+  <script src="static/js/index.js"></script>
+</head>
+<body>
+
+
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">CycleDiff: Cycle Diffusion Models <br> for Unpaired Image-to-image Translation</h1>
+              <h1 class="title is-2 publication-title">
+              </h1>
+            <div class="is-size-5 publication-authors">
+              <!-- Paper authors --> 
+            <span class="author-block">
+              Shilong Zou<sup>&dagger;</sup>,</span></span>
+            <span class="author-block">
+              Yuhang Huang<sup>&dagger;</sup>,</span></span>
+            <span class="author-block">
+              Renjiao Yi<sup></sup>,</span>
+            </span>
+            <span class="author-block">
+              Chenyang Zhu<sup>*</sup>,</span>
+            </span>
+            <span class="author-block">
+              Kai Xu<sup>*</sup>
+            </span>
+                  </div>
+
+                  <div class="is-size-5 publication-authors">
+                    <span class="author-block"><sup></sup>National University of Defense and Technology <br> TIP under review</span>
+                    <span class="eql-cntrb"><small><br><sup>&dagger;</sup> Indicates Equal Contribution, * Co-corresponding Author </small></span> 
+                  </div>
+
+                  <div class="column has-text-centered">
+                    <div class="publication-links">
+
+                <span class="link-block">
+                  <a href="https://github.com/ZouShilong1024/CycleDiff" target="_blank" 
+                     class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fab fa-github"></i>
+                    </span>
+                    <span>Code</span>
+                    <span id="star-count" class="star-badge">⭐ --</span>
+                  </a>
+                </span>
+
+                <style>
+                  .star-badge {
+                    margin-left: 8px;
+                    font-weight: 600;
+                    font-size: 1.0rem;
+                    color: #ffcc00;
+                    transition: color 0.3s ease, transform 0.3s ease;
+                  }
+                
+                  .external-link:hover .star-badge {
+                    color: #ffd633;
+                    transform: scale(1.1);
+                  }
+                </style>
+
+                <script>
+                  fetch("https://api.github.com/repos/ZouShilong1024/CycleDiff")
+                    .then(response => response.json())
+                    .then(data => {
+                      document.getElementById("star-count").textContent = `(⭐ Starred ${data.stargazers_count})`;
+                    })
+                    .catch(() => {
+                      document.getElementById("star-count").textContent = "⭐ N/A";
+                    });
+                </script>
+
+
+                <!-- ArXiv abstract Link -->
+                <span class="link-block">
+                  <a href="https://arxiv.org/abs/2508.06625" target="_blank"
+                  class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+
+                <!-- Data Link -->
+                <!-- <span class="link-block">
+                  <a href="https://pan.baidu.com/s/1QIVEVO5n1RYEGndHPe6aRg?pwd=cfod" target="_blank"
+                  class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="fas fa-database"></i>
+                  </span>
+                  <span>CFOD Industrial Dataset</span>
+                </a>
+              </span> -->
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Teaser video  height="100%" subtitle has-text-left--> 
+<section class="hero teaser" style="margin-top: -50px; padding-top: 0;">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <img id="teaser" width="80%" src="static/images/Cyclediff_2-teaser.jpg" alt="Teaser image demonstrating Marigold depth estimation."/>  
+      <h2 class="content has-text-justified">   
+        The proposed CycleDiff consists of two domain-specific diffusion models and a cycle translator, and learns the diffusion and translation processes jointly. The cycle translator consists of two translation network used for performing cycle translation between two domains: <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><msub><mi>G</mi><mi>ϕ</mi></msub><mo>:</mo><mrow><mi data-mjx-variant="-tex-calligraphic" mathvariant="script">S</mi></mrow><mo accent="false" stretchy="false">→</mo><mrow><mi data-mjx-variant="-tex-calligraphic" mathvariant="script">T</mi></mrow></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline"><msub><mi>F</mi><mi>ψ</mi></msub><mo>:</mo><mrow><mi data-mjx-variant="-tex-calligraphic" mathvariant="script">T</mi></mrow><mo accent="false" stretchy="false">→</mo><mrow><mi data-mjx-variant="-tex-calligraphic" mathvariant="script">S</mi></mrow></math>. We employ the cycle consistency constrain to regularize the forward and backward translation mappings. Utilizing only unpaired images, CycleDiff can synthesize structure-consistent and photo-realistic results across different modalities of images.
+      </h2>
+    </div>
+  </div>
+</section>
+<!-- End teaser video -->
+
+<!-- Paper abstract -->
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Overview</h2>
+        <p>
+           
+        </p>
+        <!-- <p align="center">
+          <img width="100%" src="./static/images/figure2-1.jpg" class="img-responsive" alt="overview">  <span class="methodname">
+        </p> -->
+
+        <div class="content has-text-justified">
+          <p>
+            We introduce a diffusion-based cross-domain image translator in the absence of paired training data.
+            Unlike GAN-based methods, our approach integrates diffusion models to learn the image translation process, allowing for more coverable modeling of the data distribution and performance improvement of the cross-domain translation.
+            However, incorporating the translation process within the diffusion process is still challenging since the two processes are not aligned exactly, i.e., the diffusion process is applied to the noisy signal while the translation process is conducted on the clean signal. 
+            As a result, recent diffusion-based studies employ separate training or shallow integration to learn the two processes, yet this may cause the local minimal of the translation optimization, constraining the effectiveness of diffusion models.
+          </p>
+          <p>
+            To address the problem, we propose a novel joint learning framework that aligns the diffusion and the translation process, thereby improving the global optimality.
+            Specifically, we propose to extract the image components with diffusion models to represent the clean signal and employ the translation process with the image components, enabling an end-to-end joint learning manner.
+            On the other hand, we introduce a time-dependent translation network to learn the complex translation mapping, resulting in effective translation learning and significant performance improvement.
+            Benefiting from the design of joint learning, our method enables global optimization of both processes, enhancing the optimality and achieving improved fidelity and structural consistency.
+          </p>
+          <p>
+            We have conducted extensive experiments on RGB&lrarr;RGB and cross-modality translation tasks including RGB&lrarr;Edge, RGB&lrarr;Semantics and RGB&lrarr;Depth, showcasing better generative performances than the state of the arts.
+            Especially, our method achieves the best FID score in widely-adopted tasks and outperforms the second-best method with an improved FID of 19.61 and 19.67 on Dog&lrarr;Cat and Dog&lrarr;Wild respectively.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End paper abstract -->
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Method and main results</h2>
+        <div class="content has-text-justified">
+
+          <h3 class="title has-text-centered">
+            Method
+          </h3>
+          <img width="100%" src="static/images/Cyclediff_2-archi.png" width="1000px" alt="MY ALT TEXT"/>
+          <p>
+            The overall architecture of CycleDiff. CycleDiff comprises two parts: the diffusion models and the cycle translator. The diffusion models are employed to extract image components, which are then fed into the cycle translator for unpaired translation between two domains. The diffusion and translation processes are learned jointly.
+          </p>
+          <!-- Your image here -->
+
+          <h3 class="title has-text-centered">
+            Comparison with other methods
+          </h3>
+          <img id="method_inference" width="100%" src="./static/images/result.png" alt="MY ALT TEXT"/>
+
+          <p>
+            Quantitative comparison of unpaired image-to-image translation methods. The best results are shown in <b>bold</b>, and the second-best results are <u>underline</u>. Note that the KID metric is multiplied by 100.
+          </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Image carousel -->
+<!-- <section class="hero is-small"> -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">More Visual Results</h2>
+      </div>
+    </div>
+  </div>
+  <div class="hero-body">
+    <div class="container">
+      <div id="results-carousel" class="carousel results-carousel">
+      <div class="item">
+        <img width="60%" src="static/images/Cyclediff_2-comparasion_other2.png" alt="MY ALT TEXT"/>
+        <h2 class="subtitle has-text-left--">
+          Qualitative comparisons on RGB&lrarr;RGB tasks with state-of-the-art methods. CycleDiff could achieve superior visual results for both realism and faithfulness across all tasks.
+       </h2>
+     </div>
+     <div class="item">
+      <img width="50%" src="static/images/Cyclediff_2-comparasion_downsteam.jpg" alt="MY ALT TEXT"/>
+      <h2 class="subtitle has-text-left">
+        Qualitative comparison on RGB&lrarr;Edge, RGB&lrarr;Semantics, RGB&lrarr;Depth with state-of-the-art methods. CycleDiff is capable of translating images between various modalities. 
+      </h2>
+    </div>
+     <div class="item">
+      <img width="75%" src="static/images/Cyclediff_2-comparasion_our.jpg" alt="MY ALT TEXT"/>
+      <h2 class="subtitle has-text-left">
+        Qualitative comparisons on RGB&lrarr;RGB tasks of CycleDiff.
+      </h2>
+    </div>
+    <div class="item" style="flex-direction: column; align-items: center; justify-content: center; text-align: center;">
+      <img width="75%" src="static/images/Cyclediff_2-comparision_downstream.jpg" alt="MY ALT TEXT"/>
+      <h2 class="subtitle has-text-left">
+        Quantitative results on RGB&lrarr;Edge, RGB&lrarr;Semantics, RGB&lrarr;Depth of CycleDiff.
+      </h2>
+    </div>
+    <!-- <div class="item" style="flex-direction: column; align-items: center; justify-content: center; text-align: center;">
+      <img height="100%" src="static/images/S2T1.jpg" alt="MY ALT TEXT"/>
+      <h2 class="subtitle has-text-left">
+        Quantitative results on Indus-S &rarr; Indus-T2.
+      </h2>
+    </div> -->
+  </div>
+</div>
+</div>
+</section>
+<!-- End image carousel -->
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Other interesting results</h2>
+        <div class="box">
+          <!-- 待完成的 -->
+          <!-- <h4 style="font: normal 400 20px/30px 'STHupo';">待完成</h4> -->
+          <ol id="doList">
+            &#9745; Training in a 640 * 320 resolution on RGB&lrarr;Dpeth
+          </ol>
+          <hr style="margin: 10px;">
+          <!-- <h4 style="font: normal 400 20px/30px 'STHupo';">已完成</h4> &#9745
+          <ol id="todolist">
+          </ol> -->
+        <!-- <h2 class="subtitle has-text-centered">
+          Comming soon.
+        </h2> -->
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <div class="hero-body"></div>
+    <div class="container">
+      <div id="results-carousel" class="carousel results-carousel">
+      <div class="item">
+        <img width="60%" src="static/images/Cyclediff_2-kitti_rgb2depth.drawio_page-0001.jpg" alt="MY ALT TEXT"/>
+        <h2 class="subtitle has-text-left--">
+          Qualitative results on RGB&rarr;Depth task with more larger resolution.
+       </h2>
+     </div>
+     <div class="item">
+      <img width="60%" src="static/images/Cyclediff_2-kitti_depth2rgb.drawio_page-0001.jpg" alt="MY ALT TEXT"/>
+      <h2 class="subtitle has-text-left">
+        Qualitative results on Depth&rarr;RGB task with more larger resolution. 
+      </h2>
+    </div>
+    <!-- <div class="item" style="flex-direction: column; align-items: center; justify-content: center; text-align: center;">
+      <img height="100%" src="static/images/S2T1.jpg" alt="MY ALT TEXT"/>
+      <h2 class="subtitle has-text-left">
+        Quantitative results on Indus-S &rarr; Indus-T2.
+      </h2>
+    </div> -->
+  </div>
+</div>
+</div>
+
+</section>
+
+<!-- Paper poster  -->
+<!-- <section class="hero is-small is-light">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title">Poster</h2>
+      <iframe  src="static/pdfs/CFOD.pdf" width="100%" height="550">
+          </iframe>
+      </div>
+    </div>
+  </section> -->
+<!--End paper poster -->
+
+
+<!--BibTex citation -->
+  <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <h2 class="title">BibTeX</h2>
+      <pre><code>@article{zou2025cyclediff,
+    title    = {CycleDiff: Cycle Diffusion Models for Unpaired Image-to-image Translation},
+    author   = {Zou, Shilong and Huang, Yuhang and Yi, Renjiao and Zhu, Chenyang and Xu, Kai},
+    journal  = {arXiv preprint arXiv:2508.06625},
+    year     = {2025}
+}</code></pre>
+    </div>
+</section>
+<!--End BibTex citation -->
+
+  <footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+
+          <p>
+            This website template was borrowed from <a href="https://nerfies.github.io" target="_blank">https://nerfies.github.io</a>
+          </p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Statcounter tracking code -->
+  
+<!-- You can add a tracker to track page visits by creating an account at statcounter.com -->
+
+    <!-- End of Statcounter Code -->
+
+  </body>
+  </html>
