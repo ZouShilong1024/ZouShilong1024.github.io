@@ -15,6 +15,10 @@
         background-color: #f0f0f0;
         margin: 0;
         padding: 0;
+        padding-bottom: 118px;
+      }
+      html.photo-strip-off body {
+        padding-bottom: 0;
       }
       .main-content {
         max-width: 1200px;
@@ -137,10 +141,14 @@
         width: 95px;
         text-align: center;
       }
+      html.photo-strip-off .back-to-top {
+        bottom: 30px;
+      }
       .back-to-top {
         position: fixed;
-        bottom: 30px;
+        bottom: calc(30px + 100px);
         right: 30px;
+        z-index: 1050;
         width: 50px;
         height: 50px;
         background-color: #527bbd;
@@ -166,6 +174,170 @@
       }
       .back-to-top:hover {
         background-color: #3a5f9a;
+      }
+
+      html.photo-strip-off #photo-strip-bar {
+        display: none;
+      }
+      .photo-strip-bar {
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 1020;
+        background: linear-gradient(165deg, #e8edf6 0%, #dfe8f3 42%, #d5e0ef 100%);
+        border-top: 1px solid rgba(82, 123, 189, 0.18);
+        box-shadow: 0 -8px 32px rgba(82, 123, 189, 0.1), 0 -1px 0 rgba(255, 255, 255, 0.45) inset;
+        padding: 16px 52px 18px 22px;
+      }
+      .photo-strip-close {
+        position: absolute;
+        top: 10px;
+        right: 12px;
+        width: 34px;
+        height: 34px;
+        border: 1px solid rgba(82, 123, 189, 0.2);
+        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.55);
+        color: #4a5d78;
+        font-size: 1.35rem;
+        line-height: 1;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+        transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+        box-shadow: 0 2px 10px rgba(82, 123, 189, 0.12);
+        z-index: 5;
+      }
+      .photo-strip-close:hover {
+        background: #527bbd;
+        color: #fff;
+        border-color: #527bbd;
+        box-shadow: 0 4px 14px rgba(82, 123, 189, 0.3);
+      }
+      .photo-strip-close:focus {
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(82, 123, 189, 0.35);
+      }
+      .photo-strip-row {
+        display: flex;
+        align-items: stretch;
+        max-width: 1200px;
+        margin: 0 auto;
+        gap: 18px;
+        padding: 0 4px;
+      }
+      .photo-strip-title-col {
+        flex-shrink: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        width: auto;
+        min-height: 76px;
+        align-self: auto;
+      }
+      .photo-strip-title {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 7px;
+        margin: 0;
+        padding: 0;
+        border: none;
+        line-height: 1.25;
+      }
+      .photo-strip-title-text {
+        color: #2c3e50;
+        font-size: 1.28rem;
+        font-weight: 600;
+        letter-spacing: 0.02em;
+        font-family: Georgia, "Times New Roman", serif;
+        text-shadow: 0 1px 0 rgba(255, 255, 255, 0.35);
+      }
+      .photo-strip-title-line {
+        display: block;
+        width: 100%;
+        height: 2px;
+        border-radius: 1px;
+        background: rgba(82, 123, 189, 0.42);
+      }
+      .photo-strip-viewport {
+        flex: 1;
+        min-width: 0;
+        min-height: 76px;
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+        mask-image: linear-gradient(90deg, transparent 0%, #000 28px, #000 calc(100% - 28px), transparent 100%);
+        -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 28px, #000 calc(100% - 28px), transparent 100%);
+      }
+      .photo-strip-track {
+        display: flex;
+        width: max-content;
+        animation: photo-marquee-ltr 96s linear infinite;
+      }
+      .photo-strip-bar:hover .photo-strip-track {
+        animation-play-state: paused;
+      }
+      @keyframes photo-marquee-ltr {
+        from { transform: translateX(-50%); }
+        to { transform: translateX(0); }
+      }
+      .photo-strip-group {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        padding-right: 16px;
+      }
+      .photo-strip-frame {
+        position: relative;
+        flex-shrink: 0;
+        width: 118px;
+        height: 76px;
+        border-radius: 12px;
+        overflow: hidden;
+        border: 1px solid rgba(82, 123, 189, 0.15);
+        box-shadow: 0 4px 16px rgba(82, 123, 189, 0.12), 0 1px 2px rgba(0, 0, 0, 0.04);
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
+      }
+      .photo-strip-frame img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+      .photo-strip-label {
+        position: absolute;
+        top: 5px;
+        left: 5px;
+        z-index: 2;
+        max-width: calc(100% - 10px);
+        font-size: 0.68rem;
+        font-weight: 600;
+        color: #fff;
+        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7);
+        padding: 3px 7px;
+        border-radius: 6px;
+        background: rgba(44, 62, 80, 0.55);
+        line-height: 1.25;
+        letter-spacing: 0.02em;
+        font-family: "Segoe UI", "Microsoft YaHei", "PingFang SC", sans-serif;
+        pointer-events: none;
+      }
+      .photo-strip-frame:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 26px rgba(82, 123, 189, 0.18), 0 2px 4px rgba(0, 0, 0, 0.06);
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .photo-strip-track {
+          animation: none;
+        }
+        .photo-strip-frame:hover {
+          transform: none;
+        }
       }
 
 	  .custom-img {
@@ -285,6 +457,13 @@
         }, { threshold: 0.1 });
 
         videos.forEach(video => observer.observe(video));
+
+        var photoClose = document.getElementById("photo-strip-close");
+        if (photoClose) {
+            photoClose.addEventListener("click", function () {
+                document.documentElement.classList.add("photo-strip-off");
+            });
+        }
     });
 	</script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
@@ -817,7 +996,7 @@
 	</div>
 	<div style="margin-top: 5px; font-size: small; margin-bottom: 0px;">⬆ scrollable</div>
 
-	<div class="content-div"></div>
+	<!-- <div class="content-div"></div> -->
 </div>
 
 <div class="container" id="competition">
@@ -875,7 +1054,7 @@
 	</div>
 	<div style="margin-top: 5px; font-size: small; margin-bottom: 0px;">⬆ scrollable</div>
 	
-	<div class="content-div"></div>
+	<!-- <div class="content-div"></div> -->
 
 </div>
 
@@ -936,7 +1115,7 @@
 	</div>
 	</div>
 
-	<div class="content-div"></div>
+	<!-- <div class="content-div"></div> -->
 </div>
 
 <div class="container" id="internship">
@@ -962,7 +1141,7 @@
 	</div>
 	</div>
 
-	<div class="content-div"></div>
+	<!-- <div class="content-div"></div> -->
 </div>
 
 <div class="container" id="miscellaneous">
@@ -1010,5 +1189,130 @@
 </div>
 
 </div>
+
+<aside class="photo-strip-bar" id="photo-strip-bar" aria-label="My photography showcase">
+	<button type="button" class="photo-strip-close" id="photo-strip-close" aria-label="Close my photography strip" title="Close">&times;</button>
+	<div class="photo-strip-row">
+		<div class="photo-strip-title-col">
+			<div class="photo-strip-title">
+				<span class="photo-strip-title-text">My photography</span>
+				<span class="photo-strip-title-line" aria-hidden="true"></span>
+			</div>
+		</div>
+		<div class="photo-strip-viewport">
+			<div class="photo-strip-track">
+				<div class="photo-strip-group">
+					<div class="photo-strip-frame">
+						<span class="photo-strip-label">湖南-长沙</span>
+						<img src="res/figs/photos/4c2cd716b24932ea36db5527f5fdbc30.jpg" alt="摄影作品" width="118" height="76" loading="lazy">
+					</div>
+					<div class="photo-strip-frame">
+						<span class="photo-strip-label">北京</span>
+						<img src="res/figs/photos/beijing-1.jpg" alt="摄影：北京" width="118" height="76" loading="lazy">
+					</div>
+					<div class="photo-strip-frame">
+						<span class="photo-strip-label">湖南-长沙</span>
+						<img src="res/figs/photos/changsha-1.jpg" alt="摄影：湖南长沙" width="118" height="76" loading="lazy">
+					</div>
+					<div class="photo-strip-frame">
+						<span class="photo-strip-label">江苏-常州</span>
+						<img src="res/figs/photos/changzhou-1.jpg" alt="摄影：江苏常州" width="118" height="76" loading="lazy">
+					</div>
+					<div class="photo-strip-frame">
+						<span class="photo-strip-label">江苏-常州</span>
+						<img src="res/figs/photos/changzhou-2.jpg" alt="摄影：江苏常州" width="118" height="76" loading="lazy">
+					</div>
+					<div class="photo-strip-frame">
+						<span class="photo-strip-label">湖南-郴州</span>
+						<img src="res/figs/photos/chenzhou-1.jpg" alt="摄影：湖南郴州" width="118" height="76" loading="lazy">
+					</div>
+					<div class="photo-strip-frame">
+						<span class="photo-strip-label">山东-菏泽</span>
+						<img src="res/figs/photos/heze.jpg" alt="摄影：山东菏泽" width="118" height="76" loading="lazy">
+					</div>
+					<div class="photo-strip-frame">
+						<span class="photo-strip-label">山东-济南</span>
+						<img src="res/figs/photos/jinan.jpg" alt="摄影：山东济南" width="118" height="76" loading="lazy">
+					</div>
+					<div class="photo-strip-frame">
+						<span class="photo-strip-label">山东-济南</span>
+						<img src="res/figs/photos/jinan-2.jpg" alt="摄影：山东济南" width="118" height="76" loading="lazy">
+					</div>
+					<div class="photo-strip-frame">
+						<span class="photo-strip-label">河南-平顶山</span>
+						<img src="res/figs/photos/ruzhou-1.jpg" alt="摄影：河南汝州" width="118" height="76" loading="lazy">
+					</div>
+					<div class="photo-strip-frame">
+						<span class="photo-strip-label">广东-深圳</span>
+						<img src="res/figs/photos/shenzhen-1.jpg" alt="摄影：广东深圳" width="118" height="76" loading="lazy">
+					</div>
+					<div class="photo-strip-frame">
+						<span class="photo-strip-label">广东-深圳</span>
+						<img src="res/figs/photos/shenzhen-2.jpg" alt="摄影：广东深圳" width="118" height="76" loading="lazy">
+					</div>
+					<div class="photo-strip-frame">
+						<span class="photo-strip-label">广东-深圳</span>
+						<img src="res/figs/photos/shenzhen-3.jpg" alt="摄影：广东深圳" width="118" height="76" loading="lazy">
+					</div>
+				</div>
+				<div class="photo-strip-group" aria-hidden="true">
+					<div class="photo-strip-frame">
+						<span class="photo-strip-label">湖南-长沙</span>
+						<img src="res/figs/photos/4c2cd716b24932ea36db5527f5fdbc30.jpg" alt="" width="118" height="76" loading="lazy">
+					</div>
+					<div class="photo-strip-frame">
+						<span class="photo-strip-label">北京</span>
+						<img src="res/figs/photos/beijing-1.jpg" alt="" width="118" height="76" loading="lazy">
+					</div>
+					<div class="photo-strip-frame">
+						<span class="photo-strip-label">湖南-长沙</span>
+						<img src="res/figs/photos/changsha-1.jpg" alt="" width="118" height="76" loading="lazy">
+					</div>
+					<div class="photo-strip-frame">
+						<span class="photo-strip-label">江苏-常州</span>
+						<img src="res/figs/photos/changzhou-1.jpg" alt="" width="118" height="76" loading="lazy">
+					</div>
+					<div class="photo-strip-frame">
+						<span class="photo-strip-label">江苏-常州</span>
+						<img src="res/figs/photos/changzhou-2.jpg" alt="" width="118" height="76" loading="lazy">
+					</div>
+					<div class="photo-strip-frame">
+						<span class="photo-strip-label">湖南-郴州</span>
+						<img src="res/figs/photos/chenzhou-1.jpg" alt="" width="118" height="76" loading="lazy">
+					</div>
+					<div class="photo-strip-frame">
+						<span class="photo-strip-label">山东-菏泽</span>
+						<img src="res/figs/photos/heze.jpg" alt="" width="118" height="76" loading="lazy">
+					</div>
+					<div class="photo-strip-frame">
+						<span class="photo-strip-label">山东-济南</span>
+						<img src="res/figs/photos/jinan.jpg" alt="" width="118" height="76" loading="lazy">
+					</div>
+					<div class="photo-strip-frame">
+						<span class="photo-strip-label">山东-济南</span>
+						<img src="res/figs/photos/jinan-2.jpg" alt="" width="118" height="76" loading="lazy">
+					</div>
+					<div class="photo-strip-frame">
+						<span class="photo-strip-label">河南-平顶山</span>
+						<img src="res/figs/photos/ruzhou-1.jpg" alt="" width="118" height="76" loading="lazy">
+					</div>
+					<div class="photo-strip-frame">
+						<span class="photo-strip-label">广东-深圳</span>
+						<img src="res/figs/photos/shenzhen-1.jpg" alt="" width="118" height="76" loading="lazy">
+					</div>
+					<div class="photo-strip-frame">
+						<span class="photo-strip-label">广东-深圳</span>
+						<img src="res/figs/photos/shenzhen-2.jpg" alt="" width="118" height="76" loading="lazy">
+					</div>
+					<div class="photo-strip-frame">
+						<span class="photo-strip-label">广东-深圳</span>
+						<img src="res/figs/photos/shenzhen-3.jpg" alt="" width="118" height="76" loading="lazy">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</aside>
+
 </body>
 </html>
