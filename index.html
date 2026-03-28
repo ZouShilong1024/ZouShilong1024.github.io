@@ -59,9 +59,24 @@
         background-color: #3a5f9a;
         border-radius: 4px;
       }
-      #news, #publications, #projects, #honors, #competition, #miscellaneous, #education {
+      #news, #publications, #projects, #honors, #competition, #miscellaneous, #education, #internship {
         scroll-margin-top: 70px;
         padding-top: 20px;
+      }
+      .internship-logo {
+        max-width: 92%;
+        max-height: 150px;
+        width: auto;
+        height: auto;
+        object-fit: contain;
+      }
+      .internship-date-col {
+        text-align: center;
+      }
+      @media (min-width: 768px) {
+        .internship-date-col {
+          text-align: right;
+        }
       }
       h3 {
         color: #2c3e50;
@@ -304,6 +319,9 @@
           <a class="nav-link" href="#education">Education</a>
         </li>
         <li class="nav-item">
+          <a class="nav-link" href="#internship">Internship</a>
+        </li>
+        <li class="nav-item">
 			<a class="nav-link" href="#miscellaneous">Miscellaneous</a>
 		</li>
       </ul>
@@ -368,6 +386,12 @@
 		<div class="news-container">
 		<div style="height: 140px; overflow: auto; font-size: medium;">
 		<ul>
+			<li>
+				[01/2026] 🎉🎉 One paper is accepted by TOG 2026!
+			</li>
+			<li>
+				[01/2026] 🎉🎉 One paper is accepted by TIP 2026!
+			</li>
 			<li>
 				[09/2025] 🎉🎉 The code of <a href="https://github.com/ZouShilong1024/CycleDiff" target="_blank">CycleDiff</a> has been released now!
 			</li>
@@ -908,6 +932,32 @@
 			<font size="3">
 				2019 - 2023
 			</font>
+		</div>
+	</div>
+	</div>
+
+	<div class="content-div"></div>
+</div>
+
+<div class="container" id="internship">
+	<h3> Internship </h3>
+	<div class="small-div"></div>
+
+	<div class="news-container">
+	<div class="row align-items-center">
+		<div class="col-md-3">
+			<center>
+				<img class="img-fluid internship-logo" src="res/figs/x-humanoid-logo.png" alt="Beijing Innovation Center for Humanoid Robotics">
+			</center>
+		</div>
+		<div class="col-md-7">
+			<font size="4"><b>Beijing Innovation Center of Humanoid Robotics</b></font><br>
+			<font size="3" style="color: #4a5568;">Department of Foundation Models</font>
+			<br><br>
+			<font size="3"><b>Focus:</b> research on embodied world foundation models and action-conditioned video prediction</font>
+		</div>
+		<div class="col-md-2 internship-date-col">
+			<font size="3" style="white-space: nowrap;">2026.01 - present</font>
 		</div>
 	</div>
 	</div>
