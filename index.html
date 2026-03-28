@@ -188,7 +188,7 @@
         background: linear-gradient(165deg, #e8edf6 0%, #dfe8f3 42%, #d5e0ef 100%);
         border-top: 1px solid rgba(82, 123, 189, 0.18);
         box-shadow: 0 -8px 32px rgba(82, 123, 189, 0.1), 0 -1px 0 rgba(255, 255, 255, 0.45) inset;
-        padding: 16px 52px 18px 22px;
+        padding: 16px 34px 18px 2px;
       }
       .photo-strip-close {
         position: absolute;
@@ -224,20 +224,42 @@
       .photo-strip-row {
         display: flex;
         align-items: stretch;
-        max-width: 1200px;
-        margin: 0 auto;
+        max-width: none;
+        margin: 0;
+        margin-left: max(0px, (100vw - 1254px) / 2);
+        margin-right: 18px;
         gap: 18px;
-        padding: 0 4px;
+        padding: 0;
       }
-      .photo-strip-title-col {
+      /* 与可见标题同宽，占位以固定跑马灯起点（与标题曾参与 flex 时一致） */
+      .photo-strip-title-spacer {
         flex-shrink: 0;
+        visibility: hidden;
+        pointer-events: none;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: flex-start;
-        width: auto;
         min-height: 76px;
-        align-self: auto;
+        align-self: stretch;
+        max-width: min(11.5rem, 42vw);
+      }
+      .photo-strip-title-col {
+        position: absolute;
+        left: calc(5.3rem + max(0px, (100vw - 1254px) / 4));
+        top: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 2;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        width: max-content;
+        max-width: min(11.5rem, 42vw);
+        pointer-events: none;
+      }
+      .photo-strip-title-col .photo-strip-title {
+        pointer-events: auto;
       }
       .photo-strip-title {
         display: flex;
@@ -1193,6 +1215,12 @@
 <aside class="photo-strip-bar" id="photo-strip-bar" aria-label="My photography showcase">
 	<button type="button" class="photo-strip-close" id="photo-strip-close" aria-label="Close my photography strip" title="Close">&times;</button>
 	<div class="photo-strip-row">
+		<div class="photo-strip-title-spacer" aria-hidden="true">
+			<div class="photo-strip-title">
+				<span class="photo-strip-title-text">My photography</span>
+				<span class="photo-strip-title-line"></span>
+			</div>
+		</div>
 		<div class="photo-strip-title-col">
 			<div class="photo-strip-title">
 				<span class="photo-strip-title-text">My photography</span>
@@ -1204,7 +1232,7 @@
 				<div class="photo-strip-group">
 					<div class="photo-strip-frame">
 						<span class="photo-strip-label">湖南-长沙</span>
-						<img src="res/figs/photos/4c2cd716b24932ea36db5527f5fdbc30.jpg" alt="摄影作品" width="118" height="76" loading="lazy">
+						<img src="res/figs/photos/changsha-2.jpg" alt="摄影：湖南长沙" width="118" height="76" loading="lazy">
 					</div>
 					<div class="photo-strip-frame">
 						<span class="photo-strip-label">北京</span>
@@ -1223,8 +1251,16 @@
 						<img src="res/figs/photos/changzhou-2.jpg" alt="摄影：江苏常州" width="118" height="76" loading="lazy">
 					</div>
 					<div class="photo-strip-frame">
+						<span class="photo-strip-label">江苏-连云港</span>
+						<img src="res/figs/photos/lianyungang.jpg" alt="摄影：江苏连云港" width="118" height="76" loading="lazy">
+					</div>
+					<div class="photo-strip-frame">
 						<span class="photo-strip-label">湖南-郴州</span>
 						<img src="res/figs/photos/chenzhou-1.jpg" alt="摄影：湖南郴州" width="118" height="76" loading="lazy">
+					</div>
+					<div class="photo-strip-frame">
+						<span class="photo-strip-label">江西-武功山</span>
+						<img src="res/figs/photos/wugongshan.jpg" alt="摄影：江西武功山" width="118" height="76" loading="lazy">
 					</div>
 					<div class="photo-strip-frame">
 						<span class="photo-strip-label">山东-菏泽</span>
@@ -1258,7 +1294,7 @@
 				<div class="photo-strip-group" aria-hidden="true">
 					<div class="photo-strip-frame">
 						<span class="photo-strip-label">湖南-长沙</span>
-						<img src="res/figs/photos/4c2cd716b24932ea36db5527f5fdbc30.jpg" alt="" width="118" height="76" loading="lazy">
+						<img src="res/figs/photos/changsha-2.jpg" alt="" width="118" height="76" loading="lazy">
 					</div>
 					<div class="photo-strip-frame">
 						<span class="photo-strip-label">北京</span>
@@ -1277,8 +1313,16 @@
 						<img src="res/figs/photos/changzhou-2.jpg" alt="" width="118" height="76" loading="lazy">
 					</div>
 					<div class="photo-strip-frame">
+						<span class="photo-strip-label">江苏-连云港</span>
+						<img src="res/figs/photos/lianyungang.jpg" alt="" width="118" height="76" loading="lazy">
+					</div>
+					<div class="photo-strip-frame">
 						<span class="photo-strip-label">湖南-郴州</span>
 						<img src="res/figs/photos/chenzhou-1.jpg" alt="" width="118" height="76" loading="lazy">
+					</div>
+					<div class="photo-strip-frame">
+						<span class="photo-strip-label">江西-武功山</span>
+						<img src="res/figs/photos/wugongshan.jpg" alt="" width="118" height="76" loading="lazy">
 					</div>
 					<div class="photo-strip-frame">
 						<span class="photo-strip-label">山东-菏泽</span>
