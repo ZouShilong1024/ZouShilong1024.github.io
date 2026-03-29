@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>My Photography | Shilong Zou</title>
+  <meta name="description" content="A curated photography gallery by Shilong Zou, featuring travel and city moments captured across China.">
+  <link rel="shortcut icon" href="../res/icon/icon.svg">
+  <style>
+    :root {
+      --bg: #0b1220;
+      --bg-soft: rgba(15, 23, 42, 0.72);
+      --panel: rgba(15, 23, 42, 0.84);
+      --panel-strong: rgba(15, 23, 42, 0.94);
+      --line: rgba(148, 163, 184, 0.18);
+      --line-strong: rgba(148, 163, 184, 0.32);
+      --text: #e5eefc;
+      --muted: #a8b5ca;
+      --accent: #8cc9ff;
+      --accent-strong: #c8e8ff;
+      --shadow: 0 20px 55px rgba(0, 0, 0, 0.32);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Segoe UI", "Microsoft YaHei", "PingFang SC", Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 12% 18%, rgba(76, 132, 255, 0.16), transparent 32%),
+        radial-gradient(circle at 82% 12%, rgba(56, 189, 248, 0.12), transparent 28%),
+        radial-gradient(circle at 50% 82%, rgba(14, 165, 233, 0.12), transparent 36%),
+        linear-gradient(180deg, #0f172a 0%, #0b1220 52%, #09111d 100%);
+    }
+
+    body.lightbox-open {
+      overflow: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    .page-shell {
+      width: min(1320px, calc(100vw - 32px));
+      margin: 0 auto;
+      padding: 28px 0 72px;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .topbar-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--muted);
+      font-size: 0.95rem;
+      letter-spacing: 0.03em;
+    }
+
+    .topbar-brand-mark {
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #93c5fd 0%, #38bdf8 100%);
+      box-shadow: 0 0 0 6px rgba(56, 189, 248, 0.12);
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 16px;
+      border: 1px solid var(--line-strong);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text);
+      transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+    }
+
+    .back-link:hover {
+      transform: translateY(-1px);
+      border-color: rgba(140, 201, 255, 0.5);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+      gap: 26px;
+      align-items: stretch;
+      margin-bottom: 32px;
+    }
+
+    .hero-copy,
+    .hero-showcase,
+    .gallery-panel {
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      background: var(--bg-soft);
+      backdrop-filter: blur(12px);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-copy {
+      padding: 36px 34px 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--accent);
+      font-size: 0.84rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 26px;
+      height: 1px;
+      background: currentColor;
+      opacity: 0.75;
+    }
+
+    h1 {
+      margin: 0 0 18px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2.6rem, 5vw, 4.9rem);
+      line-height: 0.95;
+      letter-spacing: -0.03em;
+      color: #f8fbff;
+    }
+
+    .hero-copy p {
+      margin: 0;
+      max-width: 58ch;
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.9;
+    }
+
+    .stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 26px;
+    }
+
+    .stat-pill {
+      min-width: 122px;
+      padding: 14px 16px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .stat-label {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--muted);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .stat-value {
+      display: block;
+      color: #f9fbff;
+      font-size: 1.18rem;
+      font-weight: 700;
+    }
+
+    .hero-showcase {
+      padding: 16px;
+    }
+
+    .featured-grid {
+      display: grid;
+      grid-template-columns: 1.25fr 1fr;
+      grid-template-rows: repeat(2, minmax(180px, 1fr));
+      gap: 16px;
+      min-height: 100%;
+    }
+
+    .featured-card {
+      position: relative;
+      display: block;
+      width: 100%;
+      min-height: 180px;
+      padding: 0;
+      border: 0;
+      border-radius: 22px;
+      overflow: hidden;
+      cursor: pointer;
+      background: #111827;
+      box-shadow: 0 16px 35px rgba(0, 0, 0, 0.25);
+    }
+
+    .featured-card.primary {
+      grid-row: 1 / span 2;
+    }
+
+    .featured-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.45s ease;
+    }
+
+    .featured-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(3, 7, 18, 0.06) 8%, rgba(3, 7, 18, 0.74) 100%);
+    }
+
+    .featured-card:hover img {
+      transform: scale(1.05);
+    }
+
+    .featured-card-copy {
+      position: absolute;
+      left: 18px;
+      right: 18px;
+      bottom: 16px;
+      z-index: 1;
+    }
+
+    .featured-card-copy strong {
+      display: block;
+      margin-bottom: 5px;
+      color: #fff;
+      font-size: 1.02rem;
+      font-weight: 700;
+    }
+
+    .featured-card-copy span {
+      color: rgba(255, 255, 255, 0.82);
+      font-size: 0.84rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .gallery-panel {
+      padding: 24px 24px 18px;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 18px;
+      margin-bottom: 18px;
+    }
+
+    .section-head h2 {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 2rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+
+    .section-head p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 22px;
+    }
+
+    .filter-btn {
+      padding: 9px 14px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--muted);
+      cursor: pointer;
+      transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+    }
+
+    .filter-btn:hover,
+    .filter-btn.active {
+      transform: translateY(-1px);
+      color: #f8fbff;
+      border-color: rgba(140, 201, 255, 0.45);
+      background: rgba(140, 201, 255, 0.12);
+    }
+
+    .gallery-grid {
+      column-count: 4;
+      column-gap: 18px;
+    }
+
+    .photo-card {
+      position: relative;
+      display: block;
+      width: 100%;
+      margin: 0 0 18px;
+      padding: 0;
+      break-inside: avoid;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 20px;
+      overflow: hidden;
+      background: var(--panel-strong);
+      box-shadow: 0 16px 34px rgba(0, 0, 0, 0.18);
+      cursor: pointer;
+      transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease;
+      text-align: left;
+    }
+
+    .photo-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 22px 48px rgba(0, 0, 0, 0.28);
+      border-color: rgba(140, 201, 255, 0.22);
+    }
+
+    .photo-card[hidden] {
+      display: none !important;
+    }
+
+    .photo-card img {
+      width: 100%;
+      display: block;
+      background: #111827;
+    }
+
+    .photo-badge {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      z-index: 1;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.7);
+      backdrop-filter: blur(8px);
+      color: #f8fbff;
+      font-size: 0.77rem;
+      letter-spacing: 0.03em;
+    }
+
+    .photo-caption {
+      padding: 14px 16px 16px;
+      background: linear-gradient(180deg, rgba(15, 23, 42, 0.04) 0%, rgba(15, 23, 42, 0.32) 100%);
+    }
+
+    .photo-title {
+      display: block;
+      margin-bottom: 5px;
+      color: #f8fbff;
+      font-size: 0.98rem;
+      font-weight: 600;
+    }
+
+    .photo-note {
+      display: block;
+      color: var(--muted);
+      font-size: 0.82rem;
+      letter-spacing: 0.02em;
+    }
+
+    .footer-note {
+      margin-top: 28px;
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.8;
+      text-align: center;
+    }
+
+    .footer-note a {
+      color: var(--accent-strong);
+    }
+
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+      padding: 28px;
+      background: rgba(2, 6, 23, 0.88);
+      backdrop-filter: blur(10px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.24s ease;
+    }
+
+    .lightbox.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .lightbox-nav,
+    .lightbox-close {
+      flex-shrink: 0;
+      width: 48px;
+      height: 48px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      color: #fff;
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .lightbox-nav:hover,
+    .lightbox-close:hover {
+      transform: translateY(-1px);
+      background: rgba(255, 255, 255, 0.14);
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 1.3rem;
+      line-height: 1;
+    }
+
+    .lightbox-figure {
+      width: min(1100px, calc(100vw - 160px));
+      margin: 0;
+      text-align: center;
+    }
+
+    .lightbox-figure img {
+      width: 100%;
+      max-height: calc(100vh - 170px);
+      object-fit: contain;
+      border-radius: 22px;
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.34);
+      background: #020617;
+    }
+
+    .lightbox-caption {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      margin-top: 14px;
+      padding: 0 6px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .lightbox-caption strong {
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    @media (max-width: 1100px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+
+      .gallery-grid {
+        column-count: 3;
+      }
+    }
+
+    @media (max-width: 780px) {
+      .page-shell {
+        width: min(100vw - 20px, 1320px);
+        padding-top: 18px;
+      }
+
+      .topbar,
+      .section-head,
+      .lightbox-caption {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .hero-copy,
+      .gallery-panel {
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+
+      .featured-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(3, 230px);
+      }
+
+      .featured-card.primary {
+        grid-row: auto;
+      }
+
+      .gallery-grid {
+        column-count: 2;
+      }
+
+      .lightbox {
+        padding: 18px;
+      }
+
+      .lightbox-figure {
+        width: min(100vw - 36px, 1100px);
+      }
+
+      .lightbox-nav {
+        display: none;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .gallery-grid {
+        column-count: 1;
+      }
+
+      .stats {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-shell">
+    <div class="topbar">
+      <div class="topbar-brand">
+        <span class="topbar-brand-mark" aria-hidden="true"></span>
+        <span>Shilong Zou · Photography Portfolio</span>
+      </div>
+      <a class="back-link" href="../index.html">← Back to homepage</a>
+    </div>
+
+    <section class="hero">
+      <div class="hero-copy">
+        <div>
+          <div class="eyebrow">Travel Frames</div>
+          <h1>My Photography</h1>
+          <p>
+            A small visual notebook of the places I have visited along the way.
+            I enjoy keeping fragments of cities, mountains, light, and everyday travel moments through the lens.
+            The layout combines a curated hero, a responsive masonry gallery, and a full-screen lightbox so the photos can breathe on both desktop and mobile.
+          </p>
+        </div>
+        <div class="stats" id="stats-bar"></div>
+      </div>
+
+      <div class="hero-showcase">
+        <div class="featured-grid" id="featured-grid"></div>
+      </div>
+    </section>
+
+    <section class="gallery-panel">
+      <div class="section-head">
+        <div>
+          <h2>Gallery</h2>
+        </div>
+      </div>
+
+      <div class="filters" id="filter-bar"></div>
+      <div class="gallery-grid" id="gallery-grid"></div>
+
+      <div class="footer-note">
+        Click any frame to view it in full screen.
+        Return to <a href="../index.html">homepage</a>.
+      </div>
+    </section>
+  </div>
+
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <button type="button" class="lightbox-close" id="lightbox-close" aria-label="Close lightbox">&times;</button>
+    <button type="button" class="lightbox-nav" id="lightbox-prev" aria-label="Previous photo">&#10094;</button>
+    <figure class="lightbox-figure">
+      <img id="lightbox-image" src="" alt="">
+      <figcaption class="lightbox-caption">
+        <div>
+          <strong id="lightbox-location"></strong>
+        </div>
+        <div id="lightbox-index"></div>
+      </figcaption>
+    </figure>
+    <button type="button" class="lightbox-nav" id="lightbox-next" aria-label="Next photo">&#10095;</button>
+  </div>
+
+  <script>
+    // Add new photos here. The page will update its gallery, filters, stats, and lightbox automatically.
+    const photos = [
+      { src: "../res/figs/photos/changsha-2.jpg", location: "湖南-长沙", alt: "Photography in Changsha, Hunan" },
+      { src: "../res/figs/photos/beijing-1.jpg", location: "北京", alt: "Photography in Beijing" },
+      { src: "../res/figs/photos/changsha-1.jpg", location: "湖南-长沙", alt: "Photography in Changsha, Hunan" },
+      { src: "../res/figs/photos/changzhou-1.jpg", location: "江苏-常州", alt: "Photography in Changzhou, Jiangsu" },
+      { src: "../res/figs/photos/changzhou-2.jpg", location: "江苏-常州", alt: "Photography in Changzhou, Jiangsu" },
+      { src: "../res/figs/photos/lianyungang.jpg", location: "江苏-连云港", alt: "Photography in Lianyungang, Jiangsu" },
+      { src: "../res/figs/photos/chenzhou-1.jpg", location: "湖南-郴州", alt: "Photography in Chenzhou, Hunan" },
+      { src: "../res/figs/photos/wugongshan.jpg", location: "江西-武功山", alt: "Photography in Wugong Mountain, Jiangxi" },
+      { src: "../res/figs/photos/heze.jpg", location: "山东-菏泽", alt: "Photography in Heze, Shandong" },
+      { src: "../res/figs/photos/jinan.jpg", location: "山东-济南", alt: "Photography in Jinan, Shandong" },
+      { src: "../res/figs/photos/jinan-2.jpg", location: "山东-济南", alt: "Photography in Jinan, Shandong" },
+      { src: "../res/figs/photos/ruzhou-1.jpg", location: "河南-平顶山", alt: "Photography in Pingdingshan, Henan" },
+      { src: "../res/figs/photos/shenzhen-1.jpg", location: "广东-深圳", alt: "Photography in Shenzhen, Guangdong" },
+      { src: "../res/figs/photos/shenzhen-2.jpg", location: "广东-深圳", alt: "Photography in Shenzhen, Guangdong" },
+      { src: "../res/figs/photos/shenzhen-3.jpg", location: "广东-深圳", alt: "Photography in Shenzhen, Guangdong" }
+    ];
+
+    const featuredIndexes = [0, 7, 12];
+    const galleryGrid = document.getElementById("gallery-grid");
+    const featuredGrid = document.getElementById("featured-grid");
+    const filterBar = document.getElementById("filter-bar");
+    const statsBar = document.getElementById("stats-bar");
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImage = document.getElementById("lightbox-image");
+    const lightboxLocation = document.getElementById("lightbox-location");
+    const lightboxIndex = document.getElementById("lightbox-index");
+    const lightboxClose = document.getElementById("lightbox-close");
+    const lightboxPrev = document.getElementById("lightbox-prev");
+    const lightboxNext = document.getElementById("lightbox-next");
+
+    let currentIndex = 0;
+    let activeFilter = "全部";
+
+    function regionOf(location) {
+      return location.split("-")[0];
+    }
+
+    function createStats() {
+      const uniqueLocations = new Set(photos.map((photo) => photo.location));
+      const uniqueRegions = new Set(photos.map((photo) => regionOf(photo.location)));
+      const stats = [
+        { label: "Frames", value: photos.length },
+        { label: "Places", value: uniqueLocations.size },
+        { label: "Regions", value: uniqueRegions.size }
+      ];
+
+      statsBar.innerHTML = stats.map((item) => `
+        <div class="stat-pill">
+          <span class="stat-label">${item.label}</span>
+          <span class="stat-value">${item.value}</span>
+        </div>
+      `).join("");
+    }
+
+    function createFeatured() {
+      featuredGrid.innerHTML = featuredIndexes.map((photoIndex, order) => {
+        const photo = photos[photoIndex];
+        return `
+          <button type="button" class="featured-card ${order === 0 ? "primary" : ""}" data-index="${photoIndex}" aria-label="View ${photo.location}">
+            <img src="${photo.src}" alt="${photo.alt}" loading="${order === 0 ? "eager" : "lazy"}">
+            <span class="featured-card-copy">
+              <strong>${photo.location}</strong>
+            </span>
+          </button>
+        `;
+      }).join("");
+    }
+
+    function createFilters() {
+      const regions = ["全部", ...new Set(photos.map((photo) => regionOf(photo.location)))];
+      filterBar.innerHTML = regions.map((region, index) => `
+        <button type="button" class="filter-btn ${index === 0 ? "active" : ""}" data-filter="${region}">
+          ${region}
+        </button>
+      `).join("");
+    }
+
+    function createGallery() {
+      galleryGrid.innerHTML = photos.map((photo, index) => `
+        <button
+          type="button"
+          class="photo-card"
+          data-index="${index}"
+          data-region="${regionOf(photo.location)}"
+          aria-label="View ${photo.location}"
+        >
+          <span class="photo-badge">${photo.location}</span>
+          <img src="${photo.src}" alt="${photo.alt}" loading="lazy" decoding="async">
+          <span class="photo-caption">
+            <span class="photo-title">${photo.location}</span>
+          </span>
+        </button>
+      `).join("");
+    }
+
+    function applyFilter(filter) {
+      activeFilter = filter;
+      document.querySelectorAll(".filter-btn").forEach((button) => {
+        button.classList.toggle("active", button.dataset.filter === filter);
+      });
+
+      document.querySelectorAll(".photo-card").forEach((card) => {
+        const visible = filter === "全部" || card.dataset.region === filter;
+        card.hidden = !visible;
+      });
+    }
+
+    function openLightbox(index) {
+      const photo = photos[index];
+      currentIndex = index;
+      lightboxImage.src = photo.src;
+      lightboxImage.alt = photo.alt;
+      lightboxLocation.textContent = photo.location;
+      lightboxIndex.textContent = `${index + 1} / ${photos.length}`;
+      lightbox.classList.add("open");
+      lightbox.setAttribute("aria-hidden", "false");
+      document.body.classList.add("lightbox-open");
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove("open");
+      lightbox.setAttribute("aria-hidden", "true");
+      document.body.classList.remove("lightbox-open");
+    }
+
+    function stepLightbox(delta) {
+      currentIndex = (currentIndex + delta + photos.length) % photos.length;
+      openLightbox(currentIndex);
+    }
+
+    createStats();
+    createFeatured();
+    createFilters();
+    createGallery();
+    applyFilter("全部");
+
+    document.addEventListener("click", (event) => {
+      const trigger = event.target.closest("[data-index]");
+      if (trigger) {
+        openLightbox(Number(trigger.dataset.index));
+      }
+
+      const filterButton = event.target.closest("[data-filter]");
+      if (filterButton) {
+        applyFilter(filterButton.dataset.filter);
+      }
+
+      if (event.target === lightbox) {
+        closeLightbox();
+      }
+    });
+
+    lightboxClose.addEventListener("click", closeLightbox);
+    lightboxPrev.addEventListener("click", () => stepLightbox(-1));
+    lightboxNext.addEventListener("click", () => stepLightbox(1));
+
+    document.addEventListener("keydown", (event) => {
+      if (!lightbox.classList.contains("open")) {
+        return;
+      }
+
+      if (event.key === "Escape") {
+        closeLightbox();
+      } else if (event.key === "ArrowLeft") {
+        stepLightbox(-1);
+      } else if (event.key === "ArrowRight") {
+        stepLightbox(1);
+      }
+    });
+  </script>
+</body>
+</html>

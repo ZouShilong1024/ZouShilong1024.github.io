@@ -112,6 +112,57 @@
 		text-decoration: none;
       }
 
+      .social-links {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 12px 8px;
+        margin: 4px 0;
+      }
+      .social-separator {
+        color: #94a3b8;
+        font-size: 0.9rem;
+        line-height: 1;
+        user-select: none;
+      }
+      .social-btn,
+      .social-btn:link,
+      .social-btn:visited {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        padding: 8px 14px;
+        border: 0;
+        border-radius: 4px;
+        font-family: "Segoe UI", "Microsoft YaHei", "PingFang SC", Arial, sans-serif;
+        font-size: 0.76rem;
+        font-weight: 600;
+        line-height: 1.15;
+        color: #1a1a1a !important;
+        background: rgba(255,255,255,0.6);
+        box-shadow: inset 0 0 0 1.5px #d4d0c8;
+        transition: box-shadow 0.15s, background 0.15s, color 0.15s;
+        text-decoration: none;
+        letter-spacing: 0.01em;
+        border-bottom: none !important;
+        text-shadow: none !important;
+        vertical-align: middle;
+      }
+      .social-btn:hover {
+        color: #2563eb !important;
+        background: rgba(255,255,255,0.9);
+        box-shadow: inset 0 0 0 1.5px #2563eb;
+        text-decoration: none;
+        border-bottom: none !important;
+        text-shadow: none !important;
+      }
+      .social-btn img {
+        width: 15px;
+        height: 15px;
+        object-fit: contain;
+        flex-shrink: 0;
+      }
+
       hr {
         border: 10;
         height: 1px;
@@ -270,6 +321,29 @@
         padding: 0;
         border: none;
         line-height: 1.25;
+      }
+      .photo-strip-title-link,
+      .photo-strip-title-link:link,
+      .photo-strip-title-link:visited {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 7px;
+        color: inherit !important;
+        text-decoration: none;
+        border-bottom: none !important;
+        text-shadow: none !important;
+        transition: transform 0.2s ease;
+      }
+      .photo-strip-title-link:hover {
+        color: inherit !important;
+        text-decoration: none;
+        border-bottom: none !important;
+        text-shadow: none !important;
+        transform: translateY(-1px);
+      }
+      .photo-strip-title-link:hover .photo-strip-title-line {
+        background: rgba(82, 123, 189, 0.72);
       }
       .photo-strip-title-text {
         color: #2c3e50;
@@ -545,18 +619,17 @@
 			</div>
 			<div class="col-md-9 align-column-center">
 				<h2> Shilong Zou （邹世龙） </h2>
-				<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-				<div style="font-family: 'Segoe UI', sans-serif; font-size: 16px; display: flex; align-items: center; gap: 20px; color: #2563eb;">
-				<a href="mailto:zoushilong@nudt.edu.cn" 
-					style="text-decoration: none; display: inline-flex; align-items: center; transition: all 0.3s;">
-					<i class="fa-solid fa-envelope" style="margin-right: 6px; font-size: 18px;"></i>
-					<span>Email: zoushilong@nudt.edu.cn</span>
+				<div class="social-links">
+				<a class="social-btn" href="mailto:zoushilong@nudt.edu.cn">
+					<img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect x='3' y='5' width='18' height='14' rx='2' fill='%23527bbd'/%3E%3Cpath d='M5 7l7 5 7-5' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E" alt="Email" /> Email
 				</a>
-
-				<a href="https://github.com/ZouShilong1024" target="_blank"
-					style="text-decoration: none; display: inline-flex; align-items: center; transition: all 0.3s;">
-					<i class="fab fa-github" style="margin-right: 6px; font-size: 18px;"></i>
-					<span>GitHub: https://github.com/ZouShilong1024</span>
+				<span class="social-separator" aria-hidden="true">&middot;</span>
+				<a class="social-btn" href="https://github.com/ZouShilong1024" target="_blank" rel="noopener noreferrer">
+					<img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='11' fill='%231f2937'/%3E%3Ctext x='12' y='15' text-anchor='middle' font-size='8' font-family='Arial' font-weight='700' fill='white'%3EGH%3C/text%3E%3C/svg%3E" alt="GitHub" style="border-radius:50%;" /> GitHub
+				</a>
+				<span class="social-separator" aria-hidden="true">&middot;</span>
+				<a class="social-btn" href="https://xhslink.com/m/5QP2l843kg8" target="_blank" rel="noopener noreferrer">
+					<img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect x='2' y='2' width='20' height='20' rx='5' fill='%23ff2442'/%3E%3Ctext x='12' y='15' text-anchor='middle' font-size='9' font-family='Arial' font-weight='700' fill='white'%3ER%3C/text%3E%3C/svg%3E" alt="Rednote" /> Rednote
 				</a>
 				</div>
 
@@ -1222,10 +1295,10 @@
 			</div>
 		</div>
 		<div class="photo-strip-title-col">
-			<div class="photo-strip-title">
+			<a class="photo-strip-title photo-strip-title-link" href="photography/">
 				<span class="photo-strip-title-text">My photography</span>
 				<span class="photo-strip-title-line" aria-hidden="true"></span>
-			</div>
+			</a>
 		</div>
 		<div class="photo-strip-viewport">
 			<div class="photo-strip-track">
