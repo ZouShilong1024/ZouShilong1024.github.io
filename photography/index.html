@@ -8,17 +8,18 @@
   <link rel="shortcut icon" href="../res/icon/icon.svg">
   <style>
     :root {
-      --bg: #0b1220;
-      --bg-soft: rgba(15, 23, 42, 0.72);
-      --panel: rgba(15, 23, 42, 0.84);
-      --panel-strong: rgba(15, 23, 42, 0.94);
-      --line: rgba(148, 163, 184, 0.18);
-      --line-strong: rgba(148, 163, 184, 0.32);
-      --text: #e5eefc;
-      --muted: #a8b5ca;
-      --accent: #8cc9ff;
-      --accent-strong: #c8e8ff;
-      --shadow: 0 20px 55px rgba(0, 0, 0, 0.32);
+      --bg: #fafbfc;
+      --bg-soft: #ffffff;
+      --panel: #f8fafc;
+      --panel-strong: #f1f5f9;
+      --line: rgba(15, 23, 42, 0.08);
+      --line-strong: rgba(15, 23, 42, 0.14);
+      --text: #0f172a;
+      --muted: #64748b;
+      --accent: #0284c7;
+      --accent-strong: #0369a1;
+      --shadow: 0 18px 48px rgba(15, 23, 42, 0.07);
+      --shadow-hover: 0 24px 56px rgba(15, 23, 42, 0.1);
     }
 
     * {
@@ -35,10 +36,10 @@
       font-family: "Segoe UI", "Microsoft YaHei", "PingFang SC", Arial, sans-serif;
       color: var(--text);
       background:
-        radial-gradient(circle at 12% 18%, rgba(76, 132, 255, 0.16), transparent 32%),
-        radial-gradient(circle at 82% 12%, rgba(56, 189, 248, 0.12), transparent 28%),
-        radial-gradient(circle at 50% 82%, rgba(14, 165, 233, 0.12), transparent 36%),
-        linear-gradient(180deg, #0f172a 0%, #0b1220 52%, #09111d 100%);
+        radial-gradient(ellipse 120% 80% at 10% -10%, rgba(14, 165, 233, 0.07), transparent 50%),
+        radial-gradient(ellipse 90% 70% at 95% 5%, rgba(56, 189, 248, 0.06), transparent 45%),
+        radial-gradient(ellipse 100% 60% at 50% 100%, rgba(148, 163, 184, 0.06), transparent 55%),
+        #ffffff;
     }
 
     body.lightbox-open {
@@ -52,6 +53,12 @@
 
     button {
       font: inherit;
+    }
+
+    .photo-card::-moz-focus-inner,
+    .featured-card::-moz-focus-inner {
+      border: 0;
+      padding: 0;
     }
 
     .page-shell {
@@ -81,8 +88,8 @@
       width: 11px;
       height: 11px;
       border-radius: 50%;
-      background: linear-gradient(135deg, #93c5fd 0%, #38bdf8 100%);
-      box-shadow: 0 0 0 6px rgba(56, 189, 248, 0.12);
+      background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+      box-shadow: 0 0 0 6px rgba(14, 165, 233, 0.18);
     }
 
     .back-link {
@@ -92,15 +99,17 @@
       padding: 10px 16px;
       border: 1px solid var(--line-strong);
       border-radius: 999px;
-      background: rgba(255, 255, 255, 0.04);
+      background: #ffffff;
       color: var(--text);
-      transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+      box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+      transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
     }
 
     .back-link:hover {
       transform: translateY(-1px);
-      border-color: rgba(140, 201, 255, 0.5);
-      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(2, 132, 199, 0.35);
+      background: #f0f9ff;
+      box-shadow: 0 4px 14px rgba(14, 165, 233, 0.12);
     }
 
     .hero {
@@ -117,7 +126,6 @@
       border: 1px solid var(--line);
       border-radius: 28px;
       background: var(--bg-soft);
-      backdrop-filter: blur(12px);
       box-shadow: var(--shadow);
     }
 
@@ -153,7 +161,7 @@
       font-size: clamp(2.6rem, 5vw, 4.9rem);
       line-height: 0.95;
       letter-spacing: -0.03em;
-      color: #f8fbff;
+      color: #0c1222;
     }
 
     .hero-copy p {
@@ -174,9 +182,9 @@
     .stat-pill {
       min-width: 122px;
       padding: 14px 16px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--line);
       border-radius: 18px;
-      background: rgba(255, 255, 255, 0.04);
+      background: var(--panel);
     }
 
     .stat-label {
@@ -190,13 +198,14 @@
 
     .stat-value {
       display: block;
-      color: #f9fbff;
+      color: var(--text);
       font-size: 1.18rem;
       font-weight: 700;
     }
 
     .hero-showcase {
       padding: 16px;
+      background: linear-gradient(165deg, #f8fafc 0%, #f1f5f9 100%);
     }
 
     .featured-grid {
@@ -217,8 +226,10 @@
       border-radius: 22px;
       overflow: hidden;
       cursor: pointer;
-      background: #111827;
-      box-shadow: 0 16px 35px rgba(0, 0, 0, 0.25);
+      background: #e2e8f0;
+      box-shadow: 0 12px 32px rgba(15, 23, 42, 0.1);
+      appearance: none;
+      -webkit-appearance: none;
     }
 
     .featured-card.primary {
@@ -226,6 +237,8 @@
     }
 
     .featured-card img {
+      position: relative;
+      z-index: 0;
       width: 100%;
       height: 100%;
       object-fit: cover;
@@ -237,6 +250,8 @@
       content: "";
       position: absolute;
       inset: 0;
+      z-index: 1;
+      pointer-events: none;
       background: linear-gradient(180deg, rgba(3, 7, 18, 0.06) 8%, rgba(3, 7, 18, 0.74) 100%);
     }
 
@@ -249,7 +264,7 @@
       left: 18px;
       right: 18px;
       bottom: 16px;
-      z-index: 1;
+      z-index: 2;
     }
 
     .featured-card-copy strong {
@@ -285,6 +300,7 @@
       font-size: 2rem;
       font-weight: 600;
       letter-spacing: -0.02em;
+      color: #0c1222;
     }
 
     .section-head p {
@@ -303,20 +319,21 @@
 
     .filter-btn {
       padding: 9px 14px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      border: 1px solid var(--line-strong);
       border-radius: 999px;
-      background: rgba(255, 255, 255, 0.04);
+      background: #ffffff;
       color: var(--muted);
       cursor: pointer;
-      transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+      transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
     }
 
     .filter-btn:hover,
     .filter-btn.active {
       transform: translateY(-1px);
-      color: #f8fbff;
-      border-color: rgba(140, 201, 255, 0.45);
-      background: rgba(140, 201, 255, 0.12);
+      color: var(--accent-strong);
+      border-color: rgba(2, 132, 199, 0.35);
+      background: #e0f2fe;
+      box-shadow: 0 2px 8px rgba(14, 165, 233, 0.1);
     }
 
     .gallery-grid {
@@ -331,20 +348,23 @@
       margin: 0 0 18px;
       padding: 0;
       break-inside: avoid;
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--line);
       border-radius: 20px;
       overflow: hidden;
-      background: var(--panel-strong);
-      box-shadow: 0 16px 34px rgba(0, 0, 0, 0.18);
+      background: #ffffff;
+      box-shadow: 0 8px 28px rgba(15, 23, 42, 0.06);
       cursor: pointer;
       transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease;
       text-align: left;
+      font-weight: 400;
+      appearance: none;
+      -webkit-appearance: none;
     }
 
     .photo-card:hover {
       transform: translateY(-4px);
-      box-shadow: 0 22px 48px rgba(0, 0, 0, 0.28);
-      border-color: rgba(140, 201, 255, 0.22);
+      box-shadow: var(--shadow-hover);
+      border-color: rgba(2, 132, 199, 0.22);
     }
 
     .photo-card[hidden] {
@@ -352,9 +372,11 @@
     }
 
     .photo-card img {
+      position: relative;
+      z-index: 0;
       width: 100%;
       display: block;
-      background: #111827;
+      background: #e2e8f0;
     }
 
     .photo-badge {
@@ -362,26 +384,28 @@
       top: 14px;
       left: 14px;
       z-index: 1;
+      max-width: calc(100% - 28px);
       padding: 6px 10px;
       border-radius: 999px;
-      background: rgba(15, 23, 42, 0.7);
-      backdrop-filter: blur(8px);
-      color: #f8fbff;
+      background: rgba(255, 255, 255, 0.94);
+      border: 1px solid rgba(15, 23, 42, 0.06);
+      box-shadow: 0 2px 10px rgba(15, 23, 42, 0.08);
+      color: var(--text);
       font-size: 0.77rem;
       letter-spacing: 0.03em;
+      pointer-events: none;
     }
 
-    .photo-caption {
-      padding: 14px 16px 16px;
-      background: linear-gradient(180deg, rgba(15, 23, 42, 0.04) 0%, rgba(15, 23, 42, 0.32) 100%);
-    }
-
-    .photo-title {
+    .photo-card .photo-title {
+      position: relative;
+      z-index: 2;
       display: block;
-      margin-bottom: 5px;
-      color: #f8fbff;
+      padding: 14px 16px 16px;
+      background: linear-gradient(180deg, #fafbfc 0%, #f1f5f9 100%);
+      border-top: 1px solid var(--line);
+      color: var(--text);
       font-size: 0.98rem;
-      font-weight: 600;
+      font-weight: 400;
     }
 
     .photo-note {
@@ -473,14 +497,14 @@
       gap: 14px;
       margin-top: 14px;
       padding: 0 6px;
-      color: var(--muted);
+      color: rgba(226, 232, 240, 0.88);
       font-size: 0.95rem;
     }
 
-    .lightbox-caption strong {
+    .lightbox-caption .lightbox-comment {
       color: #fff;
       font-size: 1rem;
-      font-weight: 600;
+      font-weight: 400;
     }
 
     @media (max-width: 1100px) {
@@ -603,7 +627,7 @@
       <img id="lightbox-image" src="" alt="">
       <figcaption class="lightbox-caption">
         <div>
-          <strong id="lightbox-location"></strong>
+          <span id="lightbox-location" class="lightbox-comment"></span>
         </div>
         <div id="lightbox-index"></div>
       </figcaption>
@@ -614,24 +638,39 @@
   <script>
     // Add new photos here. The page will update its gallery, filters, stats, and lightbox automatically.
     const photos = [
-      { src: "../res/figs/photos/changsha-2.jpg", location: "湖南-长沙", alt: "Photography in Changsha, Hunan" },
-      { src: "../res/figs/photos/beijing-1.jpg", location: "北京", alt: "Photography in Beijing" },
-      { src: "../res/figs/photos/changsha-1.jpg", location: "湖南-长沙", alt: "Photography in Changsha, Hunan" },
-      { src: "../res/figs/photos/changzhou-1.jpg", location: "江苏-常州", alt: "Photography in Changzhou, Jiangsu" },
-      { src: "../res/figs/photos/changzhou-2.jpg", location: "江苏-常州", alt: "Photography in Changzhou, Jiangsu" },
-      { src: "../res/figs/photos/lianyungang.jpg", location: "江苏-连云港", alt: "Photography in Lianyungang, Jiangsu" },
-      { src: "../res/figs/photos/chenzhou-1.jpg", location: "湖南-郴州", alt: "Photography in Chenzhou, Hunan" },
-      { src: "../res/figs/photos/wugongshan.jpg", location: "江西-武功山", alt: "Photography in Wugong Mountain, Jiangxi" },
-      { src: "../res/figs/photos/heze.jpg", location: "山东-菏泽", alt: "Photography in Heze, Shandong" },
-      { src: "../res/figs/photos/jinan.jpg", location: "山东-济南", alt: "Photography in Jinan, Shandong" },
-      { src: "../res/figs/photos/jinan-2.jpg", location: "山东-济南", alt: "Photography in Jinan, Shandong" },
-      { src: "../res/figs/photos/ruzhou-1.jpg", location: "河南-平顶山", alt: "Photography in Pingdingshan, Henan" },
-      { src: "../res/figs/photos/shenzhen-1.jpg", location: "广东-深圳", alt: "Photography in Shenzhen, Guangdong" },
-      { src: "../res/figs/photos/shenzhen-2.jpg", location: "广东-深圳", alt: "Photography in Shenzhen, Guangdong" },
-      { src: "../res/figs/photos/shenzhen-3.jpg", location: "广东-深圳", alt: "Photography in Shenzhen, Guangdong" }
+      { src: "../res/figs/photos/changsha-2.jpg", location: "湖南-长沙", comment: "One evening after finishing debugging, I captured a breathtaking sunset glow.", alt: "Photography in Changsha, Hunan" },
+      { src: "../res/figs/photos/beijing-1.jpg", location: "北京", comment: "Layers of history and the present meet in one frame.", alt: "Photography in Beijing" },
+      { src: "../res/figs/photos/beijing-2.jpg", location: "北京", comment: "Street rhythm and sky blend into a calm urban palette.", alt: "Photography in Beijing" },
+      { src: "../res/figs/photos/beijing-3.jpg", location: "北京", comment: "Light falls across the city in soft, patient layers.", alt: "Photography in Beijing" },
+      { src: "../res/figs/photos/beijing-beijingbei.jpg", location: "北京", comment: "Beijing North station — arrivals, departures, and quiet in between.", alt: "Beijing North railway station photography" },
+      { src: "../res/figs/photos/beijing-changcheng.jpg", location: "北京", comment: "The Great Wall stretches into mist and memory.", alt: "Great Wall photography in Beijing" },
+      { src: "../res/figs/photos/beijing-changcheng-2.jpg", location: "北京", comment: "Stone and ridge line hold their place against the sky.", alt: "Great Wall photography in Beijing" },
+      { src: "../res/figs/photos/beijing-tiantan.jpg", location: "北京", comment: "Temple of Heaven — symmetry, space, and slow light.", alt: "Temple of Heaven photography in Beijing" },
+      { src: "../res/figs/photos/beijing-yiheyuan-1.jpg", location: "北京", comment: "Summer Palace reflections and the hush of open water.", alt: "Summer Palace photography in Beijing" },
+      { src: "../res/figs/photos/beijing-yiheyuan-2.jpg", location: "北京", comment: "Walkways and willows frame a softer side of the capital.", alt: "Summer Palace photography in Beijing" },
+      { src: "../res/figs/photos/beijing-yiheyuan-3.jpg", location: "北京", comment: "Color and distance settle into a single tranquil view.", alt: "Summer Palace photography in Beijing" },
+      { src: "../res/figs/photos/beijing-yuanmingyuan.jpg", location: "北京", comment: "Ruins and gardens speak in textures of time.", alt: "Old Summer Palace photography in Beijing" },
+      { src: "../res/figs/photos/changsha-1.jpg", location: "湖南-长沙", comment: "Warm tones and familiar streets make the city feel close.", alt: "Photography in Changsha, Hunan" },
+      { src: "../res/figs/photos/changzhou-1.jpg", location: "江苏-常州", comment: "Stillness appears in the spaces between architecture and sky.", alt: "Photography in Changzhou, Jiangsu" },
+      { src: "../res/figs/photos/changzhou-2.jpg", location: "江苏-常州", comment: "A calm urban rhythm captured in simple lines and color.", alt: "Photography in Changzhou, Jiangsu" },
+      { src: "../res/figs/photos/lianyungang.jpg", location: "江苏-连云港", comment: "Sea breeze, distance, and a horizon that feels endless.", alt: "Photography in Lianyungang, Jiangsu" },
+      { src: "../res/figs/photos/chenzhou-1.jpg", location: "湖南-郴州", comment: "Mist and mountains quietly reshape the sense of depth.", alt: "Photography in Chenzhou, Hunan" },
+      { src: "../res/figs/photos/wugongshan.jpg", location: "江西-武功山", comment: "Clouds drift slowly across the ridgeline like a moving sea.", alt: "Photography in Wugong Mountain, Jiangxi" },
+      { src: "../res/figs/photos/heze.jpg", location: "山东-菏泽", comment: "An ordinary moment becomes memorable under gentle light.", alt: "Photography in Heze, Shandong" },
+      { src: "../res/figs/photos/jinan.jpg", location: "山东-济南", comment: "The city reveals its softness when water and stone meet.", alt: "Photography in Jinan, Shandong" },
+      { src: "../res/figs/photos/jinan-2.jpg", location: "山东-济南", comment: "A second glance at the city, quieter and more reflective.", alt: "Photography in Jinan, Shandong" },
+      { src: "../res/figs/photos/ruzhou-1.jpg", location: "河南-平顶山", comment: "Open space and distant tones create a sense of pause.", alt: "Photography in Pingdingshan, Henan" },
+      { src: "../res/figs/photos/shenzhen-1.jpg", location: "广东-深圳", comment: "A fast city caught for a moment in balanced light.", alt: "Photography in Shenzhen, Guangdong" },
+      { src: "../res/figs/photos/shenzhen-2.jpg", location: "广东-深圳", comment: "Glass, structure, and motion define the modern skyline.", alt: "Photography in Shenzhen, Guangdong" },
+      { src: "../res/figs/photos/shenzhen-3.jpg", location: "广东-深圳", comment: "Nightfall turns the city into a quieter composition.", alt: "Photography in Shenzhen, Guangdong" },
+      { src: "../res/figs/photos/myself.jpg", location: "生活记录", comment: "A quiet self portrait among the travel frames.", alt: "Self portrait photography" }
     ];
 
-    const featuredIndexes = [0, 7, 12];
+    // 首页 Hero 右侧三张「精选」图：下标对应上面 photos 数组（从 0 开始数第一条为 0）。
+    // featuredIndexes[0] → 左侧竖条大图（跨两行）；[1]、[2] → 右侧上下两张小图。
+    // 修改方式：在 photos 里找到想展示的三张照片，把它们的序号（从 0 起）填进数组，例如 [3, 8, 12]。
+    // 若在 photos 中插入、删除或调整顺序，必须重新数序号，否则会显示成别的照片。
+    const featuredIndexes = [0, 1, 21];
     const galleryGrid = document.getElementById("gallery-grid");
     const featuredGrid = document.getElementById("featured-grid");
     const filterBar = document.getElementById("filter-bar");
@@ -702,9 +741,7 @@
         >
           <span class="photo-badge">${photo.location}</span>
           <img src="${photo.src}" alt="${photo.alt}" loading="lazy" decoding="async">
-          <span class="photo-caption">
-            <span class="photo-title">${photo.location}</span>
-          </span>
+          <span class="photo-title">${photo.comment}</span>
         </button>
       `).join("");
     }
@@ -726,7 +763,7 @@
       currentIndex = index;
       lightboxImage.src = photo.src;
       lightboxImage.alt = photo.alt;
-      lightboxLocation.textContent = photo.location;
+      lightboxLocation.textContent = photo.comment;
       lightboxIndex.textContent = `${index + 1} / ${photos.length}`;
       lightbox.classList.add("open");
       lightbox.setAttribute("aria-hidden", "false");
