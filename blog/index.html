@@ -1,0 +1,1243 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>博客 | Shilong Zou</title>
+  <meta name="description" content="Shilong Zou 的个人博客：技术笔记、阅读与随笔。">
+  <link rel="shortcut icon" href="../res/icon/icon.svg">
+  <style>
+    :root {
+      --bg: #f7f8fa;
+      --surface: #ffffff;
+      --text: #1a1d26;
+      --muted: #5c6370;
+      --line: rgba(26, 29, 38, 0.08);
+      --line-strong: rgba(26, 29, 38, 0.12);
+      --accent: #527bbd;
+      --accent-hover: #3a5f9a;
+      --accent-soft: rgba(82, 123, 189, 0.12);
+      --shadow: 0 12px 40px rgba(26, 29, 38, 0.06);
+      --shadow-hover: 0 18px 48px rgba(26, 29, 38, 0.09);
+      --radius: 14px;
+      --font: "Segoe UI", "Microsoft YaHei", "PingFang SC", system-ui, sans-serif;
+      --serif: Georgia, "Songti SC", "SimSun", serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: var(--font);
+      font-size: 16px;
+      line-height: 1.65;
+      color: var(--text);
+      background:
+        radial-gradient(ellipse 100% 80% at 0% 0%, rgba(82, 123, 189, 0.06), transparent 55%),
+        radial-gradient(ellipse 80% 60% at 100% 10%, rgba(82, 123, 189, 0.04), transparent 50%),
+        var(--bg);
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: var(--accent-hover);
+    }
+
+    .shell {
+      width: min(1120px, calc(100vw - 40px));
+      margin: 0 auto;
+      padding: 28px 0 80px;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 252px) minmax(0, 1fr);
+      gap: clamp(24px, 4vw, 40px);
+      align-items: start;
+    }
+
+    .main-col {
+      min-width: 0;
+    }
+
+    .sidebar-drawer-btn {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      margin: 0 0 18px;
+      padding: 12px 16px;
+      font: inherit;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text);
+      background: var(--surface);
+      border: 1px solid var(--line-strong);
+      border-radius: var(--radius);
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+    }
+
+    .sidebar-drawer-btn:hover {
+      border-color: rgba(82, 123, 189, 0.35);
+      background: var(--accent-soft);
+      color: var(--accent-hover);
+    }
+
+    .sidebar-scrim {
+      display: none;
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 24px;
+      max-height: calc(100vh - 48px);
+      overflow-y: auto;
+      overflow-x: hidden;
+      padding: 4px 4px 8px 0;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(82, 123, 189, 0.35) transparent;
+    }
+
+    .sidebar::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .sidebar::-webkit-scrollbar-thumb {
+      background: rgba(82, 123, 189, 0.35);
+      border-radius: 99px;
+    }
+
+    .sidebar-inner {
+      padding: 18px 18px 20px;
+      border-radius: calc(var(--radius) + 4px);
+      background: var(--surface);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
+
+    .sidebar-section {
+      padding-bottom: 18px;
+      margin-bottom: 18px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .sidebar-section:last-child {
+      padding-bottom: 0;
+      margin-bottom: 0;
+      border-bottom: 0;
+    }
+
+    .sidebar-heading {
+      margin: 0 0 12px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .sidebar-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .sidebar-link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--text);
+      text-decoration: none;
+      transition: background 0.15s, color 0.15s;
+    }
+
+    .sidebar-link:hover {
+      background: var(--accent-soft);
+      color: var(--accent-hover);
+    }
+
+    .sidebar-link .icon-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      opacity: 0.65;
+      flex-shrink: 0;
+    }
+
+    .tag-filter-list {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      max-height: 280px;
+      overflow-y: auto;
+      margin: 0 -6px;
+      padding: 0 6px;
+      scrollbar-width: thin;
+    }
+
+    .filter-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0;
+      padding: 8px 10px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.15s;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .filter-item:hover {
+      background: rgba(82, 123, 189, 0.08);
+    }
+
+    .filter-item input {
+      position: absolute;
+      opacity: 0;
+      width: 0;
+      height: 0;
+      pointer-events: none;
+    }
+
+    .filter-check {
+      flex-shrink: 0;
+      width: 18px;
+      height: 18px;
+      border: 2px solid var(--line-strong);
+      border-radius: 5px;
+      background: var(--surface);
+      display: grid;
+      place-items: center;
+      transition: border-color 0.15s, background 0.15s, box-shadow 0.15s;
+    }
+
+    .filter-check::after {
+      content: "";
+      width: 5px;
+      height: 9px;
+      border: solid #fff;
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg) translate(-0.5px, -1px);
+      opacity: 0;
+    }
+
+    .filter-item input:focus-visible + .filter-check {
+      box-shadow: 0 0 0 3px var(--accent-soft);
+    }
+
+    .filter-item input:checked + .filter-check {
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+
+    .filter-item input:checked + .filter-check::after {
+      opacity: 1;
+    }
+
+    .filter-label-text {
+      flex: 1;
+      min-width: 0;
+      font-size: 0.88rem;
+      color: var(--text);
+      line-height: 1.35;
+    }
+
+    .filter-count {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--muted);
+      background: rgba(82, 123, 189, 0.1);
+      padding: 2px 8px;
+      border-radius: 999px;
+    }
+
+    .filter-item:has(input:checked) .filter-count {
+      background: var(--accent-soft);
+      color: var(--accent-hover);
+    }
+
+    .filter-item:has(input:checked) {
+      background: rgba(82, 123, 189, 0.1);
+    }
+
+    .sidebar-hint {
+      margin: 0 0 10px;
+      font-size: 0.78rem;
+      line-height: 1.45;
+      color: var(--muted);
+    }
+
+    .sidebar-clear {
+      margin-top: 10px;
+      width: 100%;
+      padding: 8px 12px;
+      font: inherit;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--muted);
+      background: transparent;
+      border: 1px dashed var(--line-strong);
+      border-radius: 10px;
+      cursor: pointer;
+      transition: color 0.15s, border-color 0.15s, background 0.15s;
+    }
+
+    .sidebar-clear:hover {
+      color: var(--accent-hover);
+      border-color: rgba(82, 123, 189, 0.4);
+      background: var(--accent-soft);
+    }
+
+    .sidebar-recent {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .sidebar-recent a {
+      display: block;
+      padding: 8px 10px;
+      border-radius: 8px;
+      font-size: 0.84rem;
+      line-height: 1.4;
+      color: var(--text);
+      text-decoration: none;
+      transition: background 0.15s, color 0.15s;
+    }
+
+    .sidebar-recent a:hover {
+      background: var(--accent-soft);
+      color: var(--accent-hover);
+    }
+
+    .sidebar-recent li {
+      margin: 0;
+    }
+
+    @media (max-width: 900px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar-drawer-btn {
+        display: inline-flex;
+      }
+
+      .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        z-index: 200;
+        max-height: none;
+        width: min(300px, 88vw);
+        padding: 20px 16px 24px;
+        background: var(--bg);
+        box-shadow: 8px 0 40px rgba(26, 29, 38, 0.12);
+        transform: translateX(-102%);
+        transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+        visibility: hidden;
+      }
+
+      .layout.sidebar-open .sidebar {
+        transform: translateX(0);
+        visibility: visible;
+      }
+
+      .sidebar-scrim {
+        display: block;
+        position: fixed;
+        inset: 0;
+        z-index: 199;
+        background: rgba(15, 23, 42, 0.35);
+        backdrop-filter: blur(2px);
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transition: opacity 0.25s ease, visibility 0.25s ease;
+      }
+
+      #layout.sidebar-open + .sidebar-scrim {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+      }
+
+      .sidebar-inner {
+        max-height: calc(100vh - 40px);
+        overflow-y: auto;
+      }
+    }
+
+    .top {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 36px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .brand {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .brand h1 {
+      margin: 0;
+      font-size: 1.5rem;
+      font-weight: 650;
+      letter-spacing: -0.02em;
+      color: var(--text);
+    }
+
+    .brand p {
+      margin: 0;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .nav-links a {
+      display: inline-flex;
+      align-items: center;
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--text);
+      background: var(--surface);
+      border: 1px solid var(--line-strong);
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+      transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+    }
+
+    .nav-links a:hover {
+      border-color: rgba(82, 123, 189, 0.35);
+      background: var(--accent-soft);
+      color: var(--accent-hover);
+    }
+
+    .search-wrap {
+      margin-bottom: 28px;
+    }
+
+    .search-wrap label {
+      display: block;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    #search {
+      width: 100%;
+      padding: 12px 16px;
+      font: inherit;
+      border: 1px solid var(--line-strong);
+      border-radius: var(--radius);
+      background: var(--surface);
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    #search:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-soft);
+    }
+
+    #search::placeholder {
+      color: #9ca3af;
+    }
+
+    .post-count {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin: -12px 0 20px;
+    }
+
+    .post-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .post-card {
+      display: block;
+      padding: 20px 22px;
+      border-radius: var(--radius);
+      background: var(--surface);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      text-decoration: none;
+      color: inherit;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+
+    .post-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-hover);
+      border-color: rgba(82, 123, 189, 0.2);
+    }
+
+    .post-card:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    .post-meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px 14px;
+      margin-bottom: 10px;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .post-card h2 {
+      margin: 0 0 8px;
+      font-size: 1.15rem;
+      font-weight: 650;
+      line-height: 1.35;
+      letter-spacing: -0.02em;
+      color: var(--text);
+    }
+
+    .post-card:hover h2 {
+      color: var(--accent);
+    }
+
+    .post-excerpt {
+      margin: 0;
+      font-size: 0.92rem;
+      color: var(--muted);
+      line-height: 1.55;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 12px;
+    }
+
+    .tag {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent-hover);
+    }
+
+    /* Article view */
+    #article-view[hidden] {
+      display: none !important;
+    }
+
+    #list-view[hidden] {
+      display: none !important;
+    }
+
+    .article-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 28px;
+      padding: 8px 0;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--muted);
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .article-back:hover {
+      color: var(--accent);
+    }
+
+    .article-header {
+      margin-bottom: 32px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .article-header h1 {
+      margin: 0 0 14px;
+      font-family: var(--serif);
+      font-size: clamp(1.65rem, 4vw, 2.15rem);
+      font-weight: 700;
+      line-height: 1.25;
+      letter-spacing: -0.02em;
+      color: var(--text);
+    }
+
+    .article-body {
+      font-size: 1.02rem;
+      line-height: 1.75;
+      color: #2d3340;
+    }
+
+    .article-body p {
+      margin: 0 0 1.1em;
+    }
+
+    .article-body h2 {
+      margin: 1.6em 0 0.6em;
+      font-size: 1.2rem;
+      font-weight: 650;
+      color: var(--text);
+    }
+
+    .article-body ul,
+    .article-body ol {
+      margin: 0 0 1.1em;
+      padding-left: 1.35em;
+    }
+
+    .article-body li {
+      margin-bottom: 0.35em;
+    }
+
+    .article-body code {
+      font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
+      font-size: 0.88em;
+      padding: 0.15em 0.45em;
+      border-radius: 6px;
+      background: #eef1f6;
+      color: #374151;
+    }
+
+    .article-body pre {
+      margin: 1.2em 0;
+      padding: 16px 18px;
+      overflow-x: auto;
+      border-radius: 10px;
+      background: #1e293b;
+      color: #e2e8f0;
+      font-size: 0.86rem;
+      line-height: 1.55;
+    }
+
+    .article-body pre code {
+      background: none;
+      color: inherit;
+      padding: 0;
+    }
+
+    .article-body blockquote {
+      margin: 1.2em 0;
+      padding: 0.4em 0 0.4em 1.1em;
+      border-left: 3px solid var(--accent);
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    .empty-hint {
+      text-align: center;
+      padding: 48px 20px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    footer.site-foot {
+      margin-top: 48px;
+      padding-top: 24px;
+      border-top: 1px solid var(--line);
+      font-size: 0.82rem;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    .layout.is-article .sidebar {
+      opacity: 0.92;
+    }
+
+    @media (min-width: 901px) {
+      .layout.is-article .sidebar-inner {
+        box-shadow: 0 8px 28px rgba(26, 29, 38, 0.05);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header class="top">
+      <div class="brand">
+        <h1>博客</h1>
+        <p>笔记 · 阅读 · 随笔</p>
+      </div>
+      <nav class="nav-links" aria-label="站点导航">
+        <a href="../index.html">首页</a>
+        <a href="../photography/index.html">摄影</a>
+      </nav>
+    </header>
+
+    <button type="button" class="sidebar-drawer-btn" id="sidebar-drawer-btn" aria-expanded="false" aria-controls="sidebar">目录与筛选</button>
+
+    <div class="layout" id="layout">
+      <aside class="sidebar" id="sidebar" aria-label="博客侧栏">
+        <div class="sidebar-inner">
+          <div class="sidebar-section">
+            <h2 class="sidebar-heading">浏览</h2>
+            <nav class="sidebar-nav" aria-label="快捷浏览">
+              <a class="sidebar-link" id="nav-all-posts" href="#list-top"><span class="icon-dot" aria-hidden="true"></span>全部文章</a>
+              <a class="sidebar-link" href="../index.html"><span class="icon-dot" aria-hidden="true"></span>个人主页</a>
+              <a class="sidebar-link" href="../photography/index.html"><span class="icon-dot" aria-hidden="true"></span>摄影集</a>
+            </nav>
+          </div>
+          <div class="sidebar-section">
+            <h2 class="sidebar-heading">按标签筛选</h2>
+            <p class="sidebar-hint">可多选；与上方搜索框组合使用。未勾选则显示全部。</p>
+            <div class="tag-filter-list" id="tag-filters" role="group" aria-label="标签筛选"></div>
+            <button type="button" class="sidebar-clear" id="clear-tags">清除标签</button>
+          </div>
+          <div class="sidebar-section">
+            <h2 class="sidebar-heading">近期文章</h2>
+            <ul class="sidebar-recent" id="sidebar-recent"></ul>
+          </div>
+        </div>
+      </aside>
+
+      <div class="main-col">
+        <main id="list-top" tabindex="-1">
+          <div id="list-view">
+            <div class="search-wrap">
+              <label for="search">搜索标题或标签</label>
+              <input type="search" id="search" placeholder="输入关键词筛选文章…" autocomplete="off">
+            </div>
+            <p class="post-count" id="post-count" aria-live="polite"></p>
+            <ul class="post-list" id="post-list"></ul>
+            <p class="empty-hint" id="empty-hint" hidden>没有匹配的文章，试试调整标签或关键词。</p>
+          </div>
+
+          <article id="article-view" hidden>
+            <button type="button" class="article-back" id="article-back" aria-label="返回文章列表">← 返回列表</button>
+            <header class="article-header">
+              <div class="post-meta" id="article-meta"></div>
+              <h1 id="article-title"></h1>
+              <div class="tags" id="article-tags"></div>
+            </header>
+            <div class="article-body" id="article-body"></div>
+          </article>
+        </main>
+
+        <footer class="site-foot">© Shilong Zou · 静态页面托管于 GitHub Pages</footer>
+      </div>
+    </div>
+    <div class="sidebar-scrim" id="sidebar-scrim" aria-hidden="true"></div>
+  </div>
+
+  <script>
+    (function () {
+      /** @typedef {{ id: string, title: string, date: string, tags: string[], excerpt: string, body: string }} Post */
+
+      /** @type {Post[]} */
+      var POSTS = [
+        {
+          id: "welcome",
+          title: "欢迎来到我的博客",
+          date: "2026-04-01",
+          tags: ["随笔"],
+          excerpt: "这里会记录学习、项目与生活中值得留下的文字。",
+          body: "<p>如果你正在读这一段，说明页面已经正常打开。后续你可以把这里的示例文章替换成自己的内容：在页面底部的 <code>POSTS</code> 数组里增删改即可。</p><p>每篇文章需要唯一的 <code>id</code>，链接形式为 <code>index.html#welcome</code>，便于分享与收藏。</p>"
+        },
+        {
+          id: "static-blog-tips",
+          title: "在 GitHub Pages 上维护静态博客的几点建议",
+          date: "2026-03-28",
+          tags: ["Web", "工具"],
+          excerpt: "无后端场景下，用单页数据驱动列表与详情，简单可靠。",
+          body: "<p>纯静态站点没有数据库时，可以把文章元数据放在 JavaScript 数组里，或用 Markdown 文件配合构建工具生成 HTML。本页采用前者，部署零依赖。</p><h2>优点</h2><ul><li>构建与调试成本低</li><li>适合文章数量在几十篇以内的个人站</li><li>可配合 hash 路由实现「列表 / 详情」切换</li></ul>"
+        },
+        {
+          id: "reading-2026-q1",
+          title: "2026 年第一季度书单备忘",
+          date: "2026-03-20",
+          tags: ["阅读"],
+          excerpt: "记录在读与想读，避免书单列得太长却忘了为什么想读。",
+          body: "<p>阅读笔记可以按主题整理：技术类与非虚构分开，每本书记一两句「为什么现在读」和「读完一句总结」。</p><blockquote>读得慢没关系，持续比完美更重要。</blockquote>"
+        },
+        {
+          id: "paper-reading-habits",
+          title: "如何更高效地读论文",
+          date: "2026-03-15",
+          tags: ["科研", "方法"],
+          excerpt: "先抓问题设定与贡献，再决定是否精读实验细节。",
+          body: "<p>第一遍：标题、摘要、图、结论。第二遍：方法段落与相关工作。需要复现或写 related work 时再抠公式与实现细节。</p>"
+        },
+        {
+          id: "python-typing-notes",
+          title: "Python 类型标注随手记",
+          date: "2026-03-10",
+          tags: ["Python"],
+          excerpt: "<code>TypedDict</code> 与 <code>Protocol</code> 在小型项目里也很实用。",
+          body: "<p>在接口边界处标注类型，能减少协作时的歧义。例如对字典结构使用 <code>TypedDict</code>，对可调用对象使用 <code>Protocol</code>。</p><pre><code>from typing import TypedDict\n\nclass User(TypedDict):\n    id: str\n    name: str\n</code></pre>"
+        },
+        {
+          id: "git-commit-style",
+          title: "写让人愿意读的 Git 提交说明",
+          date: "2026-03-05",
+          tags: ["Git", "工程"],
+          excerpt: "第一行概括「做了什么」，正文解释「为什么」。",
+          body: "<p>团队规范常见写法：<code>type(scope): subject</code>。例如 <code>fix(blog): 修复列表在窄屏下的换行</code>。</p>"
+        },
+        {
+          id: "css-variables-theme",
+          title: "用 CSS 变量统一站点配色",
+          date: "2026-02-28",
+          tags: ["CSS", "设计"],
+          excerpt: "一套 <code>:root</code> 变量即可在多个页面间复用主色与灰阶。",
+          body: "<p>本站主色与首页导航栏的蓝色保持一致（<code>#527bbd</code>），读者从主页点到博客时视觉更连贯。</p>"
+        },
+        {
+          id: "markdown-workflow",
+          title: "本地用 Markdown 写文章再粘贴的流程",
+          date: "2026-02-22",
+          tags: ["写作", "工具"],
+          excerpt: "先写正文再转 HTML，或直接用少量 HTML 标签。",
+          body: "<p>若你更习惯 Markdown，可以在编辑器里预览后，将生成的 HTML 片段放入 <code>body</code> 字段。注意转义引号或使用模板字符串。</p>"
+        },
+        {
+          id: "focus-deep-work",
+          title: "深度工作的小实验：90 分钟无打断块",
+          date: "2026-02-18",
+          tags: ["效率"],
+          excerpt: "手机静音、关闭通知，只做一个任务。",
+          body: "<p>不必每天都做到，但每周安排几次完整时间块，对写代码与写长文帮助很大。</p>"
+        },
+        {
+          id: "photography-and-writing",
+          title: "摄影与文字：两种不同的「截取时间」",
+          date: "2026-02-10",
+          tags: ["随笔", "摄影"],
+          excerpt: "一张照片框住一瞬，一篇文章串起因果。",
+          body: "<p>本站也有 <a href=\"../photography/index.html\">摄影页</a>，与博客可以互相链接，形成完整的个人站点结构。</p>"
+        },
+        {
+          id: "neural-network-intuition",
+          title: "神经网络直觉：从线性到非线性",
+          date: "2026-02-01",
+          tags: ["机器学习"],
+          excerpt: "多层与激活函数到底解决了什么问题。",
+          body: "<p>单层线性模型只能表达线性边界；叠加层与非线性激活后，网络可以逼近更复杂的函数。理解这一点比死记公式更有用。</p>"
+        },
+        {
+          id: "debug-print-vs-log",
+          title: "调试时该用 print 还是 logging？",
+          date: "2026-01-25",
+          tags: ["Python", "工程"],
+          excerpt: "脚本阶段 print 很快，长期维护请用 logging。",
+          body: "<p><code>logging</code> 可以按级别过滤、输出到文件，并在生产环境关闭调试噪音。</p>"
+        },
+        {
+          id: "weekly-review-template",
+          title: "周回顾模板（极简版）",
+          date: "2026-01-18",
+          tags: ["生活"],
+          excerpt: "三件事：本周完成、卡住点、下周一条重点。",
+          body: "<p>写得短才能坚持。周日晚花十分钟足够。</p>"
+        },
+        {
+          id: "http-cache-basics",
+          title: "浏览器缓存：Cache-Control 入门",
+          date: "2026-01-12",
+          tags: ["Web"],
+          excerpt: "静态资源长缓存 + 文件名指纹是常见组合。",
+          body: "<p>GitHub Pages 托管的 HTML 更新后，若用户看到旧页，有时与 CDN 或本地缓存有关。给关键资源设置合理的缓存头需要服务器配置配合。</p>"
+        },
+        {
+          id: "note-taking-apps",
+          title: "笔记软件选择的唯一标准",
+          date: "2026-01-05",
+          tags: ["工具"],
+          excerpt: "你能坚持打开的那一个，就是最好的。",
+          body: "<p>功能再全，不用等于零。先养成习惯，再考虑迁移与高级功能。</p>"
+        },
+        {
+          id: "year-2025-retro",
+          title: "2025 年个人复盘（示例）",
+          date: "2025-12-28",
+          tags: ["随笔"],
+          excerpt: "用几条 bullet 总结学业、项目与身体状态。",
+          body: "<p>复盘不必公开全文，摘录可公开的部分放到博客即可。</p><ul><li>完成了哪些里程碑</li><li>哪些习惯想继续</li><li>哪些该止损</li></ul>"
+        },
+        {
+          id: "latex-small-tips",
+          title: "LaTeX 写作里的小习惯",
+          date: "2025-12-15",
+          tags: ["LaTeX", "科研"],
+          excerpt: "用 <code>\\label</code> / <code>\\ref</code> 管理图表引用，后期改顺序更省心。",
+          body: "<p>图表与公式尽量用语义化 label，例如 <code>fig:teaser</code>、<code>eq:loss</code>。</p>"
+        },
+        {
+          id: "open-source-first-pr",
+          title: "第一次给开源项目提 PR",
+          date: "2025-12-01",
+          tags: ["开源", "Git"],
+          excerpt: "从文档错别字或小型 bug 开始最现实。",
+          body: "<p>读 contributing 指南，保持 PR 小而专注，回复 review 时耐心沟通。</p>"
+        },
+        {
+          id: "sleep-and-cognition",
+          title: "睡眠与认知表现：个人观察",
+          date: "2025-11-20",
+          tags: ["健康"],
+          excerpt: "连续熬夜两天后，debug 效率明显下降。",
+          body: "<p>非医学建议，仅个人记录。规律作息对长期输出更友好。</p>"
+        },
+        {
+          id: "vim-motions",
+          title: "Vim 动作：先想「文本对象」再按键",
+          date: "2025-11-08",
+          tags: ["编辑器"],
+          excerpt: "<code>ci\"</code> 比删了再插入更少打断思路。",
+          body: "<p>把「想改什么」翻译成「动作 + 对象」，熟练后会比纯方向键快很多。</p>"
+        }
+      ];
+
+      POSTS.sort(function (a, b) {
+        return b.date.localeCompare(a.date);
+      });
+
+      var listView = document.getElementById("list-view");
+      var articleView = document.getElementById("article-view");
+      var postListEl = document.getElementById("post-list");
+      var postCountEl = document.getElementById("post-count");
+      var emptyHint = document.getElementById("empty-hint");
+      var searchInput = document.getElementById("search");
+      var articleBack = document.getElementById("article-back");
+      var articleMeta = document.getElementById("article-meta");
+      var articleTitle = document.getElementById("article-title");
+      var articleTags = document.getElementById("article-tags");
+      var articleBody = document.getElementById("article-body");
+      var layoutEl = document.getElementById("layout");
+      var sidebarEl = document.getElementById("sidebar");
+      var sidebarDrawerBtn = document.getElementById("sidebar-drawer-btn");
+      var sidebarScrim = document.getElementById("sidebar-scrim");
+      var tagFiltersEl = document.getElementById("tag-filters");
+      var sidebarRecentEl = document.getElementById("sidebar-recent");
+      var clearTagsBtn = document.getElementById("clear-tags");
+
+      /** @type {Record<string, true>} */
+      var selectedTags = {};
+
+      function closeDrawer() {
+        layoutEl.classList.remove("sidebar-open");
+        sidebarDrawerBtn.setAttribute("aria-expanded", "false");
+        sidebarScrim.setAttribute("aria-hidden", "true");
+      }
+
+      function openDrawer() {
+        layoutEl.classList.add("sidebar-open");
+        sidebarDrawerBtn.setAttribute("aria-expanded", "true");
+        sidebarScrim.setAttribute("aria-hidden", "false");
+      }
+
+      function toggleDrawer() {
+        if (layoutEl.classList.contains("sidebar-open")) {
+          closeDrawer();
+        } else {
+          openDrawer();
+        }
+      }
+
+      function escapeHtml(s) {
+        var d = document.createElement("div");
+        d.textContent = s;
+        return d.innerHTML;
+      }
+
+      function formatDate(iso) {
+        try {
+          var d = new Date(iso + "T12:00:00");
+          return d.toLocaleDateString("zh-CN", { year: "numeric", month: "long", day: "numeric" });
+        } catch (e) {
+          return iso;
+        }
+      }
+
+      function selectedTagKeys() {
+        return Object.keys(selectedTags);
+      }
+
+      function getFilteredPosts() {
+        var posts = POSTS;
+        var tagKeys = selectedTagKeys();
+        if (tagKeys.length) {
+          posts = posts.filter(function (p) {
+            return p.tags.some(function (t) {
+              return !!selectedTags[t];
+            });
+          });
+        }
+        var q = (searchInput.value || "").trim().toLowerCase();
+        if (!q) return posts;
+        return posts.filter(function (p) {
+          var inTitle = p.title.toLowerCase().indexOf(q) !== -1;
+          var inExcerpt = p.excerpt.toLowerCase().indexOf(q) !== -1;
+          var inTags = p.tags.some(function (t) {
+            return t.toLowerCase().indexOf(q) !== -1;
+          });
+          return inTitle || inExcerpt || inTags;
+        });
+      }
+
+      function collectTagsWithCounts() {
+        var map = {};
+        POSTS.forEach(function (p) {
+          p.tags.forEach(function (t) {
+            map[t] = (map[t] || 0) + 1;
+          });
+        });
+        return Object.keys(map)
+          .map(function (t) {
+            return { tag: t, count: map[t] };
+          })
+          .sort(function (a, b) {
+            if (b.count !== a.count) return b.count - a.count;
+            return a.tag.localeCompare(b.tag, "zh-CN");
+          });
+      }
+
+      function renderTagFilters() {
+        tagFiltersEl.innerHTML = "";
+        collectTagsWithCounts().forEach(function (item) {
+          var label = document.createElement("label");
+          label.className = "filter-item";
+          var input = document.createElement("input");
+          input.type = "checkbox";
+          input.value = item.tag;
+          input.checked = !!selectedTags[item.tag];
+          input.addEventListener("change", function () {
+            if (input.checked) {
+              selectedTags[item.tag] = true;
+            } else {
+              delete selectedTags[item.tag];
+            }
+            if (!articleView.hidden) {
+              var path = window.location.pathname + window.location.search;
+              history.replaceState(null, "", path);
+              showList();
+            }
+            renderList();
+          });
+          var box = document.createElement("span");
+          box.className = "filter-check";
+          box.setAttribute("aria-hidden", "true");
+          var text = document.createElement("span");
+          text.className = "filter-label-text";
+          text.textContent = item.tag;
+          var count = document.createElement("span");
+          count.className = "filter-count";
+          count.textContent = String(item.count);
+          label.appendChild(input);
+          label.appendChild(box);
+          label.appendChild(text);
+          label.appendChild(count);
+          tagFiltersEl.appendChild(label);
+        });
+      }
+
+      function renderSidebarRecent() {
+        sidebarRecentEl.innerHTML = "";
+        POSTS.slice(0, 12).forEach(function (p) {
+          var li = document.createElement("li");
+          var a = document.createElement("a");
+          a.href = "#" + encodeURIComponent(p.id);
+          a.textContent = p.title;
+          li.appendChild(a);
+          sidebarRecentEl.appendChild(li);
+        });
+      }
+
+      function renderList() {
+        var posts = getFilteredPosts();
+        var tagKeys = selectedTagKeys();
+        postListEl.innerHTML = "";
+        var tagHint = tagKeys.length ? " · 已选 " + tagKeys.length + " 个标签" : "";
+        if (posts.length === POSTS.length && !tagKeys.length && !(searchInput.value || "").trim()) {
+          postCountEl.textContent = "共 " + POSTS.length + " 篇文章";
+        } else {
+          postCountEl.textContent =
+            "找到 " + posts.length + " 篇（共 " + POSTS.length + " 篇）" + tagHint;
+        }
+        emptyHint.hidden = posts.length > 0;
+
+        posts.forEach(function (p) {
+          var li = document.createElement("li");
+          var a = document.createElement("a");
+          a.className = "post-card";
+          a.href = "#" + encodeURIComponent(p.id);
+          a.setAttribute("aria-label", p.title);
+
+          var meta = document.createElement("div");
+          meta.className = "post-meta";
+          meta.innerHTML = "<time datetime=\"" + escapeHtml(p.date) + "\">" + escapeHtml(formatDate(p.date)) + "</time>";
+
+          var h2 = document.createElement("h2");
+          h2.textContent = p.title;
+
+          var ex = document.createElement("p");
+          ex.className = "post-excerpt";
+          ex.innerHTML = p.excerpt;
+
+          var tags = document.createElement("div");
+          tags.className = "tags";
+          p.tags.forEach(function (t) {
+            var span = document.createElement("span");
+            span.className = "tag";
+            span.textContent = t;
+            tags.appendChild(span);
+          });
+
+          a.appendChild(meta);
+          a.appendChild(h2);
+          a.appendChild(ex);
+          a.appendChild(tags);
+          li.appendChild(a);
+          postListEl.appendChild(li);
+        });
+      }
+
+      function findPost(id) {
+        return POSTS.filter(function (p) {
+          return p.id === id;
+        })[0];
+      }
+
+      function showArticle(id) {
+        var post = findPost(id);
+        if (!post) {
+          showList();
+          return;
+        }
+        listView.hidden = true;
+        articleView.hidden = false;
+        layoutEl.classList.add("is-article");
+        closeDrawer();
+        document.title = post.title + " | Shilong Zou";
+        articleMeta.innerHTML = "<time datetime=\"" + escapeHtml(post.date) + "\">" + escapeHtml(formatDate(post.date)) + "</time>";
+        articleTitle.textContent = post.title;
+        articleTags.innerHTML = "";
+        post.tags.forEach(function (t) {
+          var span = document.createElement("span");
+          span.className = "tag";
+          span.textContent = t;
+          articleTags.appendChild(span);
+        });
+        articleBody.innerHTML = post.body;
+        window.scrollTo(0, 0);
+      }
+
+      function showList() {
+        listView.hidden = false;
+        articleView.hidden = true;
+        layoutEl.classList.remove("is-article");
+        document.title = "博客 | Shilong Zou";
+        window.scrollTo(0, 0);
+      }
+
+      function route() {
+        var hash = (location.hash || "").replace(/^#/, "");
+        var id = decodeURIComponent(hash);
+        if (id && findPost(id)) {
+          showArticle(id);
+        } else {
+          showList();
+        }
+      }
+
+      searchInput.addEventListener("input", renderList);
+      articleBack.addEventListener("click", function () {
+        location.hash = "";
+      });
+
+      clearTagsBtn.addEventListener("click", function () {
+        selectedTags = {};
+        renderTagFilters();
+        if (!articleView.hidden) {
+          var path = window.location.pathname + window.location.search;
+          history.replaceState(null, "", path);
+          showList();
+        }
+        renderList();
+      });
+
+      sidebarDrawerBtn.addEventListener("click", toggleDrawer);
+      sidebarScrim.addEventListener("click", closeDrawer);
+
+      sidebarEl.addEventListener("click", function (e) {
+        var a = e.target.closest("a");
+        if (a && window.matchMedia("(max-width: 900px)").matches) {
+          closeDrawer();
+        }
+      });
+
+      window.addEventListener("resize", function () {
+        if (window.matchMedia("(min-width: 901px)").matches) {
+          closeDrawer();
+        }
+      });
+
+      window.addEventListener("hashchange", route);
+
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") {
+          closeDrawer();
+        }
+      });
+
+      renderTagFilters();
+      renderSidebarRecent();
+      renderList();
+      route();
+    })();
+  </script>
+</body>
+</html>
