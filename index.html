@@ -39,29 +39,34 @@
         letter-spacing: 0.5px;
       }
       .navbar-custom .nav-link {
-        margin: 0 12px;
-        padding: 10px 0;
+        margin: 0 4px;
+        padding: 8px 14px;
         position: relative;
+        border-radius: 20px;
+        transition: background-color 0.15s ease, box-shadow 0.15s ease;
       }
       .navbar-custom .nav-link::after {
         content: '';
         position: absolute;
-        bottom: 0;
+        bottom: 4px;
         left: 50%;
         width: 0;
         height: 2px;
         background-color: white;
-		border-radius: 2px;
+        border-radius: 2px;
         transition: all 0.3s ease;
-		transform: translateX(-50%);
+        transform: translateX(-50%);
       }
-      .navbar-custom .nav-link:hover::after,
-      .navbar-custom .nav-link:focus::after {
-        width: 85%;
+      .navbar-custom .nav-link:not(.active):hover::after {
+        width: 60%;
+      }
+      .navbar-custom .nav-link.active::after {
+        width: 0 !important;
       }
       .navbar-custom .nav-link.active {
-        background-color: #3a5f9a;
-        border-radius: 4px;
+        background-color: rgba(255, 255, 255, 0.18);
+        box-shadow: inset 0 0 0 1.5px rgba(255, 255, 255, 0.5);
+        border-radius: 20px;
       }
       #news, #publications, #projects, #honors, #competition, #miscellaneous, #education, #internship {
         scroll-margin-top: 70px;
@@ -536,6 +541,66 @@
                 document.documentElement.classList.add("photo-strip-off");
             });
         }
+
+        const navLinks = document.querySelectorAll('.navbar-custom .nav-link[href^="#"]');
+        const sections = [];
+        navLinks.forEach(link => {
+            const id = link.getAttribute('href').substring(1);
+            const section = document.getElementById(id);
+            if (section) sections.push({ id, el: section, link });
+        });
+
+        let scrollSpyPaused = false;
+
+        function updateActiveNav() {
+            if (scrollSpyPaused) return;
+            const scrollY = window.pageYOffset + 150;
+            let current = null;
+            for (let i = sections.length - 1; i >= 0; i--) {
+                if (scrollY >= sections[i].el.offsetTop) {
+                    current = sections[i].id;
+                    break;
+                }
+            }
+            navLinks.forEach(link => {
+                const id = link.getAttribute('href').substring(1);
+                link.classList.toggle('active', id === current);
+            });
+        }
+
+        window.addEventListener('scroll', updateActiveNav, { passive: true });
+        updateActiveNav();
+
+        let scrollTimer = null;
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (!target) return;
+
+                scrollSpyPaused = true;
+                navLinks.forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+                this.blur();
+                target.scrollIntoView({ behavior: 'smooth' });
+
+                if (scrollTimer) clearTimeout(scrollTimer);
+                const resumeSpy = () => {
+                    scrollSpyPaused = false;
+                    updateActiveNav();
+                };
+                let lastY = window.pageYOffset;
+                const checkEnd = () => {
+                    if (window.pageYOffset === lastY) {
+                        resumeSpy();
+                    } else {
+                        lastY = window.pageYOffset;
+                        scrollTimer = setTimeout(checkEnd, 80);
+                    }
+                };
+                scrollTimer = setTimeout(checkEnd, 80);
+            });
+        });
     });
 	</script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
