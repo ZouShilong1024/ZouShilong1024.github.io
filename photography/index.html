@@ -638,38 +638,36 @@
   <script>
     // Add new photos here. The page will update its gallery, filters, stats, and lightbox automatically.
     const photos = [
-      { src: "../res/figs/photos/changsha-2.jpg", location: "湖南-长沙", comment: "One evening after finishing debugging, I captured a breathtaking sunset glow.", alt: "Photography in Changsha, Hunan" },
-      { src: "../res/figs/photos/beijing-1.jpg", location: "北京", comment: "Layers of history and the present meet in one frame.", alt: "Photography in Beijing" },
-      { src: "../res/figs/photos/beijing-2.jpg", location: "北京", comment: "Street rhythm and sky blend into a calm urban palette.", alt: "Photography in Beijing" },
-      { src: "../res/figs/photos/beijing-3.jpg", location: "北京", comment: "Light falls across the city in soft, patient layers.", alt: "Photography in Beijing" },
-      { src: "../res/figs/photos/beijing-beijingbei.jpg", location: "北京", comment: "Beijing North station — arrivals, departures, and quiet in between.", alt: "Beijing North railway station photography" },
-      { src: "../res/figs/photos/beijing-changcheng.jpg", location: "北京", comment: "The Great Wall stretches into mist and memory.", alt: "Great Wall photography in Beijing" },
-      { src: "../res/figs/photos/beijing-changcheng-2.jpg", location: "北京", comment: "Stone and ridge line hold their place against the sky.", alt: "Great Wall photography in Beijing" },
-      { src: "../res/figs/photos/beijing-tiantan.jpg", location: "北京", comment: "Temple of Heaven — symmetry, space, and slow light.", alt: "Temple of Heaven photography in Beijing" },
-      { src: "../res/figs/photos/beijing-yiheyuan-1.jpg", location: "北京", comment: "Summer Palace reflections and the hush of open water.", alt: "Summer Palace photography in Beijing" },
-      { src: "../res/figs/photos/beijing-yiheyuan-2.jpg", location: "北京", comment: "Walkways and willows frame a softer side of the capital.", alt: "Summer Palace photography in Beijing" },
-      { src: "../res/figs/photos/beijing-yiheyuan-3.jpg", location: "北京", comment: "Color and distance settle into a single tranquil view.", alt: "Summer Palace photography in Beijing" },
-      { src: "../res/figs/photos/beijing-yuanmingyuan.jpg", location: "北京", comment: "Ruins and gardens speak in textures of time.", alt: "Old Summer Palace photography in Beijing" },
-      { src: "../res/figs/photos/changsha-1.jpg", location: "湖南-长沙", comment: "Warm tones and familiar streets make the city feel close.", alt: "Photography in Changsha, Hunan" },
-      { src: "../res/figs/photos/changzhou-1.jpg", location: "江苏-常州", comment: "Stillness appears in the spaces between architecture and sky.", alt: "Photography in Changzhou, Jiangsu" },
-      { src: "../res/figs/photos/changzhou-2.jpg", location: "江苏-常州", comment: "A calm urban rhythm captured in simple lines and color.", alt: "Photography in Changzhou, Jiangsu" },
-      { src: "../res/figs/photos/lianyungang.jpg", location: "江苏-连云港", comment: "Sea breeze, distance, and a horizon that feels endless.", alt: "Photography in Lianyungang, Jiangsu" },
-      { src: "../res/figs/photos/chenzhou-1.jpg", location: "湖南-郴州", comment: "Mist and mountains quietly reshape the sense of depth.", alt: "Photography in Chenzhou, Hunan" },
-      { src: "../res/figs/photos/wugongshan.jpg", location: "江西-武功山", comment: "Clouds drift slowly across the ridgeline like a moving sea.", alt: "Photography in Wugong Mountain, Jiangxi" },
-      { src: "../res/figs/photos/heze.jpg", location: "山东-菏泽", comment: "An ordinary moment becomes memorable under gentle light.", alt: "Photography in Heze, Shandong" },
-      { src: "../res/figs/photos/jinan.jpg", location: "山东-济南", comment: "The city reveals its softness when water and stone meet.", alt: "Photography in Jinan, Shandong" },
-      { src: "../res/figs/photos/jinan-2.jpg", location: "山东-济南", comment: "A second glance at the city, quieter and more reflective.", alt: "Photography in Jinan, Shandong" },
-      { src: "../res/figs/photos/ruzhou-1.jpg", location: "河南-平顶山", comment: "Open space and distant tones create a sense of pause.", alt: "Photography in Pingdingshan, Henan" },
-      { src: "../res/figs/photos/shenzhen-1.jpg", location: "广东-深圳", comment: "A fast city caught for a moment in balanced light.", alt: "Photography in Shenzhen, Guangdong" },
-      { src: "../res/figs/photos/shenzhen-2.jpg", location: "广东-深圳", comment: "Glass, structure, and motion define the modern skyline.", alt: "Photography in Shenzhen, Guangdong" },
-      { src: "../res/figs/photos/shenzhen-3.jpg", location: "广东-深圳", comment: "Nightfall turns the city into a quieter composition.", alt: "Photography in Shenzhen, Guangdong" },
-      { src: "../res/figs/photos/myself.jpg", location: "生活记录", comment: "A quiet self portrait among the travel frames.", alt: "Self portrait photography" }
+      { src: "../res/figs/photos/changsha-2.jpg", location: "Hunan-Changsha", comment: "One evening after finishing debugging, I captured a breathtaking sunset glow.", alt: "Photography in Changsha, Hunan" },
+      { src: "../res/figs/photos/beijing-1.jpg", location: "Beijing", comment: "Layers of history and the present meet in one frame.", alt: "Photography in Beijing" },
+      { src: "../res/figs/photos/beijing-2.jpg", location: "Beijing", comment: "Street rhythm and sky blend into a calm urban palette.", alt: "Photography in Beijing" },
+      { src: "../res/figs/photos/beijing-3.jpg", location: "Beijing", comment: "Light falls across the city in soft, patient layers.", alt: "Photography in Beijing" },
+      { src: "../res/figs/photos/beijing-beijingbei.jpg", location: "Beijing", comment: "Beijing North station — arrivals, departures, and quiet in between.", alt: "Beijing North railway station photography" },
+      { src: "../res/figs/photos/beijing-changcheng.jpg", location: "Beijing", comment: "The Great Wall stretches into mist and memory.", alt: "Great Wall photography in Beijing" },
+      { src: "../res/figs/photos/beijing-changcheng-2.jpg", location: "Beijing", comment: "Stone and ridge line hold their place against the sky.", alt: "Great Wall photography in Beijing" },
+      { src: "../res/figs/photos/beijing-tiantan.jpg", location: "Beijing", comment: "Temple of Heaven — symmetry, space, and slow light.", alt: "Temple of Heaven photography in Beijing" },
+      { src: "../res/figs/photos/beijing-yiheyuan-1.jpg", location: "Beijing", comment: "Summer Palace reflections and the hush of open water.", alt: "Summer Palace photography in Beijing" },
+      { src: "../res/figs/photos/beijing-yiheyuan-2.jpg", location: "Beijing", comment: "Walkways and willows frame a softer side of the capital.", alt: "Summer Palace photography in Beijing" },
+      { src: "../res/figs/photos/beijing-yiheyuan-3.jpg", location: "Beijing", comment: "Color and distance settle into a single tranquil view.", alt: "Summer Palace photography in Beijing" },
+      { src: "../res/figs/photos/beijing-yuanmingyuan.jpg", location: "Beijing", comment: "Ruins and gardens speak in textures of time.", alt: "Old Summer Palace photography in Beijing" },
+      { src: "../res/figs/photos/changsha-1.jpg", location: "Hunan-Changsha", comment: "Warm tones and familiar streets make the city feel close.", alt: "Photography in Changsha, Hunan" },
+      { src: "../res/figs/photos/changzhou-1.jpg", location: "Jiangsu-Changzhou", comment: "Stillness appears in the spaces between architecture and sky.", alt: "Photography in Changzhou, Jiangsu" },
+      { src: "../res/figs/photos/changzhou-2.jpg", location: "Jiangsu-Changzhou", comment: "A calm urban rhythm captured in simple lines and color.", alt: "Photography in Changzhou, Jiangsu" },
+      { src: "../res/figs/photos/lianyungang.jpg", location: "Jiangsu-Lianyungang", comment: "Sea breeze, distance, and a horizon that feels endless.", alt: "Photography in Lianyungang, Jiangsu" },
+      { src: "../res/figs/photos/chenzhou-1.jpg", location: "Hunan-Chenzhou", comment: "Mist and mountains quietly reshape the sense of depth.", alt: "Photography in Chenzhou, Hunan" },
+      { src: "../res/figs/photos/wugongshan.jpg", location: "Jiangxi-Wugongshan", comment: "Clouds drift slowly across the ridgeline like a moving sea.", alt: "Photography in Wugong Mountain, Jiangxi" },
+      { src: "../res/figs/photos/heze.jpg", location: "Shandong-Heze", comment: "An ordinary moment becomes memorable under gentle light.", alt: "Photography in Heze, Shandong" },
+      { src: "../res/figs/photos/jinan.jpg", location: "Shandong-Jinan", comment: "The city reveals its softness when water and stone meet.", alt: "Photography in Jinan, Shandong" },
+      { src: "../res/figs/photos/jinan-2.jpg", location: "Shandong-Jinan", comment: "A second glance at the city, quieter and more reflective.", alt: "Photography in Jinan, Shandong" },
+      { src: "../res/figs/photos/ruzhou-1.jpg", location: "Henan-Pingdingshan", comment: "Open space and distant tones create a sense of pause.", alt: "Photography in Pingdingshan, Henan" },
+      { src: "../res/figs/photos/shenzhen-1.jpg", location: "Guangdong-Shenzhen", comment: "A fast city caught for a moment in balanced light.", alt: "Photography in Shenzhen, Guangdong" },
+      { src: "../res/figs/photos/shenzhen-2.jpg", location: "Guangdong-Shenzhen", comment: "Glass, structure, and motion define the modern skyline.", alt: "Photography in Shenzhen, Guangdong" },
+      { src: "../res/figs/photos/shenzhen-3.jpg", location: "Guangdong-Shenzhen", comment: "Nightfall turns the city into a quieter composition.", alt: "Photography in Shenzhen, Guangdong" },
+      { src: "../res/figs/photos/myself.jpg", location: "Life Moments", comment: "A quiet self portrait among the travel frames.", alt: "Self portrait photography" }
     ];
 
-    // 首页 Hero 右侧三张「精选」图：下标对应上面 photos 数组（从 0 开始数第一条为 0）。
-    // featuredIndexes[0] → 左侧竖条大图（跨两行）；[1]、[2] → 右侧上下两张小图。
-    // 修改方式：在 photos 里找到想展示的三张照片，把它们的序号（从 0 起）填进数组，例如 [3, 8, 12]。
-    // 若在 photos 中插入、删除或调整顺序，必须重新数序号，否则会显示成别的照片。
+    // Hero featured photos: indexes into the photos array above.
+    // featuredIndexes[0] = large left card (spans 2 rows); [1],[2] = right top/bottom cards.
     const featuredIndexes = [0, 1, 21];
     const galleryGrid = document.getElementById("gallery-grid");
     const featuredGrid = document.getElementById("featured-grid");
@@ -684,7 +682,7 @@
     const lightboxNext = document.getElementById("lightbox-next");
 
     let currentIndex = 0;
-    let activeFilter = "全部";
+    let activeFilter = "All";
 
     function regionOf(location) {
       return location.split("-")[0];
@@ -722,7 +720,7 @@
     }
 
     function createFilters() {
-      const regions = ["全部", ...new Set(photos.map((photo) => regionOf(photo.location)))];
+      const regions = ["All", ...new Set(photos.map((photo) => regionOf(photo.location)))];
       filterBar.innerHTML = regions.map((region, index) => `
         <button type="button" class="filter-btn ${index === 0 ? "active" : ""}" data-filter="${region}">
           ${region}
@@ -753,7 +751,7 @@
       });
 
       document.querySelectorAll(".photo-card").forEach((card) => {
-        const visible = filter === "全部" || card.dataset.region === filter;
+        const visible = filter === "All" || card.dataset.region === filter;
         card.hidden = !visible;
       });
     }
@@ -785,7 +783,7 @@
     createFeatured();
     createFilters();
     createGallery();
-    applyFilter("全部");
+    applyFilter("All");
 
     document.addEventListener("click", (event) => {
       const trigger = event.target.closest("[data-index]");
