@@ -626,6 +626,9 @@
 			<a class="nav-link" href="#projects">Projects</a>
 		  </li>
         <li class="nav-item">
+			<a class="nav-link" href="#talks">Talks</a>
+		  </li>
+        <li class="nav-item">
           <a class="nav-link" href="#honors">Honors Awards</a>
         </li>
         <li class="nav-item">
@@ -709,6 +712,9 @@
 		<div class="news-container">
 		<div style="height: 140px; overflow: auto; font-size: medium;">
 		<ul>
+			<li>
+				[04/2026] 🎉🎉 I have been invited to give a presentation at <a href="https://mp.weixin.qq.com/s/_baauotlrfvYalyn-ghk-A" target="_blank">NICE Academic</a> (on the theme "HELLO, WORLD MODEL").
+			</li>
 			<li>
 				[03/2026] 🎉🎉 One paper is accepted by JNUDT 2026!
 			</li>
@@ -868,7 +874,7 @@
 			<font size="4"> <b> Part-aware Shape Generation with Latent 3D Diffusion of Neural Voxel Fields </b></font><br>
 			<font size="3">
 				<a href="https://scholar.google.com/citations?user=OAULSygAAAAJ&hl=en" target="_blank"> Yuhang Huang</a>*,
-				<b> Shilong Zou</b>*,
+				<b> Shilong Zou</b>,
 				<a href="https://xinwangliu.github.io/" target="_blank"> Xinwang Liu</a>,
 				<a href="https://kevinkaixu.net/" target="_blank"> Kai Xu</a>
 			</font>
@@ -900,7 +906,6 @@
 				<br>
 				Arxiv, 2026<br>
 				<a href="https://arxiv.org/abs/2512.03538" target="_blank"> [Paper]</a>
-				<!-- <a href="https://github.com/GuHuangAI/DIffPart" target="_blank"> [Code]</a> -->
 			</div>
 		</div>
 		</div>
@@ -1127,6 +1132,52 @@
 		</div>
 	</div>
 	</div> -->
+
+	<div class="small-div"></div>
+
+</div>
+
+<div class="container" id="talks">
+	<h3> Talks </h3>
+
+	<div style="text-align: center; position: relative; margin-bottom: 50px; margin-top: 20px;">
+		<span style="position: absolute; top: 50%; left: 0; right: 0; transform: translateY(-50%); background-color: rgba(128, 128, 128, 0.3); padding: 0 10px;">
+			<b>Selected Talks</b>
+		</span>
+	</div>
+
+	<div class="news-container">
+	<div class="row align-items-center">
+		<div class="col-md-3 align-column-center" style="position: relative;">
+			<center>
+				<img class="img-fluid" src="res/figs/share/0426_4.jpg" width="98%" alt="" style="box-shadow: 4px 4px 4px #888888; margin-left: 5px; margin-right: 5px; border-radius:10px;">
+			</center>
+			<div class="badge" style="position: absolute; top: 4px; left: 8px;"><span class="cvpr-badge">World Model</span></div>
+		</div>
+		<div class="col-md-9">
+			<!-- <font size="4"> <b> 从感知到执行：基于世界模型的具身智能视频生成与动作预测 </b></font><br> -->
+			<font size="4"> <b> From Perception to Execution: Embodied Intelligence Video Generation and Action Prediction Based on World Models </b></font><br>
+			<br>
+			<font size="3">
+				<b> Shilong Zou</b>
+			</font>
+			<br>
+			ZhongGuanCun Dinghao H3, Beijing · Sharing Session · 2026.04.26<br>
+			<!-- 北京中关村鼎好H3 · 分享 · 2026.04.26<br> -->
+		</div>
+	</div>
+	<div class="row" style="margin-top: 18px;">
+		<div class="col-md-4">
+			<img class="img-fluid" src="res/figs/share/0426_3.jpg" width="100%" alt="" style="box-shadow: 4px 4px 4px #888888; margin-bottom: 12px; border-radius:10px;">
+		</div>
+		<div class="col-md-4">
+			<img class="img-fluid" src="res/figs/share/0426_2.jpg" width="100%" alt="" style="box-shadow: 4px 4px 4px #888888; margin-bottom: 12px; border-radius:10px;">
+		</div>
+		<div class="col-md-4">
+			<img class="img-fluid" src="res/figs/share/0426_5.jpg" width="100%" alt="" style="box-shadow: 4px 4px 4px #888888; margin-bottom: 12px; border-radius:10px;">
+		</div>
+	</div>
+	</div>
 
 	<div class="small-div"></div>
 
@@ -1367,7 +1418,7 @@
 
 <div class="container">
 	<div class="small-div"></div>
-	<center><i>Updated October 2025. </i></center>
+	<center><i>Updated <span id="updated-date"></span>. </i></center>
 	<center> © Shilong Zou</center>
 	<div class="content-div"></div>
 </div>
@@ -1519,6 +1570,20 @@
 		</div>
 	</div>
 </aside>
+
+<script>
+	(function () {
+		const updatedEl = document.getElementById('updated-date');
+		if (!updatedEl) return;
+		const lastModified = new Date(document.lastModified);
+		if (Number.isNaN(lastModified.getTime())) return;
+		updatedEl.textContent = lastModified.toLocaleDateString('en-US', {
+			year: 'numeric',
+			month: 'long',
+			day: 'numeric'
+		});
+	})();
+</script>
 
 </body>
 </html>
