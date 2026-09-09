@@ -548,7 +548,7 @@ body {
   letter-spacing: -.085em;
   color: #fff;
 }
-.hero-title span { color: rgba(255,255,255,.45); }
+.hero-title span { color: #83f5df; }
 .hero-subtitle {
   max-width: 58rem;
   margin: 1.7rem auto 0;
@@ -561,7 +561,7 @@ body {
 }
 .hero-byline { margin-top: 1.65rem; font-size: .79rem; line-height: 1.6; }
 .hero-byline p { color: rgba(255,255,255,.82); font-weight: 600; }
-.hero-byline span { color: rgba(255,255,255,.65); }
+.hero-byline span { color: rgba(255,255,255,.80); }
 .hero-actions {
   display: flex;
   flex-wrap: wrap;
