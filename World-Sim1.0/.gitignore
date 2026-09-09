@@ -1,5 +1,0 @@
-.preview.pid
-.preview.log
-assets/videos/*.zip
-dist/
-build-report.json
