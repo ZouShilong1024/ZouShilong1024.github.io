@@ -1,0 +1,158 @@
+{
+  "source_directory": "/home/zsl/下载/action_inject_dataset_infer_mixed_ar_iter_000232000_n400_matchlen_seed1_g3_s1",
+  "method": "Shortlist by PSNR on 12 uniform frames resized to 192x144, excluding initial frame from PSNR; inspect paired RGB/prediction at 15%, 50%, 90% of duration; prefer visible motion and varied tasks. Metrics are screening proxies, not paper benchmark scores.",
+  "candidate_counts": {
+    "libero": 32,
+    "robocasa": 32,
+    "robotwin": 32,
+    "real_source_world": 79,
+    "robomind": 80,
+    "agibot": 80,
+    "maniskill": 32
+  },
+  "preserved_dexhand": "dexhand_scan: packaged goods scanning from user supplied 0909.zip",
+  "selected": [
+    {
+      "name": "agibot_015801_retrieve_two_slices_of_toast_from_the_to",
+      "source": "agibot",
+      "prompt": "Retrieve two slices of toast from the toaster and place them on the blue plate.",
+      "psnr": 26.309384946322716,
+      "motion": 13.564589500427246,
+      "motion_ratio": 1.0330039653382153,
+      "dataset_id": "agibot",
+      "streams": {
+        "observation": "/home/zsl/下载/action_inject_dataset_infer_mixed_ar_iter_000232000_n400_matchlen_seed1_g3_s1/agibot_015801_retrieve_two_slices_of_toast_from_the_to_original_rgb.mp4",
+        "action": "/home/zsl/下载/action_inject_dataset_infer_mixed_ar_iter_000232000_n400_matchlen_seed1_g3_s1/agibot_015801_retrieve_two_slices_of_toast_from_the_to_action_video.mp4",
+        "prediction": "/home/zsl/下载/action_inject_dataset_infer_mixed_ar_iter_000232000_n400_matchlen_seed1_g3_s1/agibot_015801_retrieve_two_slices_of_toast_from_the_to.mp4"
+      },
+      "video": {
+        "width": 640,
+        "height": 480,
+        "r_frame_rate": "16/1",
+        "nb_frames": "103"
+      }
+    },
+    {
+      "name": "libero_002737_pick_up_the_ketchup_and_put_it_in_the_ba",
+      "source": "libero",
+      "prompt": "pick up the ketchup and put it in the basket",
+      "psnr": 30.665179048325722,
+      "motion": 3.6147520542144775,
+      "motion_ratio": 1.1660749105176451,
+      "dataset_id": "libero",
+      "streams": {
+        "observation": "/home/zsl/下载/action_inject_dataset_infer_mixed_ar_iter_000232000_n400_matchlen_seed1_g3_s1/libero_002737_pick_up_the_ketchup_and_put_it_in_the_ba_original_rgb.mp4",
+        "action": "/home/zsl/下载/action_inject_dataset_infer_mixed_ar_iter_000232000_n400_matchlen_seed1_g3_s1/libero_002737_pick_up_the_ketchup_and_put_it_in_the_ba_action_video.mp4",
+        "prediction": "/home/zsl/下载/action_inject_dataset_infer_mixed_ar_iter_000232000_n400_matchlen_seed1_g3_s1/libero_002737_pick_up_the_ketchup_and_put_it_in_the_ba.mp4"
+      },
+      "video": {
+        "width": 640,
+        "height": 480,
+        "r_frame_rate": "16/1",
+        "nb_frames": "143"
+      }
+    },
+    {
+      "name": "maniskill_004432_pick_up_the_red_cube_and_stack_it_on_the",
+      "source": "maniskill",
+      "prompt": "pick up the red cube and stack it on the green cube",
+      "psnr": 28.037397226919374,
+      "motion": 5.773695945739746,
+      "motion_ratio": 1.2439474252328027,
+      "dataset_id": "maniskill",
+      "streams": {
+        "observation": "/home/zsl/下载/action_inject_dataset_infer_mixed_ar_iter_000232000_n400_matchlen_seed1_g3_s1/maniskill_004432_pick_up_the_red_cube_and_stack_it_on_the_original_rgb.mp4",
+        "action": "/home/zsl/下载/action_inject_dataset_infer_mixed_ar_iter_000232000_n400_matchlen_seed1_g3_s1/maniskill_004432_pick_up_the_red_cube_and_stack_it_on_the_action_video.mp4",
+        "prediction": "/home/zsl/下载/action_inject_dataset_infer_mixed_ar_iter_000232000_n400_matchlen_seed1_g3_s1/maniskill_004432_pick_up_the_red_cube_and_stack_it_on_the.mp4"
+      },
+      "video": {
+        "width": 640,
+        "height": 480,
+        "r_frame_rate": "16/1",
+        "nb_frames": "113"
+      }
+    },
+    {
+      "name": "real_source_world_020022_steaming_rice_in_a_rice_cooker",
+      "source": "real_source_world",
+      "prompt": "Steaming rice in a rice cooker",
+      "psnr": 24.74480502613229,
+      "motion": 10.814565658569336,
+      "motion_ratio": 1.0863503662379912,
+      "dataset_id": "realsource",
+      "streams": {
+        "observation": "/home/zsl/下载/action_inject_dataset_infer_mixed_ar_iter_000232000_n400_matchlen_seed1_g3_s1/real_source_world_020022_steaming_rice_in_a_rice_cooker_original_rgb.mp4",
+        "action": "/home/zsl/下载/action_inject_dataset_infer_mixed_ar_iter_000232000_n400_matchlen_seed1_g3_s1/real_source_world_020022_steaming_rice_in_a_rice_cooker_action_video.mp4",
+        "prediction": "/home/zsl/下载/action_inject_dataset_infer_mixed_ar_iter_000232000_n400_matchlen_seed1_g3_s1/real_source_world_020022_steaming_rice_in_a_rice_cooker.mp4"
+      },
+      "video": {
+        "width": 640,
+        "height": 480,
+        "r_frame_rate": "16/1",
+        "nb_frames": "647"
+      },
+      "selection_note": "Replaced pen-holder organization with rice-cooker operation; inspected RGB/prediction at 15%, 40%, 65%, 90%."
+    },
+    {
+      "name": "robocasa_112033_turnonsinkfaucet",
+      "source": "robocasa",
+      "prompt": "TurnOnSinkFaucet",
+      "psnr": 23.380197110858184,
+      "motion": 9.136544227600098,
+      "motion_ratio": 0.9931040176878512,
+      "dataset_id": "robocasa",
+      "streams": {
+        "observation": "/home/zsl/下载/action_inject_dataset_infer_mixed_ar_iter_000232000_n400_matchlen_seed1_g3_s1/robocasa_112033_turnonsinkfaucet_original_rgb.mp4",
+        "action": "/home/zsl/下载/action_inject_dataset_infer_mixed_ar_iter_000232000_n400_matchlen_seed1_g3_s1/robocasa_112033_turnonsinkfaucet_action_video.mp4",
+        "prediction": "/home/zsl/下载/action_inject_dataset_infer_mixed_ar_iter_000232000_n400_matchlen_seed1_g3_s1/robocasa_112033_turnonsinkfaucet.mp4"
+      },
+      "video": {
+        "width": 640,
+        "height": 480,
+        "r_frame_rate": "16/1",
+        "nb_frames": "126"
+      }
+    },
+    {
+      "name": "robomind_002094_左臂将杯子放到电子秤上_右臂拿起调料瓶向杯子内做出倾倒动作",
+      "source": "robomind",
+      "prompt": "左臂将杯子放到电子秤上，右臂拿起调料瓶向杯子内做出倾倒动作",
+      "psnr": 24.479381358854923,
+      "motion": 8.333891868591309,
+      "motion_ratio": 1.033053128267427,
+      "dataset_id": "robomind",
+      "streams": {
+        "observation": "/home/zsl/下载/action_inject_dataset_infer_mixed_ar_iter_000232000_n400_matchlen_seed1_g3_s1/robomind_002094_左臂将杯子放到电子秤上_右臂拿起调料瓶向杯子内做出倾倒动作_original_rgb.mp4",
+        "action": "/home/zsl/下载/action_inject_dataset_infer_mixed_ar_iter_000232000_n400_matchlen_seed1_g3_s1/robomind_002094_左臂将杯子放到电子秤上_右臂拿起调料瓶向杯子内做出倾倒动作_action_video.mp4",
+        "prediction": "/home/zsl/下载/action_inject_dataset_infer_mixed_ar_iter_000232000_n400_matchlen_seed1_g3_s1/robomind_002094_左臂将杯子放到电子秤上_右臂拿起调料瓶向杯子内做出倾倒动作.mp4"
+      },
+      "video": {
+        "width": 640,
+        "height": 480,
+        "r_frame_rate": "16/1",
+        "nb_frames": "120"
+      },
+      "selection_note": "Replaced lid opening with a multi-stage dual-arm cup placement and pouring task; inspected RGB/prediction at 15%, 40%, 65%, 90%."
+    },
+    {
+      "name": "robotwin_037703_using_arms_pick_up_the_yellow_bottle_wit",
+      "source": "robotwin",
+      "prompt": "Using arms, pick up the yellow bottle with smooth texture, the blue-accented cylindrical bottle, and the red and black beverage bottle, dropping each into the plastic dustbin.",
+      "psnr": 30.56485814328849,
+      "motion": 19.832584381103516,
+      "motion_ratio": 1.0439605323569392,
+      "dataset_id": "robotwin",
+      "streams": {
+        "observation": "/home/zsl/下载/action_inject_dataset_infer_mixed_ar_iter_000232000_n400_matchlen_seed1_g3_s1/robotwin_037703_using_arms_pick_up_the_yellow_bottle_wit_original_rgb.mp4",
+        "action": "/home/zsl/下载/action_inject_dataset_infer_mixed_ar_iter_000232000_n400_matchlen_seed1_g3_s1/robotwin_037703_using_arms_pick_up_the_yellow_bottle_wit_action_video.mp4",
+        "prediction": "/home/zsl/下载/action_inject_dataset_infer_mixed_ar_iter_000232000_n400_matchlen_seed1_g3_s1/robotwin_037703_using_arms_pick_up_the_yellow_bottle_wit.mp4"
+      },
+      "video": {
+        "width": 640,
+        "height": 480,
+        "r_frame_rate": "16/1",
+        "nb_frames": "261"
+      }
+    }
+  ]
+}

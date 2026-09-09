@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>World-Sim 1.0: A General World Model Simulator for Embodied Intelligence</title>
+  <link rel="icon" type="image/png" href="assets/figures/logo.png" />
+  <meta name="description" content="World-Sim 1.0 predicts robot observations from an initial RGB image, synchronized numerical and visual actions, and an optional task instruction. A sparse-MoE video DiT supports generalization and downstream simulator applications." />
+  <meta property="og:title" content="World-Sim 1.0" />
+  <meta property="og:description" content="A General World Model Simulator for Embodied Intelligence — September 9, 2026 technical report" />
+  <meta property="og:image" content="assets/figures/paper-teaser.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="assets/js/tailwind-config.js"></script>
+  <link rel="stylesheet" href="assets/css/site.css" />
+  <link rel="stylesheet" href="assets/css/presentation.css" />
+</head>
+<body class="text-ink font-sans antialiased">
+  <nav class="site-nav fixed inset-x-0 top-0 z-20 backdrop-blur-xl">
+    <div class="mx-auto flex page-container items-center justify-between gap-4 px-4 py-2.5 text-sm">
+      <a href="#" class="flex shrink-0 items-center gap-2 whitespace-nowrap font-semibold tracking-tight" aria-label="World-Sim 1.0 home">
+        <img class="site-logo" src="assets/figures/logo.png" width="222" height="213" alt="" />
+        World-Sim 1.0
+      </a>
+      <div class="flex gap-0.5 overflow-x-auto text-mute whitespace-nowrap" aria-label="Page sections">
+        <a class="nav-link" href="#abstract">Abstract</a>
+        <a class="nav-link" href="#method">Method</a>
+        <a class="nav-link" href="#experiments">Experiments</a>
+        <a class="nav-link" href="#applications">Applications</a>
+        <a class="nav-link" href="#ood-cases">Generalization</a>
+        <a class="nav-link" href="#contributors">Team</a>
+        <a class="nav-link" href="#citation">Citation</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero-surface relative isolate overflow-hidden border-b border-zinc-200">
+    <section class="hero-stage" aria-labelledby="hero-title">
+      <video class="hero-video" muted loop playsinline preload="metadata" poster="assets/posters/hero-dexhand-mosaic.jpg" data-playback-rate="1" aria-hidden="true">
+        <source src="assets/videos/hero-dexhand-mosaic.mp4" type="video/mp4" />
+      </video>
+      <div class="hero-veil" aria-hidden="true"></div>
+      <div class="hero-grid" aria-hidden="true"></div>
+      <div class="hero-content mx-auto page-container px-4 text-center">
+        <h1 id="hero-title" class="hero-title">World-Sim <span>1.0</span></h1>
+        <p class="hero-subtitle">A General World Model Simulator<br class="hidden sm:block" /> for Embodied Intelligence</p>
+        <div class="hero-byline">
+          <p>Beijing Innovation Center of Humanoid Robotics (X-Humanoid)</p>
+          <span>WFM System Group</span>
+        </div>
+        <div class="hero-actions">
+          <a class="hero-button hero-button-primary" href="World_Simulator.pdf">Read the paper <span>↗</span></a>
+          <a class="hero-button" href="https://github.com/Open-X-Humanoid">GitHub <span>↗</span></a>
+          <span class="hero-button hero-button-muted">Checkpoints &amp; code · Planned</span>
+        </div>
+        <div class="hero-contributions" role="list" aria-label="Key model capabilities">
+          <div role="listitem"><strong>Unified Action</strong><span class="hero-feature-label">Numerical + Visual</span><p>28-D Configurations<br />Whole-Arm Skeletons</p></div>
+          <div role="listitem"><strong>MoE Architecture</strong><span class="hero-feature-label">Sparse Experts</span><p>Causal Distillation<br />Efficient Rollouts</p></div>
+          <div role="listitem"><strong>5 Distribution Shifts</strong><span class="hero-feature-label">Qualitative Generalization</span><p>Trajectory · Scene · Embodiment<br />Object · Viewpoint</p></div>
+          <div role="listitem"><strong>4 Applications</strong><span class="hero-feature-label">Data &amp; Policy</span><p>Data Generation · Policy Evaluation<br />Action Selection · Policy Improvement</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="teaser-showcase" aria-labelledby="teaser-heading">
+      <div class="mx-auto page-container px-4">
+        <div class="teaser-heading-row">
+          <div><h2 id="teaser-heading">World-Sim 1.0 at a Glance</h2></div>
+        </div>
+        <figure id="teaser" class="teaser-frame overflow-hidden rounded-2xl border border-zinc-200 bg-white p-2 shadow-sm sm:p-4">
+          <a href="World_Simulator.pdf#page=1" target="_blank" rel="noopener" class="block rounded-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-cond" aria-label="Open Figure 1 in the September 9 World-Sim report">
+            <img class="block h-auto w-full rounded-lg" src="assets/figures/paper-teaser.png" width="2500" height="1900" alt="Figure 1 from the September 9 report: training data, synchronized action conditions, downstream applications, five qualitative distribution shifts, and selected results" decoding="async" />
+          </a>
+        </figure>
+      </div>
+    </section>
+  </header>
+
+  <main class="mx-auto page-container px-4 pb-28 pt-20">
+    <section id="abstract">
+      <div>
+        <h2 class="section-title">Abstract</h2>
+      </div>
+      <div class="mt-6 overflow-hidden rounded-2xl border border-zinc-200 bg-white shadow-sm">
+        <div class="p-6 md:px-8 md:py-7">
+          <p class="max-w-4xl text-[15px] leading-7 text-zinc-700">
+            Simulating manipulation across diverse robot embodiments requires preserving precise action information while accommodating variations in robot geometry and visual context. We present <strong>World-Sim 1.0</strong>, an action-conditioned world model simulator built on a synchronized numerical and visual action interface. Unified numerical configurations specify arm-joint states and gripper or dexterous-hand states, while camera-aligned whole-arm skeleton videos rendered from the same trajectories provide explicit image-space motion guidance. A Diffusion Transformer interleaves the two conditioning pathways and uses shared-and-routed sparse experts to expand capacity with input-dependent activation. We train World-Sim 1.0 on approximately one million real-world and simulated trajectories and accelerate inference for efficient simulator rollouts.
+          </p>
+          <p class="mt-4 max-w-4xl text-[15px] leading-7 text-zinc-700">
+            Experiments on held-out test splits of three datasets show improved video prediction over representative action-conditioned world models, with ablations supporting the complementary action interface and sparse architecture. Qualitative studies further examine generalization across trajectory, scene appearance, embodiment, object, and viewpoint shifts. Beyond video prediction, generated rollouts support data generation for policy training, while a fine-tuned vision–language model (VLM) evaluator supplies task-conditioned feedback for policy evaluation and ranking, action selection, and policy improvement. In separate RoboTwin studies, action selection using predicted outcomes and VLM scores increases success by <strong>20.6 percentage points</strong> over single-sample execution, while policy optimization with imagined rollouts and VLM-derived rewards improves mean success by <strong>12.7 percentage points</strong> over supervised initialization. We will release model checkpoints and inference code to support further research.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="method">
+      <div>
+        <h2 class="section-title">Method</h2>
+        <p class="section-intro prose-intro">World-Sim 1.0 predicts future observations from an initial RGB image, a frame-aligned robot-configuration trajectory, and an optional task instruction. The trajectory supplies numerical configurations and, through URDF rendering with camera calibration, synchronized visual action conditions.</p>
+      </div>
+
+      <div id="rendering" class="method-block">
+        <div>
+          <div class="subsection-heading"><span class="section-index">01</span><h3 class="subsection-title">Complementary Action Representations</h3></div>
+        </div>
+
+      <div class="mt-6 overflow-hidden rounded-2xl border border-zinc-200 bg-white shadow-sm">
+        <div class="render-pipeline">
+          <article class="relative min-h-64 bg-white p-5">
+            <div class="flex items-center justify-between">
+                <span class="text-[11px] font-medium tracking-[0.16em] text-zinc-500">01 · Input</span>
+              <span class="rounded-full border border-zinc-300 px-2 py-0.5 text-[10px] text-zinc-500">T + 1 frames</span>
+            </div>
+            <h4 class="mt-2 text-sm font-semibold">Configuration Sequence</h4>
+            <div class="relative mx-auto mt-6 w-44 overflow-hidden rounded-lg border border-zinc-200 bg-zinc-50 p-2" aria-label="Animated joint action matrix">
+              <div class="action-scan absolute bottom-2 left-2 top-2 z-0 rounded bg-act/10 ring-1 ring-act/50"></div>
+              <div class="relative z-10 grid grid-cols-4 gap-1 text-center font-mono text-[10px] text-zinc-600">
+                <span class="text-zinc-400">t</span><span>t+1</span><span>t+2</span><span>t+T</span>
+                <span>.52</span><span>.52</span><span>.57</span><span>.81</span>
+                <span>−.10</span><span>−.08</span><span>.02</span><span>.27</span>
+                <span>.31</span><span>.28</span><span>.19</span><span>.12</span>
+                <span>.05</span><span>.03</span><span>.00</span><span>−.08</span>
+              </div>
+            </div>
+
+          </article>
+
+
+          <article class="min-h-64 bg-white p-5">
+            <span class="text-[11px] font-medium tracking-[0.16em] text-zinc-500">02 · Geometry</span>
+            <h4 class="mt-2 text-sm font-semibold">Forward Kinematics</h4>
+            <svg class="mx-auto mt-3 h-36 w-44" viewBox="0 0 180 145" role="img" aria-label="Animated robot arm produced by forward kinematics">
+              <g stroke="#d4d4d8" stroke-width="1">
+                <path d="M18 123H160"/><path d="M30 15V132"/><path d="M30 123l8-8M30 123l-8-8"/>
+              </g>
+              <g fill="#ffffff" stroke="#52525b" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <g class="arm-shoulder">
+                  <path d="M31 120L52 79" fill="none" stroke="#0078FF" stroke-width="7"/>
+                  <circle cx="52" cy="79" r="6"/>
+                  <g class="arm-elbow">
+                    <path d="M52 79L89 43" fill="none" stroke="#0078FF" stroke-width="7"/>
+                    <circle cx="89" cy="43" r="6"/>
+                    <g class="arm-wrist">
+                      <path d="M89 43L128 63" fill="none" stroke="#0078FF" stroke-width="7"/>
+                      <circle cx="128" cy="63" r="6"/>
+                      <g class="arm-forearm">
+                        <path d="M128 63L143 83" fill="none" stroke="#0078FF" stroke-width="6"/>
+                        <circle cx="143" cy="83" r="5"/>
+                        <g class="gripper-jaw gripper-jaw-top">
+                          <path d="M143 83L158 75" fill="none" stroke="#0078FF" stroke-width="5"/>
+                          <circle cx="158" cy="75" r="5"/>
+                        </g>
+                        <g class="gripper-jaw gripper-jaw-bottom">
+                          <path d="M143 83L159 92" fill="none" stroke="#0078FF" stroke-width="5"/>
+                          <circle cx="159" cy="92" r="5"/>
+                        </g>
+                      </g>
+                    </g>
+                  </g>
+                </g>
+                <circle cx="31" cy="120" r="6"/>
+              </g>
+              <text x="39" y="136" fill="#71717a" font-size="9">world frame</text>
+            </svg>
+
+          </article>
+
+
+          <article class="min-h-64 bg-white p-5">
+            <span class="text-[11px] font-medium tracking-[0.16em] text-zinc-500">03 · View</span>
+            <h4 class="mt-2 text-sm font-semibold">Camera Projection</h4>
+            <svg class="mx-auto mt-3 h-36 w-44" viewBox="0 0 180 145" role="img" aria-label="Animated camera projection from 3D joints to an image plane">
+              <path d="M18 72L75 28M18 72L75 120" class="projection-ray" fill="none" stroke="#a1a1aa" stroke-dasharray="4 5"/>
+              <path d="M75 28L159 45L159 126L75 120Z" fill="#fafafa" stroke="#a1a1aa" stroke-width="2"/>
+              <g fill="#ffffff" stroke="#52525b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <g class="projection-shoulder">
+                  <path d="M96 108L99 76" fill="none" stroke="#0078FF" stroke-width="5"/>
+                  <circle cx="99" cy="76" r="4"/>
+                  <g class="projection-elbow">
+                    <path d="M99 76L121 58" fill="none" stroke="#0078FF" stroke-width="5"/>
+                    <circle cx="121" cy="58" r="4"/>
+                    <g class="projection-wrist">
+                      <path d="M121 58L143 74" fill="none" stroke="#0078FF" stroke-width="5"/>
+                      <circle cx="143" cy="74" r="4"/>
+                      <g class="projection-forearm">
+                        <path d="M143 74L148 91" fill="none" stroke="#0078FF" stroke-width="4"/>
+                        <circle cx="148" cy="91" r="4"/>
+                      </g>
+                    </g>
+                  </g>
+                </g>
+                <circle cx="96" cy="108" r="4"/>
+              </g>
+              <g transform="translate(8 63)" fill="#71717a">
+                <rect width="18" height="14" rx="3"/><path d="M18 4l8-4v14l-8-4z"/>
+              </g>
+            </svg>
+
+          </article>
+
+
+          <article class="min-h-64 bg-white p-5">
+            <span class="text-[11px] font-medium tracking-[0.16em] text-zinc-500">04 · Output</span>
+            <h4 class="mt-2 text-sm font-semibold">Action Video</h4>
+            <div class="relative mt-4 overflow-hidden rounded-lg border border-zinc-200 bg-black">
+              <video class="block aspect-[4/3] w-full object-cover" muted loop playsinline preload="none" poster="assets/posters/ov_agibot_ac.jpg" aria-label="Rendered AgiBot action skeleton video">
+                <source src="assets/videos/ov_agibot_ac.mp4" type="video/mp4" />
+              </video>
+              <div class="pointer-events-none absolute inset-x-0 bottom-0 h-0.5 bg-zinc-800">
+                <div class="render-progress h-full bg-out"></div>
+              </div>
+            </div>
+
+          </article>
+        <article class="gripper-legend bg-white p-5">
+          <p class="gripper-state-title">gripper state</p>
+          <div class="mt-5 space-y-4 text-sm">
+            <div class="flex items-center gap-3">
+              <span class="h-3 w-10 rounded-full" style="background:#0078FF"></span>
+              <p class="font-medium" style="color:#0078FF">Open</p>
+            </div>
+            <div class="flex items-center gap-3">
+              <span class="h-3 w-10 rounded-full bg-zinc-500"></span>
+              <p class="font-medium text-zinc-600">Transitional</p>
+            </div>
+            <div class="flex items-center gap-3">
+              <span class="h-3 w-10 rounded-full bg-orange-500"></span>
+              <p class="font-medium text-orange-600">Closed</p>
+            </div>
+          </div>
+        </article>
+        </div>
+      </div>
+
+      </div>
+
+      <div id="action-injection" class="method-block">
+      <div>
+        <div class="subsection-heading"><span class="section-index">02</span><h3 class="subsection-title">Dual-Branch Injection with Sparse Experts</h3></div>
+      </div>
+      <figure class="mt-6 overflow-hidden rounded-2xl border border-zinc-200 bg-white p-2 shadow-sm">
+        <img class="w-full rounded-xl bg-white" src="assets/figures/paper-architecture.png" width="2500" height="1170" loading="lazy" decoding="async" alt="Figure 3 from the September 9 report: action values modulate odd-indexed DiT blocks, action-video Context Blocks add residuals after even-indexed blocks, and sparse MoE combines shared and routed experts" />
+      </figure>
+      <div class="architecture-notes mt-4 grid gap-4 md:grid-cols-3">
+        <article class="lift-card rounded-2xl border border-zinc-200 bg-white p-6">
+          <div class="flex items-center gap-3">
+            <h4 class="font-semibold">Interleaved Action Conditioning</h4>
+          </div>
+          <p class="method-copy">In the 28-layer Cosmos-Predict 2.5 DiT, numerical action embeddings apply scale and shift within odd-indexed blocks; action-video Context Blocks add aligned residuals after even-indexed blocks. Indices are zero-based.</p>
+        </article>
+        <article class="lift-card rounded-2xl border border-zinc-200 bg-white p-6">
+          <div class="flex items-center gap-3">
+            <h4 class="font-semibold">Unified Action Representation</h4>
+          </div>
+          <p class="method-copy">Each side occupies 14 dimensions: seven arm joints, one parallel-gripper opening, and six hand joints. Unused joints and absent sides are zero-filled. Both action conditions span the conditioning frame and all target frames.</p>
+        </article>
+        <article class="lift-card rounded-2xl border border-zinc-200 bg-white p-6">
+          <div class="flex items-center gap-3">
+            <h4 class="font-semibold">Sparse Mixture of Experts</h4>
+          </div>
+          <p class="method-copy">Every main DiT block uses one always-active shared expert and eight routed experts, with two routed experts selected per token. This expands capacity through input-dependent activation.</p>
+        </article>
+      </div>
+      </div>
+    </section>
+
+    <section id="experiments">
+      <div>
+        <h2 class="section-title">Experiments &amp; Results</h2>
+      </div>
+      <div class="experiment-block">
+        <div class="subsection-heading"><span class="section-index">01</span><h3 class="subsection-title">Experimental Setup</h3></div>
+        <dl class="corpus-stats">
+          <div><dt>Training trajectories</dt><dd>~1M</dd></div>
+          <div><dt>Robot interaction video</dt><dd>8,000 <small>hours</small></dd></div>
+          <div><dt>Real &amp; simulated sources</dt><dd>7 <small>datasets</small></dd></div>
+        </dl>
+        <p class="section-intro prose-intro">The corpus combines AgiBotWorld Beta, RealSource World, and RoboMIND with LIBERO, ManiSkill2, RoboTwin, and RoboCasa. A 90% / 5% / 5% training, validation, and test partition is established before clip extraction. Video prediction is evaluated on held-out splits of AgiBotWorld Beta, RoboMIND, and RoboTwin; baselines are retrained on the same mixed-domain corpus.</p>
+      </div>
+      <div id="results" class="experiment-block">
+        <div class="subsection-heading"><span class="section-index">02</span><h3 class="subsection-title">Video Prediction Benchmark</h3></div>
+        <p class="section-intro">World-Sim 1.0 achieves the best scores on all five video-quality metrics and the adapted EWMBench overall score among the methods evaluated on each dataset.</p>
+        <div class="benchmark-highlights" aria-label="PSNR gains over the strongest evaluated baseline on each dataset">
+          <article class="benchmark-highlight"><h4>AgiBotWorld Beta</h4><strong>+4.636 <small>dB</small></strong><p>PSNR over the best baseline</p><p class="benchmark-baseline">EnerVerse-AC → World-Sim<br />17.640 → 22.276 dB</p></article>
+          <article class="benchmark-highlight"><h4>RoboMIND</h4><strong>+2.080 <small>dB</small></strong><p>PSNR over the best baseline</p><p class="benchmark-baseline">Ctrl-World → World-Sim<br />21.770 → 23.850 dB</p></article>
+          <article class="benchmark-highlight"><h4>RoboTwin</h4><strong>+10.343 <small>dB</small></strong><p>PSNR over the best baseline</p><p class="benchmark-baseline">Ctrl-World → World-Sim<br />20.040 → 30.383 dB</p></article>
+        </div>
+      <div class="results-table-wrap" tabindex="0" role="region" aria-label="Video prediction comparison, scroll horizontally on small screens">
+        <table class="results-table">
+          <caption>Video quality and adapted EWMBench overall scores</caption>
+          <thead><tr><th scope="col">Method</th><th scope="col">PSNR ↑</th><th scope="col">SSIM ↑</th><th scope="col">LPIPS ↓</th><th scope="col">FID ↓</th><th scope="col">FVD ↓</th><th scope="col">Overall ↑</th></tr></thead>
+          <tbody>
+            <tr class="dataset-row"><th colspan="7" scope="rowgroup">AgiBotWorld Beta</th></tr>
+            <tr><th scope="row">IRASim</th><td>15.796</td><td>0.544</td><td>0.028</td><td>64.418</td><td>62.548</td><td>3.571</td></tr>
+            <tr><th scope="row">Ctrl-World</th><td>17.550</td><td>0.682</td><td>0.022</td><td>46.600</td><td>45.100</td><td>4.401</td></tr>
+            <tr><th scope="row">OSCAR</th><td>16.644</td><td>0.608</td><td>0.023</td><td>27.805</td><td>32.241</td><td>4.303</td></tr>
+            <tr><th scope="row">Wan-Move</th><td>12.610</td><td>0.429</td><td>0.447</td><td>88.496</td><td>95.260</td><td>3.244</td></tr>
+            <tr><th scope="row">EnerVerse-AC</th><td>17.640</td><td>0.769</td><td>0.023</td><td>19.510</td><td>21.390</td><td>4.431</td></tr>
+            <tr class="ours-row"><th scope="row">World-Sim 1.0</th><td>22.276</td><td>0.796</td><td>0.013</td><td>14.640</td><td>10.850</td><td>4.997</td></tr>
+          </tbody>
+          <tbody>
+            <tr class="dataset-row"><th colspan="7" scope="rowgroup">RoboMIND</th></tr>
+            <tr><th scope="row">IRASim</th><td>20.102</td><td>0.709</td><td>0.019</td><td>44.597</td><td>43.414</td><td>3.079</td></tr>
+            <tr><th scope="row">Ctrl-World</th><td>21.770</td><td>0.716</td><td>0.015</td><td>21.800</td><td>16.700</td><td>4.276</td></tr>
+            <tr><th scope="row">EnerVerse-AC</th><td>17.930</td><td>0.680</td><td>0.293</td><td>67.350</td><td>63.690</td><td>2.982</td></tr>
+            <tr class="ours-row"><th scope="row">World-Sim 1.0</th><td>23.850</td><td>0.835</td><td>0.012</td><td>17.610</td><td>15.930</td><td>4.666</td></tr>
+          </tbody>
+          <tbody>
+            <tr class="dataset-row"><th colspan="7" scope="rowgroup">RoboTwin</th></tr>
+            <tr><th scope="row">IRASim</th><td>17.121</td><td>0.666</td><td>0.025</td><td>69.777</td><td>57.350</td><td>3.383</td></tr>
+            <tr><th scope="row">Ctrl-World</th><td>20.040</td><td>0.804</td><td>0.016</td><td>31.400</td><td>26.600</td><td>3.971</td></tr>
+            <tr><th scope="row">EnerVerse-AC</th><td>19.680</td><td>0.779</td><td>0.221</td><td>32.450</td><td>29.700</td><td>3.610</td></tr>
+            <tr class="ours-row"><th scope="row">World-Sim 1.0</th><td>30.383</td><td>0.942</td><td>0.006</td><td>8.910</td><td>4.980</td><td>5.044</td></tr>
+          </tbody>
+        </table>
+      </div>
+      </div>
+      <div id="overview" class="experiment-block">
+        <div class="subsection-heading"><span class="section-index">03</span><h3 class="subsection-title">Qualitative Generation Results</h3></div>
+        <p class="section-intro">Action-conditioned rollouts across seven real-world and simulated data sources, including parallel-gripper and dexterous-hand embodiments.</p>
+      <figure id="overview-carousel" class="mt-6 overflow-hidden rounded-2xl border border-zinc-200 bg-white shadow-sm outline-none focus-visible:ring-2 focus-visible:ring-cond/40" tabindex="0" aria-label="Dataset comparison carousel">
+        <div class="flex items-center justify-between gap-4 border-b border-zinc-200 px-4 py-3.5">
+          <div class="flex min-w-0 items-center gap-2.5">
+            <h3 id="overview-dataset-name" class="truncate text-sm font-semibold">AgiBotWorld Beta · Gripper</h3>
+            <span id="overview-dataset-domain" class="shrink-0 rounded-full bg-cond/10 px-2 py-0.5 text-[10px] font-medium text-cond">Real</span>
+          </div>
+          <div class="flex shrink-0 items-center gap-2">
+            <span id="overview-counter" class="mr-1 font-mono text-[11px] text-mute" aria-live="polite">1 / 8</span>
+            <button id="overview-prev" type="button" class="grid h-8 w-8 place-items-center rounded-full border border-zinc-200 text-sm text-zinc-600 transition hover:border-zinc-300 hover:bg-zinc-50 hover:text-ink" aria-label="Previous dataset">←</button>
+            <button id="overview-next" type="button" class="grid h-8 w-8 place-items-center rounded-full border border-zinc-200 text-sm text-zinc-600 transition hover:border-zinc-300 hover:bg-zinc-50 hover:text-ink" aria-label="Next dataset">→</button>
+          </div>
+        </div>
+        <div class="overview-scroll overflow-x-auto">
+          <div id="overview-stage" class="overview-stage grid min-w-[45rem] grid-cols-3 gap-2 p-2">
+            <div class="overflow-hidden rounded-xl border border-zinc-200 bg-zinc-50">
+              <div class="flex items-center gap-2 px-3 py-2 text-xs font-medium"><span class="h-1.5 w-1.5 rounded-full bg-cond"></span>Ground-truth video</div>
+              <video class="block aspect-[4/3] w-full bg-black object-cover" data-overview-stream="observation" muted loop playsinline preload="metadata" aria-label="AgiBotWorld Beta · Gripper observation video"></video>
+            </div>
+            <div class="overflow-hidden rounded-xl border border-zinc-200 bg-zinc-50">
+              <div class="flex items-center gap-2 px-3 py-2 text-xs font-medium"><span class="h-1.5 w-1.5 rounded-full bg-act"></span>Rendered Action</div>
+              <video class="block aspect-[4/3] w-full bg-black object-cover" data-overview-stream="action" muted loop playsinline preload="metadata" aria-label="AgiBotWorld Beta · Gripper rendered action video"></video>
+            </div>
+            <div class="overflow-hidden rounded-xl border border-zinc-200 bg-zinc-50">
+              <div class="flex items-center gap-2 px-3 py-2 text-xs font-medium"><span class="h-1.5 w-1.5 rounded-full bg-out"></span>Prediction</div>
+              <video class="block aspect-[4/3] w-full bg-black object-cover" data-overview-stream="prediction" muted loop playsinline preload="metadata" aria-label="AgiBotWorld Beta · Gripper prediction video"></video>
+            </div>
+            <div id="overview-second-row" aria-label="Second dataset example">
+<div class="overflow-hidden rounded-xl border border-zinc-200 bg-zinc-50">
+              <div class="flex items-center gap-2 px-3 py-2 text-xs font-medium"><span class="h-1.5 w-1.5 rounded-full bg-cond"></span>Ground-truth video</div>
+              <video class="block aspect-[4/3] w-full bg-black object-cover" data-overview-second="observation" muted loop playsinline preload="metadata"></video>
+            </div><div class="overflow-hidden rounded-xl border border-zinc-200 bg-zinc-50">
+              <div class="flex items-center gap-2 px-3 py-2 text-xs font-medium"><span class="h-1.5 w-1.5 rounded-full bg-act"></span>Rendered Action</div>
+              <video class="block aspect-[4/3] w-full bg-black object-cover" data-overview-second="action" muted loop playsinline preload="metadata"></video>
+            </div><div class="overflow-hidden rounded-xl border border-zinc-200 bg-zinc-50">
+              <div class="flex items-center gap-2 px-3 py-2 text-xs font-medium"><span class="h-1.5 w-1.5 rounded-full bg-out"></span>Prediction</div>
+              <video class="block aspect-[4/3] w-full bg-black object-cover" data-overview-second="prediction" muted loop playsinline preload="metadata"></video>
+            </div>
+            </div>
+          </div>
+        </div>
+        <div class="border-t border-zinc-200 px-2 py-2">
+          <div id="overview-dataset-tabs" class="overview-scroll flex gap-1 overflow-x-auto" role="tablist" aria-label="Select dataset"></div>
+        </div>
+      </figure>
+      </div>
+    </section>
+
+    <section id="applications">
+      <div>
+        <h2 class="section-title">Applications</h2>
+        <p class="section-intro prose-intro">The four-step causal simulator supports data generation and policy applications. A fine-tuned Qwen3-VL-2B-Instruct evaluator supplies task-conditioned success, progress, and visual-validity scores for policy evaluation, action selection, and policy improvement, and remains frozen during downstream use.</p>
+      </div>
+
+      <div class="applications-layout">
+        <aside class="application-tabs" role="tablist" aria-label="Application category">
+          <button type="button" class="app-tab block w-full border-b border-zinc-200 px-5 py-5 text-left text-zinc-500" data-app="data" data-kicker="DATA GENERATION" data-title="Scalable Data Generation" data-description="World-Sim generates ten rollouts per demonstration from edited initial frames and the original actions. With 10, 30, and 50 randomized demonstrations per task, π0.5 success improves from 28.5%, 57.0%, and 70.0% to 64.5%, 87.0%, and 93.0%, respectively (Table 9). A separate cross-domain study reaches 72.0% using 50 clean and 500 generated trajectories, compared with 70.0% using 50 directly collected randomized trajectories (Table 8). Both studies use 200 unseen evaluation seeds per task." role="tab" aria-selected="true" id="application-tab-data" aria-controls="application-panel">
+            <span class="text-[10px] font-semibold tracking-[0.14em] text-cond">01 · DATA</span>
+            <span class="mt-1.5 block text-sm font-semibold">Scalable Data Generation</span>
+
+          </button>
+          <button type="button" class="app-tab block w-full border-b border-zinc-200 px-5 py-5 text-left text-zinc-500" data-app="evaluation" data-kicker="POLICY EVALUATION" data-title="Policy Evaluation &amp; Ranking" data-description="Five checkpoints from one VLA training run are evaluated with matched action trajectories on 200 held-out initial conditions each. With 200 world-model adaptation rollouts, the model–VLM pipeline reproduces their RoboTwin ranking (Spearman ρ = 1.0), with success-rate MAE of 4.0 percentage points. MAE falls to 2.9 points at 500 rollouts, the adaptation budget used for action selection and policy improvement (Table 11)." role="tab" aria-selected="false" tabindex="-1" id="application-tab-evaluation" aria-controls="application-panel">
+            <span class="text-[10px] font-semibold tracking-[0.14em] text-cond">02 · EVALUATE</span>
+            <span class="mt-1.5 block text-sm font-semibold">Policy Evaluation &amp; Ranking</span>
+
+          </button>
+          <button type="button" class="app-tab block w-full border-b border-zinc-200 px-5 py-5 text-left text-zinc-500" data-app="selection" data-kicker="ACTION SELECTION" data-title="World-Model-Based Action Selection" data-description="A frozen Diffusion Policy proposes ten action sequences. The 500-rollout adapted World-Sim model predicts their outcomes, and a frozen VLM selects one for open-loop execution. Across five RoboTwin tasks and 200 held-out conditions per task, success reaches 63.8%, compared with 43.2% for single-sample execution and 52.3% for Ctrl-World selection. The simulator-based Best-of-10 oracle reaches 68.1% (Table 12)." role="tab" aria-selected="false" tabindex="-1" id="application-tab-selection" aria-controls="application-panel">
+            <span class="text-[10px] font-semibold tracking-[0.14em] text-cond">03 · SELECT</span>
+            <span class="mt-1.5 block text-sm font-semibold">World-Model-Based Action Selection</span>
+
+          </button>
+          <button type="button" class="app-tab block w-full border-b border-zinc-200 px-5 py-5 text-left text-zinc-500" data-app="learning" data-kicker="POLICY IMPROVEMENT" data-title="World-Model-Guided Policy Improvement" data-description="Group Relative Policy Optimization (GRPO) improves an OpenVLA-OFT-initialized policy using closed-loop imagined rollouts and validity-weighted progress and terminal rewards. The world model and VLM remain frozen. RoboTwin task-checker success averages 75.4% across five tasks and three training runs, versus 62.7% for initial SFT and 68.5% for terminal-only GRPO; the simulator-based oracle reaches 83.8% (Table 14)." role="tab" aria-selected="false" tabindex="-1" id="application-tab-learning" aria-controls="application-panel">
+            <span class="text-[10px] font-semibold tracking-[0.14em] text-cond">04 · LEARN</span>
+            <span class="mt-1.5 block text-sm font-semibold">World-Model-Guided Policy Improvement</span>
+
+          </button>
+        </aside>
+
+        <article id="application-panel" class="application-panel" role="tabpanel" tabindex="0" aria-labelledby="application-tab-data" aria-live="polite">
+          <div class="flex flex-col gap-3 border-b border-zinc-200 px-5 py-4 sm:flex-row sm:items-start sm:justify-between">
+            <div><p id="application-kicker" class="text-[10px] font-semibold tracking-[0.14em] text-cond">DATA GENERATION</p><h3 id="application-title" class="mt-1.5 font-semibold">Scalable Data Generation</h3></div>
+
+          </div>
+          <div id="application-media" class="application-placeholder has-media hidden flex items-center justify-center text-center">
+            <div id="application-workflow" class="hidden w-full p-6 text-left">
+              <figure class="application-chart" aria-labelledby="application-chart-title">
+                <figcaption id="application-chart-title"></figcaption>
+                <div id="application-chart-bars" class="application-chart-bars"></div>
+              </figure>
+              <p id="application-workflow-result" class="application-result"></p>
+            </div>
+          </div>
+          <div class="application-copy grid gap-4 p-5">
+            <p id="application-description" class="text-sm leading-6 text-zinc-600">World-Sim generates ten rollouts per demonstration from edited initial frames and the original actions. With 10, 30, and 50 randomized demonstrations per task, π0.5 success improves from 28.5%, 57.0%, and 70.0% to 64.5%, 87.0%, and 93.0%, respectively (Table 9). A separate cross-domain study reaches 72.0% using 50 clean and 500 generated trajectories, compared with 70.0% using 50 directly collected randomized trajectories (Table 8). Both studies use 200 unseen evaluation seeds per task.</p>
+
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="ood-cases">
+      <div>
+        <h2 class="section-title">Generalization under Distribution Shifts</h2>
+        <p class="section-intro">Five qualitative studies examine action-conditioned prediction under controlled changes in trajectory, scene appearance, embodiment, object, and viewpoint.</p>
+      </div>
+      <div class="ood-tabs" role="tablist" aria-label="Distribution shifts">
+        <button type="button" id="ood-tab-scene" class="tab rounded-xl px-4 py-2 bg-ink text-white" data-tab="scene" role="tab" aria-selected="true" tabindex="0" aria-controls="panel-scene"><span class="tab-index">01</span>Scene &amp; Appearance</button>
+        <button type="button" id="ood-tab-embodiment" class="tab rounded-xl px-4 py-2 text-mute" data-tab="embodiment" role="tab" aria-selected="false" tabindex="-1" aria-controls="panel-embodiment"><span class="tab-index">02</span>Embodiment</button>
+        <button type="button" id="ood-tab-object" class="tab rounded-xl px-4 py-2 text-mute" data-tab="object" role="tab" aria-selected="false" tabindex="-1" aria-controls="panel-object"><span class="tab-index">03</span>Object</button>
+        <button type="button" id="ood-tab-viewpoint" class="tab rounded-xl px-4 py-2 text-mute" data-tab="viewpoint" role="tab" aria-selected="false" tabindex="-1" aria-controls="panel-viewpoint"><span class="tab-index">04</span>Viewpoint</button>
+        <button type="button" id="ood-tab-reverse" class="tab rounded-xl px-4 py-2 text-mute" data-tab="reverse" role="tab" aria-selected="false" tabindex="-1" aria-controls="panel-reverse"><span class="tab-index">05</span>Trajectory</button>
+      </div>
+      <div id="panel-reverse" class="panel mt-6 hidden" role="tabpanel" tabindex="0" aria-labelledby="ood-tab-reverse">
+        <p class="demo-context">The reversed configuration sequence is paired with the terminal observation as a new conditioning frame. This tests sensitivity to commanded trajectories, without assuming exact physical time reversibility during contact.</p>
+        <article id="reverse-gallery" class="overflow-hidden rounded-2xl border border-zinc-200 bg-white shadow-sm outline-none focus-visible:ring-2 focus-visible:ring-out/40" tabindex="0" aria-label="Reverse-trajectory OOD task gallery">
+          <div class="flex flex-col gap-3 border-b border-zinc-200 px-4 py-3.5 sm:flex-row sm:items-center sm:justify-between">
+            <div class="min-w-0">
+              <div class="flex items-center gap-2">
+                <span id="reverse-dataset" class="text-[10px] font-semibold uppercase tracking-[0.14em] text-out">AgiBotWorld Beta · Bidirectional motion</span>
+                <span class="rounded-full bg-out/10 px-2 py-0.5 text-[10px] font-medium text-out">Forward ↔ Reverse</span>
+              </div>
+              <h3 id="reverse-task-name" class="mt-1.5 truncate text-sm font-medium text-zinc-700">Hairdryer</h3>
+            </div>
+            <div class="flex shrink-0 items-center gap-2">
+              <span id="reverse-counter" class="mr-1 font-mono text-[11px] text-mute" aria-live="polite">1 / 6</span>
+              <button id="reverse-prev" type="button" class="grid h-8 w-8 place-items-center rounded-full border border-zinc-200 text-sm text-zinc-600 transition hover:border-zinc-300 hover:bg-zinc-50 hover:text-ink" aria-label="Previous reverse-trajectory task">←</button>
+              <button id="reverse-next" type="button" class="grid h-8 w-8 place-items-center rounded-full border border-zinc-200 text-sm text-zinc-600 transition hover:border-zinc-300 hover:bg-zinc-50 hover:text-ink" aria-label="Next reverse-trajectory task">→</button>
+            </div>
+          </div>
+
+          <div class="overview-scroll overflow-x-auto">
+            <div id="reverse-stage" class="reverse-stage grid min-w-[60rem] grid-cols-4 gap-[.0625rem] bg-zinc-200">
+              <div class="bg-white p-2" data-reverse-phase="forward">
+                <p class="px-1 pb-2 text-[10px] font-semibold uppercase tracking-[0.14em] text-zinc-500">Forward trajectory</p>
+                <div class="overflow-hidden rounded-xl border border-zinc-200 bg-zinc-50">
+                  <div class="flex items-center justify-between px-3 py-2 text-xs font-medium"><span class="flex items-center gap-2"><i class="h-1.5 w-1.5 rounded-full bg-act"></i>Rendered Action</span><span class="text-[10px] font-normal text-mute">Condition</span></div>
+                  <video class="block aspect-[4/3] w-full bg-black object-contain" data-reverse-video="forward_action" muted playsinline preload="metadata" aria-label="Forward rendered action video"></video>
+                </div>
+              </div>
+              <div class="bg-white p-2" data-reverse-phase="forward">
+                <p class="px-1 pb-2 text-[10px] font-semibold uppercase tracking-[0.14em] text-cond">Forward prediction</p>
+                <div class="overflow-hidden rounded-xl border border-zinc-200 bg-zinc-50">
+                  <div class="flex items-center justify-between px-3 py-2 text-xs font-medium"><span class="flex items-center gap-2"><i class="h-1.5 w-1.5 rounded-full bg-cond"></i>Generated Video</span><span class="text-[10px] font-normal text-cond">World-Sim 1.0</span></div>
+                  <video class="block aspect-[4/3] w-full bg-black object-contain" data-reverse-video="forward_prediction" muted playsinline preload="metadata" aria-label="World-Sim 1.0 forward-trajectory prediction"></video>
+                </div>
+              </div>
+              <div class="bg-white p-2 is-idle" data-reverse-phase="reverse">
+                <p class="px-1 pb-2 text-[10px] font-semibold uppercase tracking-[0.14em] text-zinc-500">Reverse trajectory</p>
+                <div class="overflow-hidden rounded-xl border border-zinc-200 bg-zinc-50">
+                  <div class="flex items-center justify-between px-3 py-2 text-xs font-medium"><span class="flex items-center gap-2"><i class="h-1.5 w-1.5 rounded-full bg-act"></i>Rendered Action</span><span class="text-[10px] font-normal text-mute">OOD condition</span></div>
+                  <video class="block aspect-[4/3] w-full bg-black object-contain" data-reverse-video="reverse_action" muted playsinline preload="metadata" aria-label="Reverse rendered action video"></video>
+                </div>
+              </div>
+              <div class="bg-white p-2 is-idle" data-reverse-phase="reverse">
+                <p class="px-1 pb-2 text-[10px] font-semibold uppercase tracking-[0.14em] text-out">Reverse prediction</p>
+                <div class="overflow-hidden rounded-xl border border-zinc-200 bg-zinc-50">
+                  <div class="flex items-center justify-between px-3 py-2 text-xs font-medium"><span class="flex items-center gap-2"><i class="h-1.5 w-1.5 rounded-full bg-out"></i>Generated Video</span><span class="text-[10px] font-normal text-out">World-Sim 1.0</span></div>
+                  <video class="block aspect-[4/3] w-full bg-black object-contain" data-reverse-video="reverse_prediction" muted playsinline preload="metadata" aria-label="World-Sim 1.0 reverse-trajectory prediction"></video>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex flex-col gap-3 border-t border-zinc-200 px-3 py-3 sm:flex-row sm:items-center sm:justify-between">
+            <div class="overview-scroll flex gap-1 overflow-x-auto" role="tablist" aria-label="Select reverse-trajectory task">
+              <button type="button" class="reverse-task-tab shrink-0 rounded-full border border-zinc-900 bg-ink px-3 py-1.5 text-[11px] font-medium text-white" data-reverse-task="0" role="tab" aria-selected="true">Hairdryer</button>
+              <button type="button" class="reverse-task-tab shrink-0 rounded-full border border-transparent px-3 py-1.5 text-[11px] font-medium text-mute hover:bg-zinc-50 hover:text-ink" data-reverse-task="1" role="tab" aria-selected="false">Block</button>
+              <button type="button" class="reverse-task-tab shrink-0 rounded-full border border-transparent px-3 py-1.5 text-[11px] font-medium text-mute hover:bg-zinc-50 hover:text-ink" data-reverse-task="2" role="tab" aria-selected="false">Bowl</button>
+              <button type="button" class="reverse-task-tab shrink-0 rounded-full border border-transparent px-3 py-1.5 text-[11px] font-medium text-mute hover:bg-zinc-50 hover:text-ink" data-reverse-task="3" role="tab" aria-selected="false">Mug</button>
+              <button type="button" class="reverse-task-tab shrink-0 rounded-full border border-transparent px-3 py-1.5 text-[11px] font-medium text-mute hover:bg-zinc-50 hover:text-ink" data-reverse-task="4" role="tab" aria-selected="false">Peg</button>
+              <button type="button" class="reverse-task-tab shrink-0 rounded-full border border-transparent px-3 py-1.5 text-[11px] font-medium text-mute hover:bg-zinc-50 hover:text-ink" data-reverse-task="5" role="tab" aria-selected="false">Food Tray</button>
+            </div>
+
+          </div>
+        </article>
+      </div>
+
+      <div id="panel-scene" class="panel mt-6" role="tabpanel" tabindex="0" aria-labelledby="ood-tab-scene">
+        <article id="scene-gallery" aria-labelledby="scene-gallery-title">
+          <header class="scene-gallery-heading"><h3 id="scene-gallery-title">Scene &amp; Appearance</h3><span>6 OOD examples</span></header>
+<div class="scene-set-tabs" role="tablist" aria-label="Scene and appearance demo groups"><button type="button" class="scene-set-tab" id="scene-set-tab-1" role="tab" aria-controls="scene-set-1" aria-selected="true" tabindex="0" data-scene-set="1">Fold pants</button><button type="button" class="scene-set-tab" id="scene-set-tab-wipe" role="tab" aria-controls="scene-set-wipe" aria-selected="false" tabindex="-1" data-scene-set="wipe">Wipe table &amp; hang cloth</button><button type="button" class="scene-set-tab" id="scene-set-tab-0" role="tab" aria-controls="scene-set-0" aria-selected="false" tabindex="-1" data-scene-set="0">Steam clothing</button><button type="button" class="scene-set-tab" id="scene-set-tab-bowl" role="tab" aria-controls="scene-set-bowl" aria-selected="false" tabindex="-1" data-scene-set="bowl">Lift bowl</button></div><div class="scene-set-panel hidden" id="scene-set-wipe" role="tabpanel" aria-labelledby="scene-set-tab-wipe"><div class="scene-reference"><figure class="scene-video-card"><figcaption><span>Original rollout</span><span>Reference</span></figcaption><video muted loop playsinline preload="none" poster="assets/posters/scene_wipe_reference.jpg" src="assets/videos/scene_wipe_reference.mp4" aria-label="Wipe table and hang cloth: Original rollout"></video></figure></div><div class="scene-examples"><figure class="scene-video-card"><figcaption><span>Scene 01</span><span>World-Sim 1.0</span></figcaption><video muted loop playsinline preload="none" poster="assets/posters/scene_wipe_00.jpg" src="assets/videos/scene_wipe_00.mp4" aria-label="Scene 01 appearance-conditioned rollout"></video></figure><figure class="scene-video-card"><figcaption><span>Scene 02</span><span>World-Sim 1.0</span></figcaption><video muted loop playsinline preload="none" poster="assets/posters/scene_wipe_01.jpg" src="assets/videos/scene_wipe_01.mp4" aria-label="Scene 02 appearance-conditioned rollout"></video></figure><figure class="scene-video-card"><figcaption><span>Scene 03</span><span>World-Sim 1.0</span></figcaption><video muted loop playsinline preload="none" poster="assets/posters/scene_wipe_02.jpg" src="assets/videos/scene_wipe_02.mp4" aria-label="Scene 03 appearance-conditioned rollout"></video></figure><figure class="scene-video-card"><figcaption><span>Scene 04</span><span>World-Sim 1.0</span></figcaption><video muted loop playsinline preload="none" poster="assets/posters/scene_wipe_03.jpg" src="assets/videos/scene_wipe_03.mp4" aria-label="Scene 04 appearance-conditioned rollout"></video></figure><figure class="scene-video-card"><figcaption><span>Scene 05</span><span>World-Sim 1.0</span></figcaption><video muted loop playsinline preload="none" poster="assets/posters/scene_wipe_04.jpg" src="assets/videos/scene_wipe_04.mp4" aria-label="Scene 05 appearance-conditioned rollout"></video></figure><figure class="scene-video-card"><figcaption><span>Scene 06</span><span>World-Sim 1.0</span></figcaption><video muted loop playsinline preload="none" poster="assets/posters/scene_wipe_05.jpg" src="assets/videos/scene_wipe_05.mp4" aria-label="Scene 06 appearance-conditioned rollout"></video></figure></div></div><div class="scene-set-panel hidden" id="scene-set-0" role="tabpanel" aria-labelledby="scene-set-tab-0">          <div class="scene-reference"><figure class="scene-video-card">
+              <figcaption><span>Original rollout</span><span>Reference</span></figcaption>
+              <video muted loop playsinline preload="metadata" poster="assets/posters/scene_reference_clean.jpg" src="assets/videos/scene_reference_clean.mp4" aria-label="Original rollout"></video>
+            </figure></div>
+          <div class="scene-examples"><figure class="scene-video-card">
+              <figcaption><span>Scene 01</span><span>World-Sim 1.0</span></figcaption>
+              <video muted loop playsinline preload="metadata" poster="assets/posters/scene_variant_1.jpg" src="assets/videos/scene_variant_1.mp4" aria-label="Scene 01 appearance-conditioned rollout"></video>
+            </figure>
+<figure class="scene-video-card">
+              <figcaption><span>Scene 02</span><span>World-Sim 1.0</span></figcaption>
+              <video muted loop playsinline preload="metadata" poster="assets/posters/scene_variant_2.jpg" src="assets/videos/scene_variant_2.mp4" aria-label="Scene 02 appearance-conditioned rollout"></video>
+            </figure>
+<figure class="scene-video-card">
+              <figcaption><span>Scene 03</span><span>World-Sim 1.0</span></figcaption>
+              <video muted loop playsinline preload="metadata" poster="assets/posters/scene_variant_3.jpg" src="assets/videos/scene_variant_3.mp4" aria-label="Scene 03 appearance-conditioned rollout"></video>
+            </figure>
+<figure class="scene-video-card">
+              <figcaption><span>Scene 04</span><span>World-Sim 1.0</span></figcaption>
+              <video muted loop playsinline preload="metadata" poster="assets/posters/scene_variant_4.jpg" src="assets/videos/scene_variant_4.mp4" aria-label="Scene 04 appearance-conditioned rollout"></video>
+            </figure>
+<figure class="scene-video-card">
+              <figcaption><span>Scene 05</span><span>World-Sim 1.0</span></figcaption>
+              <video muted loop playsinline preload="metadata" poster="assets/posters/scene_variant_5.jpg" src="assets/videos/scene_variant_5.mp4" aria-label="Scene 05 appearance-conditioned rollout"></video>
+            </figure>
+<figure class="scene-video-card">
+              <figcaption><span>Scene 06</span><span>World-Sim 1.0</span></figcaption>
+              <video muted loop playsinline preload="metadata" poster="assets/posters/scene_variant_6.jpg" src="assets/videos/scene_variant_6.mp4" aria-label="Scene 06 appearance-conditioned rollout"></video>
+            </figure></div>
+</div><div class="scene-set-panel" id="scene-set-1" role="tabpanel" aria-labelledby="scene-set-tab-1"><div class="scene-reference"><figure class="scene-video-card"><figcaption><span>Original rollout</span><span>Reference</span></figcaption><video muted loop playsinline preload="none" poster="assets/posters/scene_pants_reference_1.jpg" src="assets/videos/scene_pants_reference_1.mp4" aria-label="Pants folding: Original rollout"></video></figure></div><div class="scene-examples"><figure class="scene-video-card"><figcaption><span>Scene 01</span><span>World-Sim 1.0</span></figcaption><video muted loop playsinline preload="none" poster="assets/posters/scene_pants_00.jpg" src="assets/videos/scene_pants_00.mp4" aria-label="Scene 01 appearance-conditioned rollout"></video></figure><figure class="scene-video-card"><figcaption><span>Scene 02</span><span>World-Sim 1.0</span></figcaption><video muted loop playsinline preload="none" poster="assets/posters/scene_pants_01.jpg" src="assets/videos/scene_pants_01.mp4" aria-label="Scene 02 appearance-conditioned rollout"></video></figure><figure class="scene-video-card"><figcaption><span>Scene 03</span><span>World-Sim 1.0</span></figcaption><video muted loop playsinline preload="none" poster="assets/posters/scene_pants_02.jpg" src="assets/videos/scene_pants_02.mp4" aria-label="Scene 03 appearance-conditioned rollout"></video></figure><figure class="scene-video-card"><figcaption><span>Scene 04</span><span>World-Sim 1.0</span></figcaption><video muted loop playsinline preload="none" poster="assets/posters/scene_pants_03.jpg" src="assets/videos/scene_pants_03.mp4" aria-label="Scene 04 appearance-conditioned rollout"></video></figure><figure class="scene-video-card"><figcaption><span>Scene 05</span><span>World-Sim 1.0</span></figcaption><video muted loop playsinline preload="none" poster="assets/posters/scene_pants_04.jpg" src="assets/videos/scene_pants_04.mp4" aria-label="Scene 05 appearance-conditioned rollout"></video></figure><figure class="scene-video-card"><figcaption><span>Scene 06</span><span>World-Sim 1.0</span></figcaption><video muted loop playsinline preload="none" poster="assets/posters/scene_pants_05.jpg" src="assets/videos/scene_pants_05.mp4" aria-label="Scene 06 appearance-conditioned rollout"></video></figure></div></div>        <div class="scene-set-panel hidden" id="scene-set-bowl" role="tabpanel" aria-labelledby="scene-set-tab-bowl"><div class="scene-reference"><figure class="scene-video-card"><figcaption><span>Original rollout</span><span>Reference</span></figcaption><video muted loop playsinline preload="none" poster="assets/posters/scene_bowl_reference.jpg" src="assets/videos/scene_bowl_reference.mp4" aria-label="Lift bowl: Original rollout"></video></figure></div><div class="scene-examples"><figure class="scene-video-card"><figcaption><span>Scene 01</span><span>World-Sim 1.0</span></figcaption><video muted loop playsinline preload="none" poster="assets/posters/scene_bowl_00.jpg" src="assets/videos/scene_bowl_00.mp4" aria-label="Lift bowl: Scene 01"></video></figure><figure class="scene-video-card"><figcaption><span>Scene 02</span><span>World-Sim 1.0</span></figcaption><video muted loop playsinline preload="none" poster="assets/posters/scene_bowl_01.jpg" src="assets/videos/scene_bowl_01.mp4" aria-label="Lift bowl: Scene 02"></video></figure><figure class="scene-video-card"><figcaption><span>Scene 03</span><span>World-Sim 1.0</span></figcaption><video muted loop playsinline preload="none" poster="assets/posters/scene_bowl_garden.jpg" src="assets/videos/scene_bowl_garden.mp4" aria-label="Lift bowl: Scene 03"></video></figure><figure class="scene-video-card"><figcaption><span>Scene 04</span><span>World-Sim 1.0</span></figcaption><video muted loop playsinline preload="none" poster="assets/posters/scene_bowl_03.jpg" src="assets/videos/scene_bowl_03.mp4" aria-label="Lift bowl: Scene 04"></video></figure><figure class="scene-video-card"><figcaption><span>Scene 05</span><span>World-Sim 1.0</span></figcaption><video muted loop playsinline preload="none" poster="assets/posters/scene_bowl_courtyard.jpg" src="assets/videos/scene_bowl_courtyard.mp4" aria-label="Lift bowl: Scene 05"></video></figure><figure class="scene-video-card"><figcaption><span>Scene 06</span><span>World-Sim 1.0</span></figcaption><video muted loop playsinline preload="none" poster="assets/posters/scene_bowl_05.jpg" src="assets/videos/scene_bowl_05.mp4" aria-label="Lift bowl: Scene 06"></video></figure></div></div></article>
+        <p class="demo-context">GPT-Image-2 edits the initial scene while preserving the task, robot pose, and spatial layout. The original actions condition pants-folding rollouts across six edited environments.</p>
+      </div>
+
+      <div id="panel-embodiment" class="panel mt-6 hidden" role="tabpanel" tabindex="0" aria-labelledby="ood-tab-embodiment">
+        <p class="demo-context">Panda end-effector trajectories are retargeted to held-out Sawyer, IIWA, and UR5e robots via inverse kinematics, with target-specific joint and visual action conditions. Stacking corresponds to Figure 9; lifting is supplementary.</p>
+        <article id="embodiment-gallery" class="overflow-hidden rounded-2xl border border-zinc-200 bg-white shadow-sm outline-none focus-visible:ring-2 focus-visible:ring-act/40" tabindex="0" aria-label="Cross-embodiment OOD task gallery">
+          <div class="flex flex-col gap-3 border-b border-zinc-200 px-4 py-3.5 sm:flex-row sm:items-center sm:justify-between">
+            <div class="min-w-0">
+              <div class="flex items-center gap-2">
+                <span class="text-[10px] font-semibold uppercase tracking-[0.14em] text-act">Robot-embodiment transfer</span>
+                <span class="rounded-full bg-act/10 px-2 py-0.5 text-[10px] font-medium text-act">3 OOD robots</span>
+              </div>
+              <h3 id="embodiment-task-name" class="mt-1.5 text-sm font-medium text-zinc-700">Stack</h3>
+            </div>
+            <div class="flex shrink-0 items-center gap-2">
+              <span id="embodiment-counter" class="mr-1 font-mono text-[11px] text-mute" aria-live="polite">1 / 2</span>
+              <button id="embodiment-prev" type="button" class="grid h-8 w-8 place-items-center rounded-full border border-zinc-200 text-sm text-zinc-600 transition hover:border-zinc-300 hover:bg-zinc-50 hover:text-ink" aria-label="Previous embodiment task">←</button>
+              <button id="embodiment-next" type="button" class="grid h-8 w-8 place-items-center rounded-full border border-zinc-200 text-sm text-zinc-600 transition hover:border-zinc-300 hover:bg-zinc-50 hover:text-ink" aria-label="Next embodiment task">→</button>
+            </div>
+          </div>
+
+          <div class="overview-scroll overflow-x-auto">
+            <div id="embodiment-stage" class="embodiment-stage grid min-w-[56.25rem] grid-cols-[2fr_auto_3fr] gap-[.0625rem] bg-zinc-200">
+              <div class="bg-white p-2">
+                <p class="px-1 pb-2 text-[10px] font-semibold uppercase tracking-[0.14em] text-zinc-500">Panda source trajectory</p>
+                <div class="grid grid-cols-2 gap-2">
+                  <div class="overflow-hidden rounded-xl border border-zinc-200 bg-zinc-50">
+                    <div class="flex items-center justify-between px-3 py-2 text-xs font-medium"><span class="flex items-center gap-2"><i class="h-1.5 w-1.5 rounded-full bg-out"></i>Reference RGB</span><span class="text-[10px] font-normal text-mute">Panda</span></div>
+                    <video class="block aspect-[4/3] w-full object-cover" data-embodiment-video="reference" muted loop playsinline preload="metadata" aria-label="Panda reference RGB rollout"></video>
+                  </div>
+                  <div class="overflow-hidden rounded-xl border border-zinc-200 bg-zinc-50">
+                    <div class="flex items-center justify-between px-3 py-2 text-xs font-medium"><span class="flex items-center gap-2"><i class="h-1.5 w-1.5 rounded-full bg-act"></i>Rendered Action</span><span class="text-[10px] font-normal text-mute">Panda</span></div>
+                    <video class="block aspect-[4/3] w-full object-cover" data-embodiment-video="action" muted loop playsinline preload="metadata" aria-label="Panda rendered action video"></video>
+                  </div>
+                </div>
+              </div>
+
+              <div class="flex items-center bg-white px-1 text-zinc-400" aria-hidden="true">→</div>
+
+              <div class="bg-white p-2">
+                <p class="px-1 pb-2 text-[10px] font-semibold uppercase tracking-[0.14em] text-act">Embodiment-OOD Predictions</p>
+                <div class="grid grid-cols-3 gap-2">
+                  <div class="overflow-hidden rounded-xl border border-zinc-200 bg-zinc-50">
+                    <div class="flex items-center justify-between px-3 py-2 text-xs font-medium"><span class="flex items-center gap-2"><i class="h-1.5 w-1.5 rounded-full bg-act"></i>IIWA</span><span class="text-[10px] font-normal text-act">World-Sim 1.0</span></div>
+                    <video class="block aspect-[4/3] w-full object-cover" data-embodiment-video="iiwa" muted loop playsinline preload="metadata" aria-label="World-Sim 1.0 IIWA prediction"></video>
+                  </div>
+                  <div class="overflow-hidden rounded-xl border border-zinc-200 bg-zinc-50">
+                    <div class="flex items-center justify-between px-3 py-2 text-xs font-medium"><span class="flex items-center gap-2"><i class="h-1.5 w-1.5 rounded-full bg-act"></i>Sawyer</span><span class="text-[10px] font-normal text-act">World-Sim 1.0</span></div>
+                    <video class="block aspect-[4/3] w-full object-cover" data-embodiment-video="sawyer" muted loop playsinline preload="metadata" aria-label="World-Sim 1.0 Sawyer prediction"></video>
+                  </div>
+                  <div class="overflow-hidden rounded-xl border border-zinc-200 bg-zinc-50">
+                    <div class="flex items-center justify-between px-3 py-2 text-xs font-medium"><span class="flex items-center gap-2"><i class="h-1.5 w-1.5 rounded-full bg-act"></i>UR5e</span><span class="text-[10px] font-normal text-act">World-Sim 1.0</span></div>
+                    <video class="block aspect-[4/3] w-full object-cover" data-embodiment-video="ur5e" muted loop playsinline preload="metadata" aria-label="World-Sim 1.0 UR5e prediction"></video>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex flex-col gap-3 border-t border-zinc-200 px-3 py-3 sm:flex-row sm:items-center sm:justify-between">
+            <div class="overview-scroll flex gap-1 overflow-x-auto" role="tablist" aria-label="Select cross-embodiment task">
+              <button type="button" class="embodiment-task-tab shrink-0 rounded-full border border-zinc-900 bg-ink px-3 py-1.5 text-[11px] font-medium text-white" data-embodiment-task="0" role="tab" aria-selected="true">Stack</button>
+              <button type="button" class="embodiment-task-tab shrink-0 rounded-full border border-transparent px-3 py-1.5 text-[11px] font-medium text-mute hover:bg-zinc-50 hover:text-ink" data-embodiment-task="1" role="tab" aria-selected="false">Lift</button>
+            </div>
+
+          </div>
+        </article>
+      </div>
+
+      <div id="panel-object" class="panel mt-6 hidden" role="tabpanel" tabindex="0" aria-labelledby="ood-tab-object">
+        <p class="demo-context">Object appearance is varied while preserving the robot configuration and action trajectory. These paired-object videos supplement the single-object study in Figure 10; visual variation does not imply identical physical properties.</p>
+        <article id="object-gallery" class="overflow-hidden rounded-2xl border border-zinc-200 bg-white shadow-sm outline-none focus-visible:ring-2 focus-visible:ring-out/40" tabindex="0" aria-label="Unseen object OOD task gallery">
+          <div class="flex flex-col gap-3 border-b border-zinc-200 px-4 py-3.5 sm:flex-row sm:items-center sm:justify-between">
+            <div class="min-w-0">
+              <div class="flex items-center gap-2">
+                <span class="text-[10px] font-semibold uppercase tracking-[0.14em] text-out">Controlled visual object variation</span>
+                <span class="rounded-full bg-out/10 px-2 py-0.5 text-[10px] font-medium text-out">5 object-variation demos</span>
+              </div>
+              <h3 id="object-task-name" class="mt-1.5 truncate text-sm font-medium text-zinc-700">Orange + Duck</h3>
+            </div>
+            <div class="flex shrink-0 items-center gap-2">
+              <span id="object-counter" class="mr-1 font-mono text-[11px] text-mute" aria-live="polite">1 / 5</span>
+              <button id="object-prev" type="button" class="grid h-8 w-8 place-items-center rounded-full border border-zinc-200 text-sm text-zinc-600 transition hover:border-zinc-300 hover:bg-zinc-50 hover:text-ink" aria-label="Previous unseen object set">←</button>
+              <button id="object-next" type="button" class="grid h-8 w-8 place-items-center rounded-full border border-zinc-200 text-sm text-zinc-600 transition hover:border-zinc-300 hover:bg-zinc-50 hover:text-ink" aria-label="Next unseen object set">→</button>
+            </div>
+          </div>
+
+          <div class="overview-scroll overflow-x-auto">
+            <div id="object-stage" class="object-stage grid min-w-[45rem] grid-cols-[1fr_auto_1fr] gap-[.0625rem] bg-zinc-200">
+              <div class="bg-white p-2">
+                <p class="px-1 pb-2 text-[10px] font-semibold uppercase tracking-[0.14em] text-zinc-500">Original-scene reference</p>
+                <div class="overflow-hidden rounded-xl border border-zinc-200 bg-zinc-50">
+                  <div class="flex items-center justify-between px-3 py-2 text-xs font-medium"><span class="flex items-center gap-2"><i class="h-1.5 w-1.5 rounded-full bg-zinc-400"></i>Original Objects</span><span class="text-[10px] font-normal text-mute">Reference</span></div>
+                  <video class="block aspect-[4/3] w-full object-cover" data-object-video="reference" muted loop playsinline preload="none" aria-label="Reference rollout with original objects"></video>
+                </div>
+              </div>
+
+              <div class="flex items-center bg-white px-1 text-zinc-400" aria-hidden="true">→</div>
+
+              <div class="bg-white p-2">
+                <p class="px-1 pb-2 text-[10px] font-semibold uppercase tracking-[0.14em] text-out">Object-variation rollout</p>
+                <div class="overflow-hidden rounded-xl border border-zinc-200 bg-zinc-50">
+                  <div class="flex items-center justify-between px-3 py-2 text-xs font-medium"><span class="flex items-center gap-2"><i class="h-1.5 w-1.5 rounded-full bg-out"></i>Edited Object Set</span><span class="text-[10px] font-normal text-out">World-Sim 1.0</span></div>
+                  <video class="block aspect-[4/3] w-full object-cover" data-object-video="unseen" muted loop playsinline preload="none" aria-label="World-Sim 1.0 object-variation rollout"></video>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex flex-col gap-3 border-t border-zinc-200 px-3 py-3 sm:flex-row sm:items-center sm:justify-between">
+            <div class="overview-scroll flex gap-1 overflow-x-auto" role="tablist" aria-label="Select unseen object set">
+              <button type="button" class="object-task-tab shrink-0 rounded-full border border-zinc-900 bg-ink px-3 py-1.5 text-[11px] font-medium text-white" data-object-task="0" role="tab" aria-selected="true">Orange + Duck</button>
+              <button type="button" class="object-task-tab shrink-0 rounded-full border border-transparent px-3 py-1.5 text-[11px] font-medium text-mute hover:bg-zinc-50 hover:text-ink" data-object-task="1" role="tab" aria-selected="false">Plant + Apple</button>
+              <button type="button" class="object-task-tab shrink-0 rounded-full border border-transparent px-3 py-1.5 text-[11px] font-medium text-mute hover:bg-zinc-50 hover:text-ink" data-object-task="2" role="tab" aria-selected="false">Donut + Can</button>
+              <button type="button" class="object-task-tab shrink-0 rounded-full border border-transparent px-3 py-1.5 text-[11px] font-medium text-mute hover:bg-zinc-50 hover:text-ink" data-object-task="3" role="tab" aria-selected="false">Wood Bowl + Lemon</button>
+              <button type="button" class="object-task-tab shrink-0 rounded-full border border-transparent px-3 py-1.5 text-[11px] font-medium text-mute hover:bg-zinc-50 hover:text-ink" data-object-task="4" role="tab" aria-selected="false">Peach + Pinecone</button>
+            </div>
+
+          </div>
+        </article>
+      </div>
+
+      <div id="panel-viewpoint" class="panel mt-6 hidden" role="tabpanel" tabindex="0" aria-labelledby="ood-tab-viewpoint">
+        <p class="demo-context">Novel camera views provide conditioning images and camera-aligned action videos for the same robot motion. The bowl-on-plate example corresponds to Figure 11; other tasks are supplementary.</p>
+        <article id="viewpoint-gallery" class="overflow-hidden rounded-2xl border border-zinc-200 bg-white shadow-sm outline-none focus-visible:ring-2 focus-visible:ring-cond/40" tabindex="0" aria-label="Viewpoint OOD task gallery">
+          <div class="flex flex-col gap-3 border-b border-zinc-200 px-4 py-3.5 sm:flex-row sm:items-center sm:justify-between">
+            <div class="min-w-0">
+              <div class="flex items-center gap-2">
+                <span class="text-[10px] font-semibold uppercase tracking-[0.14em] text-cond">LIBERO · Multi-view</span>
+                <span class="rounded-full bg-cond/10 px-2 py-0.5 text-[10px] font-medium text-cond">5 OOD views</span>
+              </div>
+              <h3 id="viewpoint-task-name" class="mt-1.5 truncate text-sm font-medium text-zinc-700">Put the bowl on the plate</h3>
+            </div>
+            <div class="flex shrink-0 items-center gap-2">
+              <span id="viewpoint-counter" class="mr-1 font-mono text-[11px] text-mute" aria-live="polite">1 / 5</span>
+              <button id="viewpoint-prev" type="button" class="grid h-8 w-8 place-items-center rounded-full border border-zinc-200 text-sm text-zinc-600 transition hover:border-zinc-300 hover:bg-zinc-50 hover:text-ink" aria-label="Previous viewpoint task">←</button>
+              <button id="viewpoint-next" type="button" class="grid h-8 w-8 place-items-center rounded-full border border-zinc-200 text-sm text-zinc-600 transition hover:border-zinc-300 hover:bg-zinc-50 hover:text-ink" aria-label="Next viewpoint task">→</button>
+            </div>
+          </div>
+
+          <div class="overview-scroll overflow-x-auto">
+            <div id="viewpoint-stage" class="viewpoint-stage mx-auto grid w-full max-w-3xl grid-cols-3 gap-1.5 p-2">
+              <div class="overflow-hidden rounded-lg border border-zinc-200 bg-zinc-50">
+                <div class="flex items-center justify-between px-2 py-1 text-[11px] font-medium"><span class="flex items-center gap-1.5"><i class="h-1.5 w-1.5 rounded-full bg-out"></i>Reference View</span><span class="text-[10px] font-normal text-mute">RGB rollout</span></div>
+                <video class="block aspect-[4/3] w-full bg-black object-cover" data-viewpoint-video="reference" muted loop playsinline preload="metadata" aria-label="Reference camera rollout"></video>
+              </div>
+              <div class="overflow-hidden rounded-lg border border-zinc-200 bg-zinc-50">
+                <div class="flex items-center justify-between px-2 py-1 text-[11px] font-medium"><span class="flex items-center gap-1.5"><i class="h-1.5 w-1.5 rounded-full bg-cond"></i>Novel View 01</span><span class="text-[10px] font-normal text-cond">World-Sim 1.0</span></div>
+                <video class="block aspect-[4/3] w-full bg-black object-cover" data-viewpoint-video="view1" muted loop playsinline preload="metadata" aria-label="World-Sim 1.0 novel camera view 1"></video>
+              </div>
+              <div class="overflow-hidden rounded-lg border border-zinc-200 bg-zinc-50">
+                <div class="flex items-center justify-between px-2 py-1 text-[11px] font-medium"><span class="flex items-center gap-1.5"><i class="h-1.5 w-1.5 rounded-full bg-cond"></i>Novel View 02</span><span class="text-[10px] font-normal text-cond">World-Sim 1.0</span></div>
+                <video class="block aspect-[4/3] w-full bg-black object-cover" data-viewpoint-video="view2" muted loop playsinline preload="metadata" aria-label="World-Sim 1.0 novel camera view 2"></video>
+              </div>
+              <div class="overflow-hidden rounded-lg border border-zinc-200 bg-zinc-50">
+                <div class="flex items-center justify-between px-2 py-1 text-[11px] font-medium"><span class="flex items-center gap-1.5"><i class="h-1.5 w-1.5 rounded-full bg-cond"></i>Novel View 03</span><span class="text-[10px] font-normal text-cond">World-Sim 1.0</span></div>
+                <video class="block aspect-[4/3] w-full bg-black object-cover" data-viewpoint-video="view3" muted loop playsinline preload="metadata" aria-label="World-Sim 1.0 novel camera view 3"></video>
+              </div>
+              <div class="overflow-hidden rounded-lg border border-zinc-200 bg-zinc-50">
+                <div class="flex items-center justify-between px-2 py-1 text-[11px] font-medium"><span class="flex items-center gap-1.5"><i class="h-1.5 w-1.5 rounded-full bg-cond"></i>Novel View 04</span><span class="text-[10px] font-normal text-cond">World-Sim 1.0</span></div>
+                <video class="block aspect-[4/3] w-full bg-black object-cover" data-viewpoint-video="view4" muted loop playsinline preload="metadata" aria-label="World-Sim 1.0 novel camera view 4"></video>
+              </div>
+              <div class="overflow-hidden rounded-lg border border-zinc-200 bg-zinc-50">
+                <div class="flex items-center justify-between px-2 py-1 text-[11px] font-medium"><span class="flex items-center gap-1.5"><i class="h-1.5 w-1.5 rounded-full bg-cond"></i>Novel View 05</span><span class="text-[10px] font-normal text-cond">World-Sim 1.0</span></div>
+                <video class="block aspect-[4/3] w-full bg-black object-cover" data-viewpoint-video="view5" muted loop playsinline preload="metadata" aria-label="World-Sim 1.0 novel camera view 5"></video>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex flex-col gap-3 border-t border-zinc-200 px-3 py-3 sm:flex-row sm:items-center sm:justify-between">
+            <div id="viewpoint-task-tabs" class="overview-scroll flex gap-1 overflow-x-auto" role="tablist" aria-label="Select LIBERO viewpoint task">
+              <button type="button" class="viewpoint-task-tab shrink-0 rounded-full border border-zinc-900 bg-ink px-3 py-1.5 text-[11px] font-medium text-white" data-viewpoint-task="0" role="tab" aria-selected="true">On Plate</button>
+              <button type="button" class="viewpoint-task-tab shrink-0 rounded-full border border-transparent px-3 py-1.5 text-[11px] font-medium text-mute hover:bg-zinc-50 hover:text-ink" data-viewpoint-task="1" role="tab" aria-selected="false">On Stove</button>
+              <button type="button" class="viewpoint-task-tab shrink-0 rounded-full border border-transparent px-3 py-1.5 text-[11px] font-medium text-mute hover:bg-zinc-50 hover:text-ink" data-viewpoint-task="2" role="tab" aria-selected="false">Cream Cheese</button>
+              <button type="button" class="viewpoint-task-tab shrink-0 rounded-full border border-transparent px-3 py-1.5 text-[11px] font-medium text-mute hover:bg-zinc-50 hover:text-ink" data-viewpoint-task="3" role="tab" aria-selected="false">Turn Stove</button>
+              <button type="button" class="viewpoint-task-tab shrink-0 rounded-full border border-transparent px-3 py-1.5 text-[11px] font-medium text-mute hover:bg-zinc-50 hover:text-ink" data-viewpoint-task="4" role="tab" aria-selected="false">Book</button>
+            </div>
+
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="contributors">
+      <h2 class="section-title">Contributors</h2>
+      <div class="mt-6 rounded-2xl border border-zinc-200 bg-white p-6 text-sm leading-6 text-zinc-600">
+        <p><strong class="text-ink">Core contributors · Shilong Zou, Shilin Zhang</strong></p>
+        <p class="mt-2">Shilong Zou: data preparation, model architecture design, world-model training, and downstream policy training. Shilin Zhang: data preparation, downstream policy training, and visualization of experimental results.</p>
+        <p class="mt-4"><strong>Contributors</strong><br />Yingji Zhang, Yuhang Huang, Yi Zhang, Zeyuan Ding, Han Dong, Junwei Liao</p>
+        <p class="mt-4"><strong>Tech leads</strong><br />Yong Dai, Shilong Zou</p>
+        <p class="mt-4"><strong>Corresponding authors</strong><br />Jian Tang, Xiaozhu Ju</p>
+        <p class="mt-3 break-words text-xs text-mute">Contact: jack.zou@x-humanoid.com · vito.dai@x-humanoid.com · jian.tang@x-humanoid.com · jason.ju@x-humanoid.com.</p>
+      </div>
+    </section>
+
+    <section id="citation">
+      <div>
+        <h2 class="section-title">Citation</h2>
+      </div>
+      <div class="mt-6 rounded-2xl border border-zinc-200 bg-white p-2 shadow-sm">
+        <div class="flex items-center justify-between px-3 py-2">
+          <span class="text-xs font-medium text-zinc-600">BibTeX</span>
+          <button id="copy" type="button" class="rounded-full border border-zinc-200 bg-white px-3 py-1.5 text-xs font-medium text-zinc-600 transition hover:border-zinc-300 hover:bg-zinc-50">Copy citation</button>
+        </div>
+        <pre id="bibtex" class="overflow-x-auto rounded-xl bg-zinc-900 p-5 text-[13px] leading-6 text-zinc-100">@techreport{worldsim2026,
+  title={World-Sim 1.0: A General World Model Simulator for Embodied Intelligence},
+  author={{Beijing Innovation Center of Humanoid Robotics (X-Humanoid), WFM System Group}},
+  institution={Beijing Innovation Center of Humanoid Robotics (X-Humanoid)},
+  year={2026},
+  month={September},
+  note={Technical report, September 9, 2026}
+}</pre>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-zinc-200 bg-white">
+    <div class="mx-auto flex page-container flex-col items-center justify-between gap-2 px-4 py-8 text-xs text-mute sm:flex-row">
+      <span class="font-medium text-zinc-700">World-Sim 1.0 · X-Humanoid</span>
+      <span>WFM System Group · September 9, 2026</span>
+    </div>
+  </footer>
+
+  <script type="module" src="assets/js/main.js"></script>
+</body>
+</html>
