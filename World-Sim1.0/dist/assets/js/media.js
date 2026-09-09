@@ -57,6 +57,6 @@ export function initStandaloneVideos() {
     });
     play();
   }, { threshold: 0.35 });
-  document.querySelectorAll("video:not([data-overview-stream]):not([data-viewpoint-video]):not([data-embodiment-video]):not([data-object-video]):not([data-reverse-video])").forEach(video => { if (!video.dataset.overviewSecond) observer.observe(video); });
+  document.querySelectorAll("video:not([data-overview-stream]):not([data-viewpoint-video]):not([data-embodiment-video]):not([data-object-video]):not([data-reverse-video])").forEach(video => { if (!video.dataset.overviewSecond && !video.closest?.(".scene-set-panel")) observer.observe(video); });
   return { play, pause: () => visible.forEach(video => video.pause()) };
 }

@@ -15,6 +15,7 @@
     "assets/js/overview.js",
     "assets/js/page-ui.js",
     "assets/js/reverse-gallery.js",
+    "assets/js/scene-sync.js",
     "assets/js/tab-keyboard.js",
     "assets/js/tailwind-config.js",
     "assets/js/video-gallery.js",
@@ -317,7 +318,7 @@
     "index.html"
   ],
   "excluded": [],
-  "referenced_original_bytes": 139483932,
-  "output_bytes": 139483932,
+  "referenced_original_bytes": 139485683,
+  "output_bytes": 139485683,
   "videos": []
 }

@@ -432,7 +432,6 @@
         <button type="button" id="ood-tab-reverse" class="tab rounded-xl px-4 py-2 text-mute" data-tab="reverse" role="tab" aria-selected="false" tabindex="-1" aria-controls="panel-reverse"><span class="tab-index">05</span>Trajectory</button>
       </div>
       <div id="panel-reverse" class="panel mt-6 hidden" role="tabpanel" tabindex="0" aria-labelledby="ood-tab-reverse">
-        <p class="demo-context">The reversed configuration sequence is paired with the terminal observation as a new conditioning frame. This tests sensitivity to commanded trajectories, without assuming exact physical time reversibility during contact.</p>
         <article id="reverse-gallery" class="overflow-hidden rounded-2xl border border-zinc-200 bg-white shadow-sm outline-none focus-visible:ring-2 focus-visible:ring-out/40" tabindex="0" aria-label="Reverse-trajectory OOD task gallery">
           <div class="flex flex-col gap-3 border-b border-zinc-200 px-4 py-3.5 sm:flex-row sm:items-center sm:justify-between">
             <div class="min-w-0">
@@ -532,7 +531,6 @@
       </div>
 
       <div id="panel-embodiment" class="panel mt-6 hidden" role="tabpanel" tabindex="0" aria-labelledby="ood-tab-embodiment">
-        <p class="demo-context">Panda end-effector trajectories are retargeted to held-out Sawyer, IIWA, and UR5e robots via inverse kinematics, with target-specific joint and visual action conditions. Stacking corresponds to Figure 9; lifting is supplementary.</p>
         <article id="embodiment-gallery" class="overflow-hidden rounded-2xl border border-zinc-200 bg-white shadow-sm outline-none focus-visible:ring-2 focus-visible:ring-act/40" tabindex="0" aria-label="Cross-embodiment OOD task gallery">
           <div class="flex flex-col gap-3 border-b border-zinc-200 px-4 py-3.5 sm:flex-row sm:items-center sm:justify-between">
             <div class="min-w-0">
@@ -598,7 +596,6 @@
       </div>
 
       <div id="panel-object" class="panel mt-6 hidden" role="tabpanel" tabindex="0" aria-labelledby="ood-tab-object">
-        <p class="demo-context">Object appearance is varied while preserving the robot configuration and action trajectory. These paired-object videos supplement the single-object study in Figure 10; visual variation does not imply identical physical properties.</p>
         <article id="object-gallery" class="overflow-hidden rounded-2xl border border-zinc-200 bg-white shadow-sm outline-none focus-visible:ring-2 focus-visible:ring-out/40" tabindex="0" aria-label="Unseen object OOD task gallery">
           <div class="flex flex-col gap-3 border-b border-zinc-200 px-4 py-3.5 sm:flex-row sm:items-center sm:justify-between">
             <div class="min-w-0">
@@ -651,7 +648,6 @@
       </div>
 
       <div id="panel-viewpoint" class="panel mt-6 hidden" role="tabpanel" tabindex="0" aria-labelledby="ood-tab-viewpoint">
-        <p class="demo-context">Novel camera views provide conditioning images and camera-aligned action videos for the same robot motion. The bowl-on-plate example corresponds to Figure 11; other tasks are supplementary.</p>
         <article id="viewpoint-gallery" class="overflow-hidden rounded-2xl border border-zinc-200 bg-white shadow-sm outline-none focus-visible:ring-2 focus-visible:ring-cond/40" tabindex="0" aria-label="Viewpoint OOD task gallery">
           <div class="flex flex-col gap-3 border-b border-zinc-200 px-4 py-3.5 sm:flex-row sm:items-center sm:justify-between">
             <div class="min-w-0">

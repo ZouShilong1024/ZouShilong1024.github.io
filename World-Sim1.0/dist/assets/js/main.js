@@ -1,3 +1,4 @@
+import { initSceneVideos } from "./scene-sync.js";
 import { viewpointTasks, embodimentTasks, objectTasks } from "./demo-data.js";
 import { createVideoGallery } from "./video-gallery.js";
 import { initOverview } from "./overview.js";
@@ -67,7 +68,7 @@ tabs.forEach(button => button.addEventListener("click", () => {
 }));
 enableTabKeyboard(tabs);
 
-const players = [overview, ...Object.values(galleries), initStandaloneVideos()];
+const players = [overview, ...Object.values(galleries), initSceneVideos(), initStandaloneVideos()];
 document.addEventListener("visibilitychange", () => {
   players.forEach(player => document.hidden ? player.pause() : player.play());
 });
