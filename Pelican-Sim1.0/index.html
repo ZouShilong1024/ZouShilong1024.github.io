@@ -8,14 +8,14 @@
   <meta name="description" content="Pelican-Sim 1.0 predicts robot observations from an initial RGB image, synchronized numerical and visual actions, and an optional task instruction. A sparse-MoE video DiT supports generalization and downstream simulator applications." />
   <meta property="og:title" content="Pelican-Sim 1.0" />
   <meta property="og:description" content="A General World Model Simulator for Embodied Intelligence — September 9, 2026 technical report" />
-  <meta property="og:image" content="assets/figures/paper-teaser.png" />
+  <meta property="og:image" content="assets/figures/pelican-teaser.png?v=20260911" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="assets/js/tailwind-config.js"></script>
   <link rel="stylesheet" href="assets/css/site.css?v=mint-title-1" />
-  <link rel="stylesheet" href="assets/css/presentation.css" />
+  <link rel="stylesheet" href="assets/css/presentation.css?v=architecture-cards-1" />
 </head>
 <body class="text-ink font-sans antialiased">
   <nav class="site-nav fixed inset-x-0 top-0 z-20 backdrop-blur-xl">
@@ -56,8 +56,8 @@
           <span class="hero-button hero-button-muted">Checkpoints &amp; code · Planned</span>
         </div>
         <div class="hero-contributions" role="list" aria-label="Key model capabilities">
-          <div role="listitem"><strong>Unified Action</strong><span class="hero-feature-label">Numerical + Visual</span><p>28-D Configurations<br />Whole-Arm Skeletons</p></div>
-          <div role="listitem"><strong>MoE Architecture</strong><span class="hero-feature-label">Sparse Experts</span><p>Causal Distillation<br />Efficient Rollouts</p></div>
+          <div role="listitem"><strong>Unified Action</strong><span class="hero-feature-label">Numerical + Visual Conditioning</span><p>28-D Action Value<br />URDF-Rendered Action Videos</p></div>
+          <div role="listitem"><strong>Scalable &amp; Efficient</strong><span class="hero-feature-label">Sparse MoE + Fast Rollouts</span><p>Capacity for Heterogeneous Dynamics<br />4-Step Generation（5.67× Speedup）</p></div>
           <div role="listitem"><strong>5 Distribution Shifts</strong><span class="hero-feature-label">Qualitative Generalization</span><p>Trajectory · Scene · Embodiment<br />Object · Viewpoint</p></div>
           <div role="listitem"><strong>4 Applications</strong><span class="hero-feature-label">Data &amp; Policy</span><p>Data Generation · Policy Evaluation<br />Action Selection · Policy Improvement</p></div>
         </div>
@@ -70,8 +70,8 @@
           <div><h2 id="teaser-heading">Pelican-Sim 1.0 at a Glance</h2></div>
         </div>
         <figure id="teaser" class="teaser-frame overflow-hidden rounded-2xl border border-zinc-200 bg-white p-2 shadow-sm sm:p-4">
-          <a href="teaser.pdf" target="_blank" rel="noopener" class="block rounded-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-cond" aria-label="Open the Pelican-Sim 1.0 teaser PDF">
-            <img class="block h-auto w-full rounded-lg" src="assets/figures/pelican-teaser.png" width="2600" height="2011" alt="Pelican-Sim 1.0 overview: training data, synchronized action conditions, downstream applications, five distribution shifts, and selected results" decoding="async" />
+          <a href="teaser.pdf?v=20260911" target="_blank" rel="noopener" class="block rounded-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-cond" aria-label="Open the Pelican-Sim 1.0 teaser PDF">
+            <img class="block h-auto w-full rounded-lg" src="assets/figures/pelican-teaser.png?v=20260911" width="2600" height="2011" alt="Pelican-Sim 1.0 overview: training data, synchronized action conditions, downstream applications, five distribution shifts, and selected results" decoding="async" />
           </a>
         </figure>
       </div>
@@ -86,10 +86,10 @@
       <div class="mt-6 overflow-hidden rounded-2xl border border-zinc-200 bg-white shadow-sm">
         <div class="p-6 md:px-8 md:py-7">
           <p class="max-w-4xl text-[15px] leading-7 text-zinc-700">
-            Simulating manipulation across diverse robot embodiments requires preserving precise action information while accommodating variations in robot geometry and visual context. We present <strong>Pelican-Sim 1.0</strong>, an action-conditioned world model simulator built on a synchronized numerical and visual action interface. Unified numerical configurations specify arm-joint states and gripper or dexterous-hand states, while camera-aligned whole-arm skeleton videos rendered from the same trajectories provide explicit image-space motion guidance. A Diffusion Transformer interleaves the two conditioning pathways and uses shared-and-routed sparse experts to expand capacity with input-dependent activation. We train Pelican-Sim 1.0 on approximately one million real-world and simulated trajectories and accelerate inference for efficient simulator rollouts.
+            In this technical report, we propose <strong>Pelican-Sim 1.0</strong>, a general world model simulator for embodied intelligence that predicts future observations from visual context and robot actions to support downstream learning and decision making. The model incorporates four key design features: <strong>(1) Unified action representation</strong>: a 28-dimensional action value space covering most mainstream embodiments, keeping one model valid across heterogeneous devices. <strong>(2) Action-visual injection</strong>: URDF- and camera-rendered action videos bridge actions and pixels, giving markedly better controllability across embodiments, scenes, and tasks (PSNR +0.904 over alternative fusion baselines). <strong>(3) Sparse mixture-of-experts (MoE)</strong>: sparse MoE layers add capacity for heterogeneous dynamics and absorb the action modality while reducing inter-modality conflict (FVD −6.530 vs. the dense backbone). <strong>(4) Efficient rollout generation</strong>: causal adaptation and few-step distillation yield a four-step autoregressive simulator, achieving a 5.67× speedup over the 35-step model.
           </p>
           <p class="mt-4 max-w-4xl text-[15px] leading-7 text-zinc-700">
-            Experiments on held-out test splits of three datasets show improved video prediction over representative action-conditioned world models, with ablations supporting the complementary action interface and sparse architecture. Qualitative studies further examine generalization across trajectory, scene appearance, embodiment, object, and viewpoint shifts. Beyond video prediction, generated rollouts support data generation for policy training, while a fine-tuned vision–language model (VLM) evaluator supplies task-conditioned feedback for policy evaluation and ranking, action selection, and policy improvement. In separate RoboTwin studies, action selection using predicted outcomes and VLM scores increases success by <strong>20.6 percentage points</strong> over single-sample execution, while policy optimization with imagined rollouts and VLM-derived rewards improves mean success by <strong>12.7 percentage points</strong> over supervised initialization. We will release model checkpoints and inference code to support further research.
+            Benefiting from these designs, we train on approximately one million real-world and simulated trajectories and obtain large gains in action controllability and video quality: PSNR improves over the strongest evaluated baselines by 4.636 on AgiBotWorld Beta, 2.080 on RoboMIND, and 10.343 on RoboTwin, with the adapted EWMBench DYN score up 0.426 on RoboTwin. Relying on this, four downstream applications on RoboTwin succeed: 500 generated trajectories added to 50 demonstrations per task raise policy success from 70% to 93%; policy evaluation reaches a Pearson correlation of 0.994 across five checkpoints; and relative success gains reach 47.7% for action selection and 20.3% for policy improvement. Qualitative generalization across trajectory, scene, object, embodiment, and viewpoint shifts highlights its potential as a general-purpose world model simulator.
           </p>
         </div>
       </div>
@@ -241,7 +241,7 @@
         <div class="subsection-heading"><span class="section-index">02</span><h3 class="subsection-title">Dual-Branch Injection with Sparse Experts</h3></div>
       </div>
       <figure class="mt-6 overflow-hidden rounded-2xl border border-zinc-200 bg-white p-2 shadow-sm">
-        <img class="w-full rounded-xl bg-white" src="assets/figures/paper-architecture.png" width="2500" height="1170" loading="lazy" decoding="async" alt="Figure 3 from the September 9 report: action values modulate odd-indexed DiT blocks, action-video Context Blocks add residuals after even-indexed blocks, and sparse MoE combines shared and routed experts" />
+        <a href="archi.pdf?v=20260911" target="_blank" rel="noopener" aria-label="Open the Pelican-Sim architecture PDF"><img class="w-full rounded-xl bg-white" src="assets/figures/paper-architecture.png?v=20260911" width="3000" height="1400" loading="lazy" decoding="async" alt="Pelican-Sim 1.0 architecture: action values modulate odd-indexed DiT blocks, action-video Context Blocks add residuals after even-indexed blocks, and sparse MoE combines shared and routed experts" /></a>
       </figure>
       <div class="architecture-notes mt-4 grid gap-4 md:grid-cols-3">
         <article class="lift-card rounded-2xl border border-zinc-200 bg-white p-6">

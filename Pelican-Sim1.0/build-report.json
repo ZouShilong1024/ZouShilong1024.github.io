@@ -3,6 +3,7 @@
   "crf": null,
   "files": [
     ".nojekyll",
+    "archi.pdf",
     "assets/css/presentation.css",
     "assets/css/site.css",
     "assets/figures/logo.png",
@@ -310,7 +311,6 @@
     "teaser.pdf"
   ],
   "excluded": [
-    "assets/figures/paper-teaser.png",
     "assets/posters/scene_bowl_01.jpg",
     "assets/posters/scene_pants_05.jpg",
     "assets/posters/scene_variant_6.jpg",
@@ -320,7 +320,7 @@
     "assets/videos/scene_variant_6.mp4",
     "assets/videos/scene_wipe_05.mp4"
   ],
-  "referenced_original_bytes": 123808884,
-  "output_bytes": 123808884,
+  "referenced_original_bytes": 124026453,
+  "output_bytes": 124026453,
   "videos": []
 }
