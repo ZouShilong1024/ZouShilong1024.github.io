@@ -512,6 +512,7 @@ body {
   mask-image: linear-gradient(to bottom, transparent 5%, #000 48%, transparent 92%);
 }
 .hero-content {
+  width: min(96%, 78rem);
   position: relative;
   z-index: 1;
   max-width: 78rem;
@@ -591,7 +592,7 @@ body {
 .hero-button-muted { color: rgba(255,255,255,.4); cursor: default; }
 .hero-contributions {
   display: grid;
-  max-width: 60rem;
+  max-width: 72rem;
   margin: 1.55rem auto 0;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   border: 1px solid rgba(255,255,255,.13);
