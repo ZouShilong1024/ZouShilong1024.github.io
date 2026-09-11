@@ -831,3 +831,11 @@ footer { border-color: var(--line) !important; background: #f8fafc !important; }
   .hero-stage { background: linear-gradient(145deg, #0f1d28, #070a0e 60%); }
   .hero-scroll i::after { animation: none; }
 }
+
+.hero-button .hero-button-icon { display: block; width: 1.15rem; height: 1.15rem; flex-shrink: 0; }
+
+.hero-button:disabled, .hero-button[aria-disabled="true"] { cursor: default; color: rgba(255,255,255,.65); }
+.hero-button:disabled:hover, .hero-button[aria-disabled="true"]:hover { transform: none; border-color: rgba(255,255,255,.2); background: rgba(6,10,14,.32); }
+
+.hero-actions .hero-button { cursor: pointer; font-family: inherit; }
+.hero-actions .hero-button:focus-visible { outline: 2px solid #83f5df; outline-offset: 4px; }
