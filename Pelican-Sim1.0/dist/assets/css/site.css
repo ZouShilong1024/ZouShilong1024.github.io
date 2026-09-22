@@ -840,3 +840,16 @@ footer { border-color: var(--line) !important; background: #f8fafc !important; }
 
 .hero-actions .hero-button { cursor: pointer; font-family: inherit; }
 .hero-actions .hero-button:focus-visible { outline: 2px solid #83f5df; outline-offset: 4px; }
+
+.visit-counter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: .5rem;
+  padding: 0 1rem 1.5rem;
+  color: #65758b;
+  font-size: .75rem;
+}
+.visit-counter svg { color: #087f7a; flex-shrink: 0; }
+.visit-counter strong { color: #087f7a; font-weight: 600; font-variant-numeric: tabular-nums; }
