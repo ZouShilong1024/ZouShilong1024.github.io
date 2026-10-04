@@ -203,6 +203,25 @@
 				<img src="https://img.shields.io/github/stars/ZouShilong1024/Pelican-Sim1.0?style=social" alt="GitHub stars" style="margin-left: 6px; vertical-align: middle;">
 			</div>
 		</div>
+		<div class="publication-reading">
+			<ul class="publication-keywords" aria-label="Research keywords">
+				<li>World Model Simulator</li>
+				<li>Action-conditioned video prediction</li>
+				<li>Data Engine</li>
+			</ul>
+			<details class="publication-abstract" id="abstract-pelican-sim">
+				<summary aria-label="Abstract for Pelican-Sim 1.0">
+					<span class="abstract-label">Abstract</span>
+					<span class="abstract-toggle" aria-hidden="true"><span class="abstract-more">Read more</span><span class="abstract-less">Show less</span></span>
+					<span class="abstract-preview" aria-hidden="true">Pelican-Sim 1.0 predicts future visual observations from robot actions and recent visual context, providing a general simulator for embodied learning and decision making. A shared 28-dimensional action space accommodates different robot embodiments, while rendered action videos connect control inputs to visual generation. Sparse mixture-of-experts layers model heterogeneous dynamics, and causal adaptation with few-step distillation enables efficient autoregressive rollouts.</span>
+				</summary>
+				<div class="abstract-content">
+					<p>Pelican-Sim 1.0 predicts future visual observations from robot actions and recent visual context, providing a general simulator for embodied learning and decision making. A shared 28-dimensional action space accommodates different robot embodiments, while rendered action videos connect control inputs to visual generation. Sparse mixture-of-experts layers model heterogeneous dynamics, and causal adaptation with few-step distillation enables efficient autoregressive rollouts.</p>
+					<p>Training uses approximately one million trajectories collected in simulation and the real world. Evaluations show improvements in action controllability and video quality across AgiBotWorld Beta, RoboMIND, and RoboTwin. On RoboTwin, the simulator supports synthetic training data, policy evaluation, action selection, and policy improvement. Adding 500 generated trajectories to 50 demonstrations per task increases policy success from 70% to 93%, and simulated policy evaluations correlate with measured policy success at 0.994. Tests under changes in trajectories, scenes, objects, embodiments, and viewpoints further explore its generalization.</p>
+					<div class="abstract-source"><span>Adapted from the paper abstract</span><a href="https://arxiv.org/abs/2609.12036" target="_blank" rel="noopener noreferrer">Source ↗</a></div>
+				</div>
+			</details>
+		</div>
 	</div>
 
 	<div class="news-container">
@@ -221,6 +240,26 @@
 				Lead the experiments and evaluation on the World Arena leaderboard (EWM Score of 66.03, rank #1).<br>
 				<a href="https://arxiv.org/abs/2605.15153" target="_blank"> [Report]</a>
 			</div>
+		</div>
+		<div class="publication-reading">
+			<ul class="publication-keywords" aria-label="Research keywords">
+				<li>Embodied Foundation Models</li>
+				<li>Vision-Language-Action</li>
+				<li>World Models</li>
+				<li>Unified Learning</li>
+			</ul>
+			<details class="publication-abstract" id="abstract-pelican-unified">
+				<summary aria-label="Abstract for Pelican-Unified 1.0">
+					<span class="abstract-label">Abstract</span>
+					<span class="abstract-toggle" aria-hidden="true"><span class="abstract-more">Read more</span><span class="abstract-less">Show less</span></span>
+					<span class="abstract-preview" aria-hidden="true">Pelican-Unify 1.0 brings visual understanding, reasoning, future imagination, and action generation into a single embodied foundation model. One vision-language model maps visual observations, instructions, and action histories into a common semantic representation, then produces reasoning about tasks, actions, and future outcomes. Its final hidden state conditions a Unified Future Generator, which jointly predicts future videos and actions through separate output heads within one denoising process.</span>
+				</summary>
+				<div class="abstract-content">
+					<p>Pelican-Unify 1.0 brings visual understanding, reasoning, future imagination, and action generation into a single embodied foundation model. One vision-language model maps visual observations, instructions, and action histories into a common semantic representation, then produces reasoning about tasks, actions, and future outcomes. Its final hidden state conditions a Unified Future Generator, which jointly predicts future videos and actions through separate output heads within one denoising process.</p>
+					<p>Language, video, and action objectives jointly update the shared representation during training. With one checkpoint, the model scores 64.7 across eight VLM benchmarks, reaches 66.03 on WorldArena, and achieves 93.5 on RoboTwin. These evaluations show that a unified architecture can retain strong performance across visual understanding, world modeling, and robotic action generation.</p>
+					<div class="abstract-source"><span>Adapted from the paper abstract</span><a href="https://arxiv.org/abs/2605.15153" target="_blank" rel="noopener noreferrer">Source ↗</a></div>
+				</div>
+			</details>
 		</div>
 	</div>
 
@@ -249,6 +288,26 @@
 			<a href="https://zoushilong1024.github.io/FSP-policy/" target="_blank"> [Website]</a>
 		</div>
 	</div>
+		<div class="publication-reading">
+			<ul class="publication-keywords" aria-label="Research keywords">
+				<li>Visuotactile Learning</li>
+				<li>Robotic Placement</li>
+				<li>Sim-to-Real</li>
+				<li>Policy Learning</li>
+			</ul>
+			<details class="publication-abstract" id="abstract-fsp">
+				<summary aria-label="Abstract for Learning Visuotactile Policy for Fast and Stable Placement">
+					<span class="abstract-label">Abstract</span>
+					<span class="abstract-toggle" aria-hidden="true"><span class="abstract-more">Read more</span><span class="abstract-less">Show less</span></span>
+					<span class="abstract-preview" aria-hidden="true">Placement is an essential yet underexplored component of robotic manipulation. Its contact-rich nature poses significant challenges for perception and control, making it inherently difficult to balance efficiency and stability. We present Fast and Stable Placement (FSP), a visuotactile policy learning framework that leverages multimodal sensing for enhanced contact perception and achieves reliable placement through online adjustment.</span>
+				</summary>
+				<div class="abstract-content">
+					<p>Placement is an essential yet underexplored component of robotic manipulation. Its contact-rich nature poses significant challenges for perception and control, making it inherently difficult to balance efficiency and stability. We present Fast and Stable Placement (FSP), a visuotactile policy learning framework that leverages multimodal sensing for enhanced contact perception and achieves reliable placement through online adjustment.</p>
+					<p>FSP adopts a two-stage curriculum for robust placement skill learning. An oracle policy is first trained with privileged information; then, it is distilled into a deployable policy that operates on carefully designed domain-invariant modalities, enabling direct sim-to-real policy transfer. These comprehensive modalities are tokenized and fused with the attention mechanism to support end-to-end policy learning. Extensive evaluations in both simulation and on real robots demonstrate that the learned FSP policy achieves a superior trade-off between efficiency and stability.</p>
+					<div class="abstract-source"><span>Project abstract</span><a href="https://zoushilong1024.github.io/FSP-policy/" target="_blank" rel="noopener noreferrer">Source ↗</a></div>
+				</div>
+			</details>
+		</div>
 	</div>
 
 	<div class="news-container">
@@ -277,6 +336,26 @@
 			style="margin-left: 6px; vertical-align: middle;">
 		</div>
 	</div>
+		<div class="publication-reading">
+			<ul class="publication-keywords" aria-label="Research keywords">
+				<li>Diffusion Models</li>
+				<li>Unpaired Translation</li>
+				<li>Image Generation</li>
+				<li>Cross-Modal Learning</li>
+			</ul>
+			<details class="publication-abstract" id="abstract-cyclediff">
+				<summary aria-label="Abstract for CycleDiff">
+					<span class="abstract-label">Abstract</span>
+					<span class="abstract-toggle" aria-hidden="true"><span class="abstract-more">Read more</span><span class="abstract-less">Show less</span></span>
+					<span class="abstract-preview" aria-hidden="true">CycleDiff addresses image translation between domains without paired training examples by jointly learning translation and diffusion. Existing diffusion-based translators often train these processes separately or connect them only loosely because diffusion operates on noisy inputs while translation concerns clean images. This separation can limit the quality of the learned mapping.</span>
+				</summary>
+				<div class="abstract-content">
+					<p>CycleDiff addresses image translation between domains without paired training examples by jointly learning translation and diffusion. Existing diffusion-based translators often train these processes separately or connect them only loosely because diffusion operates on noisy inputs while translation concerns clean images. This separation can limit the quality of the learned mapping.</p>
+					<p>The framework extracts image components that represent the clean signal and translates these components within the diffusion process, allowing end-to-end optimization. A time-dependent translation network models mappings that change across diffusion steps. Together, these designs improve image fidelity and preservation of structure. Experiments cover RGB-to-RGB translation as well as mappings between RGB images, edges, semantic representations, and depth. The method improves FID over competing approaches, including reported gains of 19.61 and 19.67 over the second-best method on Dog–Cat and Dog–Wild translation.</p>
+					<div class="abstract-source"><span>Adapted from the paper abstract</span><a href="https://arxiv.org/abs/2508.06625" target="_blank" rel="noopener noreferrer">Source ↗</a></div>
+				</div>
+			</details>
+		</div>
 	</div>
 
 	<div class="news-container">
@@ -300,7 +379,26 @@
 				<a href="http://journal.nudt.edu.cn/gfkjdxxb/article/html/20260319?tab=abstract" target="_blank"> [Paper]</a>
 			</div>
 		</div>
+			<div class="publication-reading">
+			<ul class="publication-keywords" aria-label="Research keywords">
+				<li>Robotic Grasping</li>
+				<li>Visual Perception</li>
+				<li>Semantic Reasoning</li>
+				<li>Survey</li>
+			</ul>
+			<details class="publication-abstract" id="abstract-grasping-survey">
+				<summary aria-label="Abstract for From Geometric Analysis to Semantic Reasoning">
+					<span class="abstract-label">Abstract</span>
+					<span class="abstract-toggle" aria-hidden="true"><span class="abstract-more">Read more</span><span class="abstract-less">Show less</span></span>
+					<span class="abstract-preview" aria-hidden="true">Robotic grasping perception serves as a fundamental prerequisite for autonomous manipulation and embodied intelligence, acting as a core technology for robots to interact with the physical world. As application scenarios expand from structured industrial assembly lines to unstructured environments such as households and logistics, the challenges facing grasping tasks have become increasingly complex. Modern robots are required not only to perceive the geometric attributes of objects in scenes characterized by clutter, occlusion, and varying lighting but also to understand semantic information and task-specific contextual constraints. Despite the proliferation of research, existing literature often focuses on single technical branches or physical stability assessments, lacking a systematic tracing of the evolutionary logic of perception paradigms. Bridging this gap is essential for developing general-purpose robotic systems that possess high generalization performance and robust task comprehension.</span>
+				</summary>
+				<div class="abstract-content">
+					<p>Robotic grasping perception serves as a fundamental prerequisite for autonomous manipulation and embodied intelligence, acting as a core technology for robots to interact with the physical world. As application scenarios expand from structured industrial assembly lines to unstructured environments such as households and logistics, the challenges facing grasping tasks have become increasingly complex. Modern robots are required not only to perceive the geometric attributes of objects in scenes characterized by clutter, occlusion, and varying lighting but also to understand semantic information and task-specific contextual constraints. Despite the proliferation of research, existing literature often focuses on single technical branches or physical stability assessments, lacking a systematic tracing of the evolutionary logic of perception paradigms. Bridging this gap is essential for developing general-purpose robotic systems that possess high generalization performance and robust task comprehension.</p>
+					<div class="abstract-source"><span>Author-provided abstract</span><a href="http://journal.nudt.edu.cn/gfkjdxxb/article/html/20260319?tab=abstract" target="_blank" rel="noopener noreferrer">Source ↗</a></div>
+				</div>
+			</details>
 		</div>
+	</div>
 
 	<div class="news-container">
 	<div class="row align-items-center">
@@ -326,6 +424,26 @@
 			<a href="https://davit666.github.io/AEG-bot/" target="_blank"> [Website]</a>
 		</div>
 	</div>
+		<div class="publication-reading">
+			<ul class="publication-keywords" aria-label="Research keywords">
+				<li>Scene Graphs</li>
+				<li>LLM Reasoning</li>
+				<li>Household Robotics</li>
+				<li>Task Planning</li>
+			</ul>
+			<details class="publication-abstract" id="abstract-aeg">
+				<summary aria-label="Abstract for LLM-enhanced Scene Graph Learning for Household Rearrangement">
+					<span class="abstract-label">Abstract</span>
+					<span class="abstract-toggle" aria-hidden="true"><span class="abstract-more">Read more</span><span class="abstract-less">Show less</span></span>
+					<span class="abstract-preview" aria-hidden="true">AEG-bot is an autonomous mobile humanoid system for rearranging household scenes in previously unseen real-world environments. It identifies misplaced objects and reasons about suitable destinations using contextual knowledge and user preferences. LLM-enhanced scene graph learning enriches an initial scene graph with additional object information and contextual relationships, producing an Affordance Enhanced Graph.</span>
+				</summary>
+				<div class="abstract-content">
+					<p>AEG-bot is an autonomous mobile humanoid system for rearranging household scenes in previously unseen real-world environments. It identifies misplaced objects and reasons about suitable destinations using contextual knowledge and user preferences. LLM-enhanced scene graph learning enriches an initial scene graph with additional object information and contextual relationships, producing an Affordance Enhanced Graph.</p>
+					<p>Receptacle nodes encode context-dependent affordances that describe which objects can be placed on them. This representation supports planning to detect misplaced items and choose appropriate destinations. The complete system combines active exploration, RGB-D reconstruction, scene graph extraction, task planning, and execution in one pipeline, enabling the robot to perceive an unfamiliar environment and carry out rearrangement autonomously.</p>
+					<div class="abstract-source"><span>Adapted from the project abstract</span><a href="https://davit666.github.io/AEG-bot/" target="_blank" rel="noopener noreferrer">Source ↗</a></div>
+				</div>
+			</details>
+		</div>
 	</div>
 
 	<div class="news-container">
@@ -348,6 +466,26 @@
 			<a href="https://github.com/GuHuangAI/DIffPart" target="_blank"> [Code]</a>
 		</div>
 	</div>
+		<div class="publication-reading">
+			<ul class="publication-keywords" aria-label="Research keywords">
+				<li>3D Generation</li>
+				<li>Latent Diffusion</li>
+				<li>Neural Fields</li>
+				<li>Part-Aware Modeling</li>
+			</ul>
+			<details class="publication-abstract" id="abstract-partdiff">
+				<summary aria-label="Abstract for Part-aware Shape Generation">
+					<span class="abstract-label">Abstract</span>
+					<span class="abstract-toggle" aria-hidden="true"><span class="abstract-more">Read more</span><span class="abstract-less">Show less</span></span>
+					<span class="abstract-preview" aria-hidden="true">This work generates structured 3D shapes with a latent diffusion model operating on neural voxel fields. The model targets accurate part structure while retaining detailed geometry and appearance. Diffusion in a compressed 3D representation makes higher-resolution generation possible, allowing the generated fields to capture finer visual and geometric detail.</span>
+				</summary>
+				<div class="abstract-content">
+					<p>This work generates structured 3D shapes with a latent diffusion model operating on neural voxel fields. The model targets accurate part structure while retaining detailed geometry and appearance. Diffusion in a compressed 3D representation makes higher-resolution generation possible, allowing the generated fields to capture finer visual and geometric detail.</p>
+					<p>A part-aware decoder incorporates part codes when reconstructing the voxel fields, improving decomposition of the shape into parts and the quality of rendered views. Experiments across multiple object categories compare the model with existing generative methods and show improvements in part-aware shape generation.</p>
+					<div class="abstract-source"><span>Adapted from the preprint abstract</span><a href="https://arxiv.org/abs/2405.00998" target="_blank" rel="noopener noreferrer">Source ↗</a></div>
+				</div>
+			</details>
+		</div>
 	</div>
 
 	<div class="news-container">
@@ -372,7 +510,27 @@
 				<a href="https://arxiv.org/abs/2512.03538" target="_blank"> [Paper]</a>
 			</div>
 		</div>
+			<div class="publication-reading">
+			<ul class="publication-keywords" aria-label="Research keywords">
+				<li>World Foundation Models</li>
+				<li>Test-Time Adaptation</li>
+				<li>Predictive Control</li>
+				<li>Robot Manipulation</li>
+			</ul>
+			<details class="publication-abstract" id="abstract-adapower">
+				<summary aria-label="Abstract for AdaPower">
+					<span class="abstract-label">Abstract</span>
+					<span class="abstract-toggle" aria-hidden="true"><span class="abstract-more">Read more</span><span class="abstract-less">Show less</span></span>
+					<span class="abstract-preview" aria-hidden="true">AdaPower adapts general world foundation models for precise robotic manipulation, addressing the gap between realistic video generation and the accuracy needed for control. Existing uses of these models as synthetic data generators can be expensive and make limited use of pretrained vision-language-action policies.</span>
+				</summary>
+				<div class="abstract-content">
+					<p>AdaPower adapts general world foundation models for precise robotic manipulation, addressing the gap between realistic video generation and the accuracy needed for control. Existing uses of these models as synthetic data generators can be expensive and make limited use of pretrained vision-language-action policies.</p>
+					<p>The framework combines Temporal-Spatial Test-Time Training for adaptation during inference with Memory Persistence to maintain consistency over longer horizons. A model predictive control loop uses the adapted world model to improve the decisions of pretrained VLA policies. On LIBERO benchmarks, task success improves by more than 41% without retraining the policy, while the framework retains computational efficiency and general-purpose capabilities.</p>
+					<div class="abstract-source"><span>Adapted from the paper abstract</span><a href="https://arxiv.org/abs/2512.03538" target="_blank" rel="noopener noreferrer">Source ↗</a></div>
+				</div>
+			</details>
 		</div>
+	</div>
 
 	<div class="news-container">
 	<div class="row align-items-center">
@@ -401,6 +559,26 @@
 			style="margin-left: 6px; vertical-align: middle;">
 		</div>
 	</div>
+		<div class="publication-reading">
+			<ul class="publication-keywords" aria-label="Research keywords">
+				<li>Latent World Models</li>
+				<li>Diffusion Policy</li>
+				<li>Visual Foundation Models</li>
+				<li>Predictive Manipulation</li>
+			</ul>
+			<details class="publication-abstract" id="abstract-ladi-wm">
+				<summary aria-label="Abstract for LaDi-WM">
+					<span class="abstract-label">Abstract</span>
+					<span class="abstract-toggle" aria-hidden="true"><span class="abstract-more">Read more</span><span class="abstract-less">Show less</span></span>
+					<span class="abstract-preview" aria-hidden="true">LaDi-WM improves predictive manipulation by forecasting future states in a visual latent space rather than generating pixel-level images of robot–object interactions. This space combines geometric features from DINO with semantic features from CLIP. Diffusion predicts how these representations evolve, making future-state learning easier and more generalizable than direct image prediction.</span>
+				</summary>
+				<div class="abstract-content">
+					<p>LaDi-WM improves predictive manipulation by forecasting future states in a visual latent space rather than generating pixel-level images of robot–object interactions. This space combines geometric features from DINO with semantic features from CLIP. Diffusion predicts how these representations evolve, making future-state learning easier and more generalizable than direct image prediction.</p>
+					<p>A diffusion policy incorporates the predicted states while repeatedly refining its actions, improving consistency and accuracy. Evaluations in simulation and on physical robots report policy-performance gains of 27.9% on LIBERO-LONG and 20% in the real-world setting. Further real-world tests examine the generalization of both the world model and its associated policies.</p>
+					<div class="abstract-source"><span>Adapted from the paper abstract</span><a href="https://arxiv.org/abs/2505.11528" target="_blank" rel="noopener noreferrer">Source ↗</a></div>
+				</div>
+			</details>
+		</div>
 	</div>
 
 	<div class="news-container">
@@ -422,7 +600,7 @@
 			</font>
 			<br>
 			The Visual Computer, 2026<br>
-			[Paper]
+			<a href="https://link.springer.com/article/10.1007/s00371-026-04523-w" target="_blank" rel="noopener noreferrer"> [Paper]</a>
 			<a href="https://github.com/GuHuangAI/MS2A" target="_blank"> [Code]</a>
 			<a href="https://ms2a-cfod.github.io/" target="_blank"> [Website]</a>
 			<img 
@@ -431,6 +609,26 @@
 			style="margin-left: 6px; vertical-align: middle;">
 		</div>
 	</div>
+		<div class="publication-reading">
+			<ul class="publication-keywords" aria-label="Research keywords">
+				<li>Object Detection</li>
+				<li>Domain Adaptation</li>
+				<li>Few-Annotation Learning</li>
+				<li>Memory Learning</li>
+			</ul>
+			<details class="publication-abstract" id="abstract-ms2a">
+				<summary aria-label="Abstract for Memory Storage-to-Adaptation">
+					<span class="abstract-label">Abstract</span>
+					<span class="abstract-toggle" aria-hidden="true"><span class="abstract-more">Read more</span><span class="abstract-less">Show less</span></span>
+					<span class="abstract-preview" aria-hidden="true">MS2A tackles object detection when a model must transfer across domains with very few labeled target-domain examples. Changes in environment and limited annotations make this transfer difficult. The approach learns prior information from a large collection of unlabeled target-domain data, giving adaptation a broader view of the target distribution.</span>
+				</summary>
+				<div class="abstract-content">
+					<p>MS2A tackles object detection when a model must transfer across domains with very few labeled target-domain examples. Changes in environment and limited annotations make this transfer difficult. The approach learns prior information from a large collection of unlabeled target-domain data, giving adaptation a broader view of the target distribution.</p>
+					<p>A memory storage module collects information about foreground objects and background context. A memory adaptation module then incorporates that knowledge into feature learning to produce more discriminative representations. Tests on newly constructed and public datasets show leading performance, including improvements of up to 10.4% over existing methods on challenging industrial datasets.</p>
+					<div class="abstract-source"><span>Adapted from the published abstract</span><a href="https://link.springer.com/article/10.1007/s00371-026-04523-w" target="_blank" rel="noopener noreferrer">Source ↗</a></div>
+				</div>
+			</details>
+		</div>
 	</div>
 </div>
 

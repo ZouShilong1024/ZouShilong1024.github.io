@@ -134,6 +134,27 @@ a:focus-visible, button:focus-visible { outline: 2px solid #659da7; outline-offs
 #news ul li:hover { background: #dbeaf3; box-shadow: 0 0 0 5px #dbeaf3; }
 #news li::marker { color: #a5b9c0; }
 #publications .news-container .col-md-3, #projects .news-container .col-md-3 { padding-right: 20px; }
+/* Paper topics and a native, keyboard-accessible abstract disclosure. */
+.publication-reading { margin-top: 18px; padding-top: 15px; border-top: 1px solid var(--line); }
+.news-container .publication-keywords { display: flex; flex-wrap: wrap; gap: 6px; padding: 0; margin: 0 0 13px; list-style: none; }
+.publication-keywords li { padding: 3px 9px; border: 1px solid #dce8ed; border-radius: 5px; background: #f2f7f9; color: #436775; font-size: 11px; line-height: 1.5; }
+.publication-abstract { color: #5a6f79; font-size: 13px; line-height: 1.8; }
+.publication-abstract > summary { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 12px; padding: 3px 0; list-style: none; cursor: pointer; border-radius: 4px; }
+.publication-abstract > summary::-webkit-details-marker { display: none; }
+.publication-abstract > summary::marker { content: ''; }
+.publication-abstract > summary:focus-visible { outline: 2px solid #659da7; outline-offset: 5px; }
+.abstract-label { color: #354f5c; font-size: 12px; font-weight: 600; }
+.abstract-toggle { display: inline-flex; align-items: center; gap: 7px; color: var(--accent); font-size: 12px; font-weight: 500; white-space: nowrap; }
+.abstract-toggle::after { content: ''; width: 6px; height: 6px; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: translateY(-2px) rotate(45deg); }
+.abstract-preview { grid-column: 1 / -1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.abstract-less, .publication-abstract[open] .abstract-more, .publication-abstract[open] .abstract-preview { display: none; }
+.publication-abstract[open] .abstract-less { display: inline; }
+.publication-abstract[open] .abstract-toggle::after { transform: translateY(2px) rotate(225deg); }
+.publication-abstract > summary:hover .abstract-toggle { color: #075777; text-decoration: underline; text-underline-offset: 3px; }
+.abstract-content { padding-top: 8px; }
+.abstract-content p { margin: 0 0 10px; }
+.abstract-source { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 12px; padding-top: 9px; border-top: 1px solid #e1e9ed; color: #7b8d96; font-size: 11px; }
+.abstract-source a { white-space: nowrap; }
 #publications .news-container .img-fluid, #projects .news-container .img-fluid, #talks .news-container .img-fluid { box-shadow: none !important; border: 1px solid #e9ecec; border-radius: 6px; margin: 0 !important; max-width: 100%; }
 .cvpr-badge { display: inline-block; padding: 4px 7px; border-radius: 4px; color: #fff; background: #386b7f; font-size: 10px; font-weight: 600; letter-spacing: .015em; }
 .badge { top: 6px !important; left: 20px !important; padding: 0; }
