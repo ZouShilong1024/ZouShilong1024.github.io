@@ -3,6 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Shilong Zou — world model researcher at the Beijing Innovation Center of Humanoid Robotics. Research in embodied intelligence, world models, computer vision, and deep learning.">
 	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 	<title>Shilong Zou's Homepage</title>
 	<link rel="shortcut icon" href="./res/icon/icon.svg">
@@ -10,707 +12,103 @@
 
 	<link href="res/css/bootstrap.min.css" rel="stylesheet">
 
-	<style>
-      body {
-        background-color: #f0f0f0;
-        margin: 0;
-        padding: 0;
-        padding-bottom: 118px;
-      }
-      html.photo-strip-off body {
-        padding-bottom: 0;
-      }
-      .main-content {
-        max-width: 1200px;
-        margin: 0 auto;
-        background: white;
-        min-height: 100vh;
-        box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      }
-      .navbar-custom {
-        background-color: #527bbd !important;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-      }
-      .navbar-custom .navbar-brand,
-      .navbar-custom .nav-link {
-        color: white !important;
-        font-size: 1.05rem;
-        font-weight: 500;
-        letter-spacing: 0.5px;
-      }
-      .navbar-custom .nav-link {
-        margin: 0 4px;
-        padding: 8px 14px;
-        position: relative;
-        border-radius: 20px;
-        transition: background-color 0.15s ease, box-shadow 0.15s ease;
-      }
-      .navbar-custom .nav-link::after {
-        content: '';
-        position: absolute;
-        bottom: 4px;
-        left: 50%;
-        width: 0;
-        height: 2px;
-        background-color: white;
-        border-radius: 2px;
-        transition: all 0.3s ease;
-        transform: translateX(-50%);
-      }
-      .navbar-custom .nav-link:not(.active):hover::after {
-        width: 60%;
-      }
-      .navbar-custom .nav-link.active::after {
-        width: 0 !important;
-      }
-      .navbar-custom .nav-link.active {
-        background-color: rgba(255, 255, 255, 0.18);
-        box-shadow: inset 0 0 0 1.5px rgba(255, 255, 255, 0.5);
-        border-radius: 20px;
-      }
-      #news, #publications, #projects, #honors, #competition, #miscellaneous, #education, #internship {
-        scroll-margin-top: 70px;
-        padding-top: 20px;
-      }
-      .internship-logo {
-        max-width: 92%;
-        max-height: 150px;
-        width: auto;
-        height: auto;
-        object-fit: contain;
-      }
-      .internship-date-col {
-        text-align: center;
-      }
-      @media (min-width: 768px) {
-        .internship-date-col {
-          text-align: right;
-        }
-      }
-      h3 {
-        color: #2c3e50;
-        padding-bottom: 10px;
-        border-bottom: 2px solid #e0e0e0;
-        margin-bottom: 20px;
-      }
-      .header {
-        width: auto;
-        max-width: auto;
-        font-family: Arial;
-        padding: 2rem 1rem;
-      }
+	<link href="res/css/homepage.css" rel="stylesheet">
 
-      a:link,a:visited
-      {
-		color: #0071bc;
-		text-decoration: none;           
-		font-weight: 500;
-		transition: color 0.3s ease, 
-					text-shadow 0.3s ease, 
-					border-bottom 0.3s ease;
-		border-bottom: 2px solid transparent;
-      }
-      a:hover {
-		color: #208799;
-		text-shadow: 0 0 6px rgba(32, 135, 153, 0.3);
-		border-bottom: 2px solid #208799;
-		text-decoration: none;
-      }
-
-      .social-links {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        gap: 12px 8px;
-        margin: 4px 0;
-      }
-      .social-separator {
-        color: #94a3b8;
-        font-size: 0.9rem;
-        line-height: 1;
-        user-select: none;
-      }
-      .social-btn,
-      .social-btn:link,
-      .social-btn:visited {
-        display: inline-flex;
-        align-items: center;
-        gap: 7px;
-        padding: 8px 14px;
-        border: 0;
-        border-radius: 4px;
-        font-family: "Segoe UI", "Microsoft YaHei", "PingFang SC", Arial, sans-serif;
-        font-size: 0.76rem;
-        font-weight: 600;
-        line-height: 1.15;
-        color: #1a1a1a !important;
-        background: rgba(255,255,255,0.6);
-        box-shadow: inset 0 0 0 1.5px #d4d0c8;
-        transition: box-shadow 0.15s, background 0.15s, color 0.15s;
-        text-decoration: none;
-        letter-spacing: 0.01em;
-        border-bottom: none !important;
-        text-shadow: none !important;
-        vertical-align: middle;
-      }
-      .social-btn:hover {
-        color: #2563eb !important;
-        background: rgba(255,255,255,0.9);
-        box-shadow: inset 0 0 0 1.5px #2563eb;
-        text-decoration: none;
-        border-bottom: none !important;
-        text-shadow: none !important;
-      }
-      .social-btn img {
-        width: 15px;
-        height: 15px;
-        object-fit: contain;
-        flex-shrink: 0;
-      }
-
-      hr {
-        border: 10;
-        height: 1px;
-        background-image: linear-gradient(to right, rgba(0, 113, 188, 0.2), rgba(0, 0, 0, 0.1), rgba(0, 113, 188, 0.2));
-      }
-
-      .gap-20 {height:20px;}
-      .gap-10 {height:10px;}
-      .hgap-6perc {width: 6%;}
-      .hgap-7perc {width: 7%;}
-
-      ::selection {
-        background: rgba(220, 220, 220);
-	  }
-
-      .section-div {height: 3em}
-      .content-div {height: 2em}
-      .small-div {height: 0.5em}
-
-      .highlight-box {
-        background: #eff6ff;
-        border-left: 3.5px solid #2563eb;
-        padding: 12px 16px;
-        border-radius: 2px;
-        font-size: .93rem;
-        font-weight: 600;
-        color: #1e3a5f;
-        margin-top: 14px;
-        line-height: 1.6;
-      }
-
-      .cvpr-badge {
-        display: inline-block;
-        background-color: #00369f;
-        color: white;
-        padding: 4px 10px;
-        font-size: 1em;
-        font-weight: bold;
-        width: 95px;
-        text-align: center;
-      }
-      html.photo-strip-off .back-to-top {
-        bottom: 30px;
-      }
-      .back-to-top {
-        position: fixed;
-        bottom: calc(30px + 100px);
-        right: 30px;
-        z-index: 1050;
-        width: 50px;
-        height: 50px;
-        background-color: #527bbd;
-        color: white;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 20px;
-        cursor: pointer;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-        opacity: 0;
-        visibility: hidden;
-        transition: all 0.3s ease;
-        user-select: none;
-        -webkit-user-select: none;
-        outline: none;
-        -webkit-tap-highlight-color: transparent;
-      }
-      .back-to-top.show {
-        opacity: 1;
-        visibility: visible;
-      }
-      .back-to-top:hover {
-        background-color: #3a5f9a;
-      }
-
-      html.photo-strip-off #photo-strip-bar {
-        display: none;
-      }
-      .photo-strip-bar {
-        position: fixed;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        z-index: 1020;
-        background: linear-gradient(165deg, #e8edf6 0%, #dfe8f3 42%, #d5e0ef 100%);
-        border-top: 1px solid rgba(82, 123, 189, 0.18);
-        box-shadow: 0 -8px 32px rgba(82, 123, 189, 0.1), 0 -1px 0 rgba(255, 255, 255, 0.45) inset;
-        padding: 16px 34px 18px 2px;
-      }
-      .photo-strip-close {
-        position: absolute;
-        top: 10px;
-        right: 12px;
-        width: 34px;
-        height: 34px;
-        border: 1px solid rgba(82, 123, 189, 0.2);
-        border-radius: 10px;
-        background: rgba(255, 255, 255, 0.55);
-        color: #4a5d78;
-        font-size: 1.35rem;
-        line-height: 1;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 0;
-        transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
-        box-shadow: 0 2px 10px rgba(82, 123, 189, 0.12);
-        z-index: 5;
-      }
-      .photo-strip-close:hover {
-        background: #527bbd;
-        color: #fff;
-        border-color: #527bbd;
-        box-shadow: 0 4px 14px rgba(82, 123, 189, 0.3);
-      }
-      .photo-strip-close:focus {
-        outline: none;
-        box-shadow: 0 0 0 3px rgba(82, 123, 189, 0.35);
-      }
-      .photo-strip-row {
-        display: flex;
-        align-items: stretch;
-        max-width: none;
-        margin: 0;
-        margin-left: max(0px, (100vw - 1254px) / 2);
-        margin-right: 18px;
-        gap: 18px;
-        padding: 0;
-      }
-      /* Spacer matching visible title width, anchoring the marquee start point */
-      .photo-strip-title-spacer {
-        flex-shrink: 0;
-        visibility: hidden;
-        pointer-events: none;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: flex-start;
-        min-height: 76px;
-        align-self: stretch;
-        max-width: min(11.5rem, 42vw);
-      }
-      .photo-strip-title-col {
-        position: absolute;
-        left: calc(5.3rem + max(0px, (100vw - 1254px) / 4));
-        top: 50%;
-        transform: translate(-50%, -50%);
-        z-index: 2;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: flex-start;
-        width: max-content;
-        max-width: min(11.5rem, 42vw);
-        pointer-events: none;
-      }
-      .photo-strip-title-col .photo-strip-title {
-        pointer-events: auto;
-      }
-      .photo-strip-title {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 7px;
-        margin: 0;
-        padding: 0;
-        border: none;
-        line-height: 1.25;
-      }
-      .photo-strip-title-link,
-      .photo-strip-title-link:link,
-      .photo-strip-title-link:visited {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 7px;
-        color: inherit !important;
-        text-decoration: none;
-        border-bottom: none !important;
-        text-shadow: none !important;
-        transition: transform 0.2s ease;
-      }
-      .photo-strip-title-link:hover {
-        color: inherit !important;
-        text-decoration: none;
-        border-bottom: none !important;
-        text-shadow: none !important;
-        transform: translateY(-1px);
-      }
-      .photo-strip-title-link:hover .photo-strip-title-line {
-        background: rgba(82, 123, 189, 0.72);
-      }
-      .photo-strip-title-text {
-        color: #2c3e50;
-        font-size: 1.28rem;
-        font-weight: 600;
-        letter-spacing: 0.02em;
-        font-family: Georgia, "Times New Roman", serif;
-        text-shadow: 0 1px 0 rgba(255, 255, 255, 0.35);
-      }
-      .photo-strip-title-line {
-        display: block;
-        width: 100%;
-        height: 2px;
-        border-radius: 1px;
-        background: rgba(82, 123, 189, 0.42);
-      }
-      .photo-strip-viewport {
-        flex: 1;
-        min-width: 0;
-        min-height: 76px;
-        display: flex;
-        align-items: center;
-        overflow: hidden;
-        mask-image: linear-gradient(90deg, transparent 0%, #000 28px, #000 calc(100% - 28px), transparent 100%);
-        -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 28px, #000 calc(100% - 28px), transparent 100%);
-      }
-      .photo-strip-track {
-        display: flex;
-        width: max-content;
-        animation: photo-marquee-ltr 96s linear infinite;
-      }
-      .photo-strip-bar:hover .photo-strip-track {
-        animation-play-state: paused;
-      }
-      @keyframes photo-marquee-ltr {
-        from { transform: translateX(-50%); }
-        to { transform: translateX(0); }
-      }
-      .photo-strip-group {
-        display: flex;
-        align-items: center;
-        gap: 16px;
-        padding-right: 16px;
-      }
-      .photo-strip-frame {
-        position: relative;
-        flex-shrink: 0;
-        width: 118px;
-        height: 76px;
-        border-radius: 12px;
-        overflow: hidden;
-        border: 1px solid rgba(82, 123, 189, 0.15);
-        box-shadow: 0 4px 16px rgba(82, 123, 189, 0.12), 0 1px 2px rgba(0, 0, 0, 0.04);
-        transition: transform 0.25s ease, box-shadow 0.25s ease;
-      }
-      .photo-strip-frame img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        display: block;
-      }
-      .photo-strip-label {
-        position: absolute;
-        top: 5px;
-        left: 5px;
-        z-index: 2;
-        max-width: calc(100% - 10px);
-        font-size: 0.68rem;
-        font-weight: 600;
-        color: #fff;
-        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7);
-        padding: 3px 7px;
-        border-radius: 6px;
-        background: rgba(44, 62, 80, 0.55);
-        line-height: 1.25;
-        letter-spacing: 0.02em;
-        font-family: "Segoe UI", "Microsoft YaHei", "PingFang SC", sans-serif;
-        pointer-events: none;
-      }
-      .photo-strip-frame:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 10px 26px rgba(82, 123, 189, 0.18), 0 2px 4px rgba(0, 0, 0, 0.06);
-      }
-      @media (prefers-reduced-motion: reduce) {
-        .photo-strip-track {
-          animation: none;
-        }
-        .photo-strip-frame:hover {
-          transform: none;
-        }
-      }
-
-	  .custom-img {
-		width: 250px;
-		height: 250px;
-		object-fit: fill;
-		box-shadow: 4px 4px 4px #888888;
-		margin: 0 5px;
-		border-radius: 8px;
-		transition: transform 0.3s ease, box-shadow 0.3s ease;
-		}
-      .custom-img:hover {
-		transform: scale(1.03);
-		box-shadow: 6px 6px 10px #666666;
-		}
-      
-      .news-container {
-		background: linear-gradient(180deg, #ffffff 0%, #fafafa 100%);
-		border-radius: 16px;
-		box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
-		padding: 18px 20px;
-		margin-bottom: 14px;
-		border: 1px solid rgba(230, 230, 230, 0.8);
-		transition: 
-			box-shadow 0.3s ease,
-			transform 0.25s ease,
-			border-color 0.3s ease;
-	}
-      
-      .news-container:hover {
-		box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
-		transform: translateY(-3px);
-		border-color: rgba(180, 180, 255, 0.6);
-      }
-      
-      .publication-item {
-        background-color: white;
-        border-radius: 12px;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-        padding: 5px;
-        margin-bottom: 5px;
-        transition: box-shadow 0.3s ease, transform 0.2s ease;
-      }
-      
-      .publication-item:hover {
-        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
-        transform: translateY(-2px);
-      }
-
-	</style>
-
-	<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const backToTopButton = document.createElement('button');
-        backToTopButton.className = 'back-to-top';
-        backToTopButton.innerHTML = '⬆';
-        backToTopButton.setAttribute('aria-label', 'Back to top');
-        backToTopButton.addEventListener('click', () => {
-            window.scrollTo({top: 0, behavior: 'smooth'});
-        });
-        document.body.appendChild(backToTopButton);
-
-        window.addEventListener('scroll', () => {
-            if (window.pageYOffset > 300) {
-                backToTopButton.classList.add('show');
-            } else {
-                backToTopButton.classList.remove('show');
-            }
-        });
-        const videos = document.querySelectorAll("video[data-src]");
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const video = entry.target;
-                    video.src = video.getAttribute("data-src");
-                    video.autoplay = true;
-                    video.loop = true;
-                    observer.unobserve(video);
-                }
-            });
-        }, { threshold: 0.1 });
-
-        videos.forEach(video => observer.observe(video));
-
-        var photoClose = document.getElementById("photo-strip-close");
-        if (photoClose) {
-            photoClose.addEventListener("click", function () {
-                document.documentElement.classList.add("photo-strip-off");
-            });
-        }
-
-        const navLinks = document.querySelectorAll('.navbar-custom .nav-link[href^="#"]');
-        const sections = [];
-        navLinks.forEach(link => {
-            const id = link.getAttribute('href').substring(1);
-            const section = document.getElementById(id);
-            if (section) sections.push({ id, el: section, link });
-        });
-
-        let scrollSpyPaused = false;
-
-        function updateActiveNav() {
-            if (scrollSpyPaused) return;
-            const scrollY = window.pageYOffset + 150;
-            let current = null;
-            for (let i = sections.length - 1; i >= 0; i--) {
-                if (scrollY >= sections[i].el.offsetTop) {
-                    current = sections[i].id;
-                    break;
-                }
-            }
-            navLinks.forEach(link => {
-                const id = link.getAttribute('href').substring(1);
-                link.classList.toggle('active', id === current);
-            });
-        }
-
-        window.addEventListener('scroll', updateActiveNav, { passive: true });
-        updateActiveNav();
-
-        let scrollTimer = null;
-        navLinks.forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (!target) return;
-
-                scrollSpyPaused = true;
-                navLinks.forEach(l => l.classList.remove('active'));
-                this.classList.add('active');
-                this.blur();
-                target.scrollIntoView({ behavior: 'smooth' });
-
-                if (scrollTimer) clearTimeout(scrollTimer);
-                const resumeSpy = () => {
-                    scrollSpyPaused = false;
-                    updateActiveNav();
-                };
-                let lastY = window.pageYOffset;
-                const checkEnd = () => {
-                    if (window.pageYOffset === lastY) {
-                        resumeSpy();
-                    } else {
-                        lastY = window.pageYOffset;
-                        scrollTimer = setTimeout(checkEnd, 80);
-                    }
-                };
-                scrollTimer = setTimeout(checkEnd, 80);
-            });
-        });
-    });
-	</script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-	<script src="res/js/bootstrap.min.js"></script>
+	<script defer src="res/js/homepage.js"></script>
 </head>
 
 <body>
 <div class="main-content">
-<nav class="navbar navbar-expand-lg navbar-custom fixed-top shadow-sm">
-  <div class="container">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav mx-auto">
-        <li class="nav-item">
-          <a class="nav-link" href="#news">News</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#publications">Publications</a>
-        </li>
-        <li class="nav-item">
-			<a class="nav-link" href="#projects">Projects</a>
-		  </li>
-        <li class="nav-item">
-			<a class="nav-link" href="#talks">Talks</a>
-		  </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#honors">Honors Awards</a>
-        </li>
-        <li class="nav-item">
-			<a class="nav-link" href="#competition">Competition Awards</a>
-		</li>
-        <li class="nav-item">
-          <a class="nav-link" href="#education">Education</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#internship">Internship</a>
-        </li>
-        <li class="nav-item">
-			<a class="nav-link" href="#miscellaneous">Miscellaneous</a>
-		</li>
-      </ul>
-    </div>
+<header class="profile-hero" id="about" aria-labelledby="profile-title">
+  <div class="hero-topline">
+    <a class="hero-brand" href="#about">Shilong Zou's homepage</a>
+    <nav class="hero-menu" aria-label="Main navigation">
+      <a href="#publications">Research</a>
+      <a href="photography/">Photography <span aria-hidden="true">↗</span></a>
+    </nav>
   </div>
-</nav>
-
-<div class="header" style="margin-top: 56px;">
-	<div class="container">
-		<div class="content-div"></div>
-		<div class="row align-items-center">
-			<div class="col-md-3 align-column-center">
-				<center>
-					<img class="img-fluid" src="res/figs/profile1.jpg"
-					     style="border-radius:20px; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15); border: 1px solid rgba(0, 0, 0, 0.05);
-						margin-bottom: 10px; transition: transform 0.3s ease, box-shadow 0.3s ease;" width=85%" alt="">
-						<!-- onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 12px 30px rgba(0,0,0,0.2)';" -->
-						<!-- onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 8px 25px rgba(0,0,0,0.15)';"> -->
-				</center>
-			</div>
-			<div class="col-md-9 align-column-center">
-				<h2> Shilong Zou （邹世龙） </h2>
-				<div class="social-links">
+  <div class="hero-grid">
+    <div class="hero-copy">
+      <h1 id="profile-title">Shilong <em>Zou.</em></h1>
+      <p class="hero-name-cn" lang="zh-CN">邹世龙</p>
+      <p class="hero-affiliation">Beijing Innovation Center of Humanoid Robotics</p>
+      <div class="hero-biography">
+        <p>I received my master's degree from the National University of Defense Technology (2026) and my bachelor's degree from Dalian Maritime University (2023). During my master's studies, I was advised by <a href="https://kevinkaixu.net/" target="_blank" rel="noopener noreferrer">Prof. Kai Xu</a> and <a href="https://www.zhuchenyang.net/" target="_blank" rel="noopener noreferrer">Prof. Chenyang Zhu</a>. I currently work as a world model researcher at the Beijing Innovation Center of Humanoid Robotics.</p>
+        <p>My research focuses on Embodied AI (including WFM, VLA, and RL), Computer Vision, and Deep Learning.</p>
+      </div>
+      <div class="research-topics" aria-label="Research interests">
+        <span>World Models</span><span>Embodied Intelligence</span><span>Computer Vision</span>
+      </div>
+      <div class="social-links hero-social" aria-label="Connect with Shilong Zou">
 				<a class="social-btn" href="mailto:zoushilong@nudt.edu.cn">
 					<img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect x='3' y='5' width='18' height='14' rx='2' fill='%23527bbd'/%3E%3Cpath d='M5 7l7 5 7-5' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E" alt="Email" /> Email
 				</a>
-				<span class="social-separator" aria-hidden="true">&middot;</span>
 				<a class="social-btn" href="https://github.com/ZouShilong1024" target="_blank" rel="noopener noreferrer">
 					<img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='11' fill='%231f2937'/%3E%3Ctext x='12' y='15' text-anchor='middle' font-size='8' font-family='Arial' font-weight='700' fill='white'%3EGH%3C/text%3E%3C/svg%3E" alt="GitHub" style="border-radius:50%;" /> GitHub
 				</a>
-				<span class="social-separator" aria-hidden="true">&middot;</span>
 				<a class="social-btn" href="https://scholar.google.com/citations?hl=zh-CN&amp;user=BfqaTCUAAAAJ&amp;view_op=list_works" target="_blank" rel="noopener noreferrer">
 					<img src="res/icon/google-scholar.svg" alt="" /> Google Scholar
 				</a>
-				<span class="social-separator" aria-hidden="true">&middot;</span>
 				<a class="social-btn" href="https://xhslink.com/m/5QP2l843kg8" target="_blank" rel="noopener noreferrer">
 					<img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect x='2' y='2' width='20' height='20' rx='5' fill='%23ff2442'/%3E%3Ctext x='12' y='15' text-anchor='middle' font-size='9' font-family='Arial' font-weight='700' fill='white'%3ER%3C/text%3E%3C/svg%3E" alt="Rednote" /> Rednote
 				</a>
-				<span class="social-separator" aria-hidden="true">&middot;</span>
-				<a class="social-btn" href="https://zoushilong1024.github.io/photography/" target="_blank" rel="noopener noreferrer">
+				<a class="social-btn" href="photography/" target="_blank" rel="noopener noreferrer">
 					<img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect x='3' y='4' width='18' height='16' rx='3' fill='%233b82f6'/%3E%3Ccircle cx='9' cy='10' r='2' fill='white'/%3E%3Cpath d='M6 17l4-4 3 3 3-4 2 5H6z' fill='white'/%3E%3C/svg%3E" alt="Photography" /> Photography
 				</a>
-				<!-- <span class="social-separator" aria-hidden="true">&middot;</span>
-				<a class="social-btn" href="https://zoushilong1024.github.io/reflections/" target="_blank" rel="noopener noreferrer">
-					<img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect x='4' y='3.5' width='16' height='17' rx='3' fill='%230284c7'/%3E%3Cpath d='M8 7.5h8M8 11.5h8M8 15.5h5' stroke='white' stroke-width='1.8' stroke-linecap='round'/%3E%3C/svg%3E" alt="Blog" /> Blog
-				</a> -->
 				</div>
-
-				<div class="small-div"></div>
-				I received my master's degree from the National University of Defense Technology (2026) and my bachelor's degree from Dalian Maritime University (2023).
-				During my master's studies, I was advised by
-				<a href="https://kevinkaixu.net/" target="_blank"> Prof. Kai Xu</a> and 
-				<a href="https://www.zhuchenyang.net/" target="_blank"> Prof. Chenyang Zhu</a>.
-				I currently work as a world model researcher at the Beijing Innovation Center of Humanoid Robotics.
-				<div class="small-div"></div>
-				My research focuses on Embodied AI (including WFM, VLA, and RL), Computer Vision, and Deep Learning.
-				<div class="small-div"></div>
-				<div class="highlight-box">
-				We are actively exploring new ideas to create intelligent robotic systems capable of learning dexterous, human-like behaviors 
-				and enhancing human life, while also committed to building a universal world model.
-			</div>
-
-				<!-- <details>
-					<summary>Bio in Chinese</summary>
-				</details> -->
-			</div>
-		</div>
-	</div>
-</div>
-
+    </div>
+    <div class="hero-portrait-column">
+      <figure class="hero-portrait">
+        <img src="res/figs/profile1.jpg" width="3072" height="4096" alt="Portrait of Shilong Zou" fetchpriority="high">
+      </figure>
+      <p class="hero-note">We are actively exploring new ideas to create intelligent robotic systems capable of learning dexterous, human-like behaviors and enhancing human life, while also committed to building a universal world model.</p>
+    </div>
+  </div>
+  <div class="hero-bottomline">
+    <a class="explore-link" href="#news"><span class="explore-arrow" aria-hidden="true">↓</span> Explore my work</a>
+  </div>
+</header>
+<div class="reading-layout" id="work">
+  <aside class="profile-sidebar" aria-label="Personal information">
+    <a class="sidebar-home" href="#about" aria-label="Back to personal introduction">
+      <div class="sidebar-portrait"><img src="res/figs/profile-outdoor.jpg" width="4624" height="3468" alt="Shilong Zou outdoors"></div>
+      <h2>Shilong Zou <span lang="zh-CN">邹世龙</span></h2>
+    </a>
+    <p class="sidebar-role">World Model Researcher</p>
+    <p class="sidebar-affiliation">Beijing Innovation Center<br>of Humanoid Robotics</p>
+    <div class="social-links sidebar-social" aria-label="Personal links">
+				<a class="social-btn" href="mailto:zoushilong@nudt.edu.cn">
+					<img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect x='3' y='5' width='18' height='14' rx='2' fill='%23527bbd'/%3E%3Cpath d='M5 7l7 5 7-5' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E" alt="Email" /> Email
+				</a>
+				<a class="social-btn" href="https://github.com/ZouShilong1024" target="_blank" rel="noopener noreferrer">
+					<img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='11' fill='%231f2937'/%3E%3Ctext x='12' y='15' text-anchor='middle' font-size='8' font-family='Arial' font-weight='700' fill='white'%3EGH%3C/text%3E%3C/svg%3E" alt="GitHub" style="border-radius:50%;" /> GitHub
+				</a>
+				<a class="social-btn" href="https://scholar.google.com/citations?hl=zh-CN&amp;user=BfqaTCUAAAAJ&amp;view_op=list_works" target="_blank" rel="noopener noreferrer">
+					<img src="res/icon/google-scholar.svg" alt="" /> Google Scholar
+				</a>
+				<a class="social-btn" href="https://xhslink.com/m/5QP2l843kg8" target="_blank" rel="noopener noreferrer">
+					<img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect x='2' y='2' width='20' height='20' rx='5' fill='%23ff2442'/%3E%3Ctext x='12' y='15' text-anchor='middle' font-size='9' font-family='Arial' font-weight='700' fill='white'%3ER%3C/text%3E%3C/svg%3E" alt="Rednote" /> Rednote
+				</a>
+				<a class="social-btn" href="photography/" target="_blank" rel="noopener noreferrer">
+					<img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect x='3' y='4' width='18' height='16' rx='3' fill='%233b82f6'/%3E%3Ccircle cx='9' cy='10' r='2' fill='white'/%3E%3Cpath d='M6 17l4-4 3 3 3-4 2 5H6z' fill='white'/%3E%3C/svg%3E" alt="Photography" /> Photography
+				</a>
+				</div>
+    <a class="sidebar-back" href="#about">Back to introduction <span aria-hidden="true">↑</span></a>
+  </aside>
+  <div class="reading-column">
+  <main class="reading-content" id="main-content">
+    <nav class="section-navigation" aria-label="Content sections">
+      <button class="section-menu-toggle" type="button" aria-expanded="false" aria-controls="section-links">Browse sections <span aria-hidden="true">＋</span></button>
+      <div class="section-links" id="section-links"><a class="section-nav-link" href="#news">News</a>
+<a class="section-nav-link" href="#publications">Publications</a>
+<a class="section-nav-link" href="#projects">Projects</a>
+<a class="section-nav-link" href="#talks">Talks</a>
+<a class="section-nav-link" href="#honors">Honors</a>
+<a class="section-nav-link" href="#competition">Competitions</a>
+<a class="section-nav-link" href="#education">Education</a>
+<a class="section-nav-link" href="#internship">Experience</a>
+<a class="section-nav-link" href="#miscellaneous">Beyond research</a></div>
+    </nav>
 
 <div class="container" id="news">
 	<h3> News </h3>
@@ -770,11 +168,6 @@
 <div class="container" id="publications">
 	<h3> Publications <font size="3" style="font-weight:normal">(*indicates equal technical contribution)</font></h3>
 
-	<div style="text-align: center; position: relative; margin-bottom: 50px; margin-top: 20px;">
-		<span style="position: absolute; top: 50%; left: 0; right: 0; transform: translateY(-50%); background-color: rgba(128, 128, 128, 0.3); padding: 0 10px;">
-			<b>Full List</b>
-		</span>
-	</div>
 
 	<!-- <div style="background-color: #edf2fd; padding-left: 20px; padding-right: 20px;">
 		<p><b>First/Co-First Author:</b> TII × 1, <i>Under Review × 2</i></p>
@@ -1044,11 +437,6 @@
 <div class="container" id="projects">
 	<h3> Projects <font size="3" style="font-weight:normal">(*indicates equal technical contribution)</font></h3>
 
-	<div style="text-align: center; position: relative; margin-bottom: 50px; margin-top: 20px;">
-		<span style="position: absolute; top: 50%; left: 0; right: 0; transform: translateY(-50%); background-color: rgba(128, 128, 128, 0.3); padding: 0 10px;">
-			<b>Full List </b>
-		</span>
-	</div>
 
 	<div class="news-container">
 	<div class="row align-items-center">
@@ -1210,57 +598,92 @@
 
 <div class="container" id="talks">
 	<h3> Talks </h3>
-
-	<div style="text-align: center; position: relative; margin-bottom: 50px; margin-top: 20px;">
-		<span style="position: absolute; top: 50%; left: 0; right: 0; transform: translateY(-50%); background-color: rgba(128, 128, 128, 0.3); padding: 0 10px;">
-			<b>Selected Talks</b>
-		</span>
-	</div>
-
-	<div class="news-container">
-	<div class="row align-items-center">
-		<div class="col-md-3 align-column-center" style="position: relative;">
-			<center>
-				<img class="img-fluid" src="res/figs/share/0426_4.jpg" width="98%" alt="" style="box-shadow: 4px 4px 4px #888888; margin-left: 5px; margin-right: 5px; border-radius:10px;">
-			</center>
-			<div class="badge" style="position: absolute; top: 4px; left: 8px;"><span class="cvpr-badge">World Model</span></div>
-		</div>
-		<div class="col-md-9">
-			<!-- <font size="4"> <b> 从感知到执行：基于世界模型的具身智能视频生成与动作预测 </b></font><br> -->
-			<font size="4"> <b> From Perception to Execution: Embodied Intelligence Video Generation and Action Prediction Based on World Models </b></font><br>
-			<br>
-			<font size="3">
-				<b> Shilong Zou</b>
-			</font>
-			<br>
-			ZhongGuanCun Dinghao H3, Beijing · Sharing Session · 2026.04.26<br>
-			<!-- 北京中关村鼎好H3 · 分享 · 2026.04.26<br> -->
-		</div>
-	</div>
-	<div class="row" style="margin-top: 18px;">
-		<div class="col-md-4">
-			<img class="img-fluid" src="res/figs/share/0426_3.jpg" width="100%" alt="" style="box-shadow: 4px 4px 4px #888888; margin-bottom: 12px; border-radius:10px;">
-		</div>
-		<div class="col-md-4">
-			<img class="img-fluid" src="res/figs/share/0426_2.jpg" width="100%" alt="" style="box-shadow: 4px 4px 4px #888888; margin-bottom: 12px; border-radius:10px;">
-		</div>
-		<div class="col-md-4">
-			<img class="img-fluid" src="res/figs/share/0426_5.jpg" width="100%" alt="" style="box-shadow: 4px 4px 4px #888888; margin-bottom: 12px; border-radius:10px;">
-		</div>
-	</div>
-	</div>
-
-	<div class="small-div"></div>
-
+	<p class="section-caption">Selected Talks</p>
+  <div class="talk-list">
+    <article class="news-container talk-card">
+      <div class="talk-card-layout">
+      <div class="talk-copy">
+      <div class="talk-meta"><time datetime="2026-09">September 2026</time><span class="talk-role">Instructor</span></div>
+      <h4>Development and Applications of Open-source World Model Systems</h4>
+      <p class="talk-event">Embodied AI Training Camp · Cohort 7</p>
+      <p class="talk-description">Taught in the seventh cohort's customization training course, presented the development and applications of open-source world model systems, and received an honorary certificate.</p>
+      <div class="talk-bottom"><p class="talk-location">Hangzhou, China</p><a class="talk-report" href="https://mp.weixin.qq.com/s/EGMHtkjkgFZ_GrOx9kGxLg" target="_blank" rel="noopener noreferrer">Event report <span aria-hidden="true">↗</span></a></div>
+      </div>
+      <div class="talk-media talk-media-triptych" role="group" aria-label="Photos from the Embodied AI Training Camp">
+        <a class="talk-photo" href="res/figs/share/training-camp-2026-09-speaker.jpg" target="_blank" rel="noopener noreferrer" title="View full-size photo"><img src="res/figs/share/training-camp-2026-09-speaker.jpg" alt="Shilong Zou teaching alongside a humanoid robot in Hangzhou" width="3072" height="4096" loading="lazy" decoding="async"></a>
+        <a class="talk-photo" href="res/figs/share/training-camp-2026-09-lecture.jpg" target="_blank" rel="noopener noreferrer" title="View full-size photo"><img src="res/figs/share/training-camp-2026-09-lecture.jpg" alt="Shilong Zou explaining world models beside a humanoid robot and presentation screen" width="4096" height="3072" loading="lazy" decoding="async"></a>
+        <a class="talk-photo" href="res/figs/share/training-camp-2026-09-session.jpg" target="_blank" rel="noopener noreferrer" title="View full-size photo"><img src="res/figs/share/training-camp-2026-09-session.jpg" alt="World model development lecture at the Embodied AI Training Camp" width="4096" height="3072" loading="lazy" decoding="async"></a>
+      </div>
+      </div>
+    </article>
+    <article class="news-container talk-card">
+      <div class="talk-card-layout">
+      <div class="talk-copy">
+      <div class="talk-meta"><time datetime="2026-09">September 2026</time><span class="talk-role">Speaker</span></div>
+      <h4>11th Siyuan Learning Motivation Training Camp</h4>
+      <p class="talk-description">Shared the latest world model research from the Beijing Innovation Center of Humanoid Robotics at the camp's exchange session.</p>
+      <div class="talk-bottom"><a class="talk-report" href="https://mp.weixin.qq.com/s/bNCQL143I_vUghdsW1FsBg" target="_blank" rel="noopener noreferrer">Event report <span aria-hidden="true">↗</span></a></div>
+      </div>
+      <div class="talk-media talk-media-pair" role="group" aria-label="Photos from the Siyuan Training Camp">
+        <a class="talk-photo" href="res/figs/share/siyuan-2026-09-exchange.png" target="_blank" rel="noopener noreferrer" title="View full-size photo"><img src="res/figs/share/siyuan-2026-09-exchange.png" alt="World model exchange session with Siyuan Training Camp participants" width="1080" height="810" loading="lazy" decoding="async"></a>
+        <a class="talk-photo" href="res/figs/share/siyuan-2026-09-group.png" target="_blank" rel="noopener noreferrer" title="View full-size photo"><img src="res/figs/share/siyuan-2026-09-group.png" alt="Group photo from the Siyuan Training Camp visit" width="1080" height="810" loading="lazy" decoding="async"></a>
+      </div>
+      </div>
+    </article>
+    <article class="news-container talk-card">
+      <div class="talk-card-layout">
+      <div class="talk-copy">
+      <div class="talk-meta"><time datetime="2026-06">June 2026</time><span class="talk-role">Roundtable participant</span></div>
+      <h4>World Models for Embodied Intelligence: Future Paradigms and the Development Landscape</h4>
+      <p class="talk-event">World Model Roundtable · InnoAngel Fund</p>
+      <p class="talk-description">Joined the roundtable hosted by InnoAngel Fund and shared experience in world model research.</p>
+      <div class="talk-bottom"><p class="talk-location">Yanqing, Beijing · <span lang="zh-CN">世园璞燊酒店</span></p><a class="talk-report" href="https://mp.weixin.qq.com/s/EvE0dT1zYt9hFtkNKUUnRQ" target="_blank" rel="noopener noreferrer">Event report <span aria-hidden="true">↗</span></a></div>
+      </div>
+      <div class="talk-media talk-media-single" role="group" aria-label="Photo from the World Model Roundtable">
+        <a class="talk-photo" href="res/figs/share/world-model-roundtable-2026-06.jpg" target="_blank" rel="noopener noreferrer" title="View full-size photo"><img src="res/figs/share/world-model-roundtable-2026-06.jpg" alt="Shilong Zou sharing experience at the InnoAngel Fund World Model Roundtable" width="3997" height="2662" loading="lazy" decoding="async"></a>
+      </div>
+      </div>
+    </article>
+    <article class="news-container talk-card">
+      <div class="talk-card-layout">
+      <div class="talk-copy">
+      <div class="talk-meta"><time datetime="2026-05">May 2026</time><span class="talk-role">Keynote speaker</span></div>
+      <h4>Pelican-Unified 1.0: A Unified Embodied Intelligence Model for Understanding, Reasoning, Imagination and Action</h4>
+      <p class="talk-event">Technology and Application Summit · Gaogong Humanoid Robotics</p>
+      <p class="talk-description">Delivered a keynote on Pelican-Unified 1.0 and its unified capabilities for embodied intelligence.</p>
+      <div class="talk-bottom"><p class="talk-location">Shanghai · <span lang="zh-CN">新华联索菲特大酒店</span></p><a class="talk-report" href="https://mp.weixin.qq.com/s/J42eW8aOaXeUvZRUqfhjCg" target="_blank" rel="noopener noreferrer">Event report <span aria-hidden="true">↗</span></a></div>
+      </div>
+      <div class="talk-media talk-media-grid" role="group" aria-label="Photos from the Gaogong Humanoid Robotics Summit">
+        <a class="talk-photo" href="res/figs/share/gaogong-2026-05-keynote-original.jpg" target="_blank" rel="noopener noreferrer" title="View full-size photo"><img src="res/figs/share/gaogong-2026-05-keynote.jpg" alt="Shilong Zou delivering the Pelican-Unified keynote in Shanghai" width="1440" height="960" loading="lazy" decoding="async"></a>
+        <a class="talk-photo" href="res/figs/share/gaogong-2026-05-presentation.jpg" target="_blank" rel="noopener noreferrer" title="View full-size photo"><img src="res/figs/share/gaogong-2026-05-presentation.jpg" alt="Shilong Zou presenting the world model architecture at the Gaogong summit" width="3200" height="2133" loading="lazy" decoding="async"></a>
+        <a class="talk-photo" href="res/figs/share/gaogong-2026-05-discussion-original.jpg" target="_blank" rel="noopener noreferrer" title="View full-size photo"><img src="res/figs/share/gaogong-2026-05-discussion.jpg" alt="Shilong Zou speaking during the Gaogong Humanoid Robotics Summit discussion" width="1440" height="960" loading="lazy" decoding="async"></a>
+        <a class="talk-photo" href="res/figs/share/gaogong-2026-05-audience.jpg" target="_blank" rel="noopener noreferrer" title="View full-size photo"><img src="res/figs/share/gaogong-2026-05-audience.jpg" alt="Shilong Zou attending the Gaogong Humanoid Robotics Summit in Shanghai" width="3200" height="2133" loading="lazy" decoding="async"></a>
+      </div>
+      </div>
+    </article>
+    <article class="news-container talk-card">
+      <div class="talk-card-layout">
+      <div class="talk-copy">
+      <div class="talk-meta"><time datetime="2026-04-26">April 2026</time><span class="talk-role">Keynote speaker</span></div>
+          <h4>From Perception to Execution: Embodied Intelligence Video Generation and Action Prediction Based on World Models</h4>
+          <p class="talk-event">HELLO WORLD (MODEL): Frontiers, Practice and Breakthroughs · NICE Academic</p>
+          <p class="talk-description">Delivered a keynote at the academic forum hosted by NICE Academic.</p>
+      <div class="talk-bottom"><p class="talk-location">Dinghao H3, Haidian, Beijing</p><a class="talk-report" href="https://mp.weixin.qq.com/s/_baauotlrfvYalyn-ghk-A" target="_blank" rel="noopener noreferrer">Event report <span aria-hidden="true">↗</span></a></div>
+      </div>
+      <div class="talk-media talk-media-grid" role="group" aria-label="Photos from the NICE Academic forum">
+        <a class="talk-photo" href="res/figs/share/0426_4.jpg" target="_blank" rel="noopener noreferrer" title="View full-size photo"><img src="res/figs/share/0426_4.jpg" alt="Shilong Zou presenting at the NICE Academic forum" width="1920" height="1280" loading="lazy" decoding="async"></a>
+        <a class="talk-photo" href="res/figs/share/0426_3.jpg" target="_blank" rel="noopener noreferrer" title="View full-size photo"><img src="res/figs/share/0426_3.jpg" alt="World model presentation at Dinghao H3" width="1920" height="1280" loading="lazy" decoding="async"></a>
+        <a class="talk-photo" href="res/figs/share/0426_2.jpg" target="_blank" rel="noopener noreferrer" title="View full-size photo"><img src="res/figs/share/0426_2.jpg" alt="Audience attending the NICE Academic forum" width="1920" height="1280" loading="lazy" decoding="async"></a>
+        <a class="talk-photo" href="res/figs/share/0426_5.jpg" target="_blank" rel="noopener noreferrer" title="View full-size photo"><img src="res/figs/share/0426_5.jpg" alt="Shilong Zou speaking at the NICE Academic forum" width="1920" height="1280" loading="lazy" decoding="async"></a>
+      </div>
+      </div>
+    </article>
+  </div>
 </div>
 
 <div class="container" id="honors">
 	<h3> Honors Awards </h3>
-	<div style="text-align: center; position: relative; margin-bottom: 50px; margin-top: 20px;">
-		<span style="position: absolute; top: 50%; left: 0; right: 0; transform: translateY(-50%); background-color: rgba(128, 128, 128, 0.3); padding: 0 10px;">
-			<b>Received more than 20 scholarships and grants totaling more than 100,000 RMB</b>
-		</span>
-	</div>
+	<p class="section-caption">Received more than 20 scholarships and grants totaling more than 100,000 RMB</p>
 	<!-- <font size="3" style="font-weight:normal"> <i> Received more than 20 scholarships and grants totaling more than 10w RMB </i></font>
 	<p></p> -->
 	<!-- <table style="border-spacing:2px; font-size: 15px;"> -->
@@ -1307,11 +730,7 @@
 
 <div class="container" id="competition">
 	<h3> Competition Awards </h3>
-	<div style="text-align: center; position: relative; margin-bottom: 50px; margin-top: 20px;">
-		<span style="position: absolute; top: 50%; left: 0; right: 0; transform: translateY(-50%); background-color: rgba(128, 128, 128, 0.3); padding: 0 10px;">
-			<b>Received more than 70 awards at international, national, provincial, and university level or above</b>
-		</span>
-	</div>
+	<p class="section-caption">Received more than 70 awards at international, national, provincial, and university level or above</p>
 	<!-- <font size="3" style="font-weight:normal"> <i> Won more than 70 awards at international, national, provincial, school level and above </i></font>
 	<p></p> -->
 
@@ -1349,11 +768,7 @@
 
 	<div class="small-div"></div>
 
-	<div style="text-align: center; position: relative; margin-bottom: 50px; margin-top: 20px;">
-		<span style="position: absolute; top: 50%; left: 0; right: 0; transform: translateY(-50%); background-color: rgba(128, 128, 128, 0.3); padding: 0 10px;">
-			<b>Others (Selected)</b>
-		</span>
-	</div>
+	<p class="section-caption section-subcaption">Others (Selected)</p>
 	
 	<div class="news-container">
 	<div style="height: 100px; overflow: auto; font-size: medium;">
@@ -1402,7 +817,7 @@
 		</div>
 		<div class="col-md-2">
 			<font size="3">
-				2023 - present
+				2023 - 2026
 			</font>
 		</div>
 	</div>
@@ -1479,8 +894,21 @@
 		<li>[03/2025] 🏃 Completed the first A1 marathon with a score of <b>135 (average 4.30)</b> - Zhangjiajie Wulingyuan Half Marathon</li>
 		<div style="height: 4px"></div>
 		<li>[04/2025] 🏃 <b>Bronze Medalist🥉 </b>in the Men's 800 Meters at the Sports Meet of Cadet Second Battalion, College of Computer Science, National University of Defense Technology</li>
-		<div style="height: 4px"></div>
 	</ul>
+  <div class="marathon-gallery" role="group" aria-label="Half marathon certificates">
+    <figure class="marathon-item">
+      <a class="marathon-photo" href="res/figs/marathons/songya-lake-2025.jpg" target="_blank" rel="noopener noreferrer" title="View full-size certificate"><img src="res/figs/marathons/songya-lake-2025.jpg" alt="Shilong Zou's 2025 Songya Lake New Year Half Marathon certificate" width="1000" height="1416" loading="lazy" decoding="async"></a>
+      <figcaption><span class="marathon-name">Songya Lake</span><span class="marathon-caption-meta">2025 · Half Marathon</span></figcaption>
+    </figure>
+    <figure class="marathon-item">
+      <a class="marathon-photo" href="res/figs/marathons/zhangjiajie-wulingyuan-2025.jpg" target="_blank" rel="noopener noreferrer" title="View full-size certificate"><img src="res/figs/marathons/zhangjiajie-wulingyuan-2025.jpg" alt="Shilong Zou's 2025 Zhangjiajie Wulingyuan Half Marathon certificate" width="1200" height="1697" loading="lazy" decoding="async"></a>
+      <figcaption><span class="marathon-name">Zhangjiajie Wulingyuan</span><span class="marathon-caption-meta">2025 · Half Marathon</span></figcaption>
+    </figure>
+    <figure class="marathon-item">
+      <a class="marathon-photo" href="res/figs/marathons/changsha-2025.jpg" target="_blank" rel="noopener noreferrer" title="View full-size certificate"><img src="res/figs/marathons/changsha-2025.jpg" alt="Shilong Zou's 2025 Changsha Half Marathon certificate" width="1241" height="1755" loading="lazy" decoding="async"></a>
+      <figcaption><span class="marathon-name">Changsha</span><span class="marathon-caption-meta">2025 · Half Marathon</span></figcaption>
+    </figure>
+  </div>
 	</div>
 	<div class="content-div"></div>
 </div>
@@ -1502,13 +930,25 @@
 	<div class="content-div"></div>
 </div> -->
 
-<div class="container">
-	<div class="small-div"></div>
-	<center><i>Updated <span id="updated-date"></span>. </i></center>
-	<center> © Shilong Zou</center>
-	<div class="content-div"></div>
-</div>
+  </main>
 
+<section class="visitor-section" id="visitors" aria-labelledby="visitors-title">
+  <h2 class="footer-label" id="visitors-title">Visitors</h2>
+  <div class="visitor-map">
+    <script async type="text/javascript" id="mapmyvisitors" src="https://mapmyvisitors.com/map.js?d=Pg7-pX-BFXtUqWXRXISRMWn9J6zSBr6D5VCwEVFEm2w&amp;cl=ffffff&amp;co=274956&amp;w=a"></script>
+    <noscript><p class="visitor-map-message">Enable JavaScript to view the visitor map.</p></noscript>
+  </div>
+</section>
+
+<footer class="page-footer" id="site-footer" aria-label="Page information">
+  <div class="footer-update">
+    <p class="footer-label">Last updated</p>
+    <p class="footer-date"><span id="updated-date"></span></p>
+    <p class="footer-copyright">© Shilong Zou</p>
+  </div>
+</footer>
+  </div>
+</div>
 </div>
 
 <aside class="photo-strip-bar" id="photo-strip-bar" aria-label="My photography showcase">
