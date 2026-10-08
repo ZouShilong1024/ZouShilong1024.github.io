@@ -129,7 +129,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid #659da7; outline-offs
 .news-container font[size="3"] { font-size: 13px; }
 .news-container ul { padding-left: 20px; margin-bottom: 0; }
 #news .news-container { padding: 20px 24px; }
-#news .news-container > div { height: 240px; scrollbar-width: thin; scrollbar-color: #c8d6d9 transparent; }
+#news .news-container > div { height: 360px; scrollbar-width: thin; scrollbar-color: #c8d6d9 transparent; }
 #news ul li { padding-block: 6px; font-size: 14px; line-height: 1.85; border-radius: 5px; transition: background-color .2s, box-shadow .2s; }
 #news ul li:hover { background: #dbeaf3; box-shadow: 0 0 0 5px #dbeaf3; }
 #news li::marker { color: #a5b9c0; }
