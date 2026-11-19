@@ -16,6 +16,7 @@
   <script src="assets/js/tailwind-config.js"></script>
   <link rel="stylesheet" href="assets/css/site.css?v=visit-counter-1" />
   <link rel="stylesheet" href="assets/css/presentation.css?v=architecture-cards-1" />
+  <link rel="stylesheet" href="assets/css/multiview.css" />
 </head>
 <body class="text-ink font-sans antialiased">
   <nav class="site-nav fixed inset-x-0 top-0 z-20 backdrop-blur-xl">
@@ -30,6 +31,7 @@
         <a class="nav-link" href="#experiments">Experiments</a>
         <a class="nav-link" href="#applications">Applications</a>
         <a class="nav-link" href="#ood-cases">Generalization</a>
+        <a class="nav-link" href="#robodojo-multiview">Downstream</a>
         <a class="nav-link" href="#contributors">Team</a>
         <a class="nav-link" href="#citation">Citation</a>
       </div>
@@ -702,6 +704,47 @@
       </div>
     </section>
 
+    <section id="robodojo-multiview" aria-labelledby="mv-heading">
+      <div class="mv-section-heading"><span class="mv-kicker">RoboDojo · Fine-tuned rollouts</span><h2 id="mv-heading" class="section-title">Fine-tuning on RoboDojo for multi-view generation</h2>
+        <p class="section-intro prose-intro">After fine-tuning on RoboDojo, Pelican-Sim 1.0 predicts head-camera and two wrist-camera observations together.</p>
+      </div>
+      <div class="mv-grid">
+        <article class="mv-card">
+          <header class="mv-card-heading"><span class="mv-number">01</span><h3>Hold button until color change</h3></header>
+          <video class="mv-prediction" controls muted loop playsinline preload="none" data-user-paused="true" poster="assets/videos/robodojo-multiview/01_hold_button.jpg" aria-label="Fine-tuned Pelican-Sim prediction: Hold button until color change">
+            <source src="assets/videos/robodojo-multiview/01_hold_button.mp4" type="video/mp4" />Your browser does not support video playback.
+          </video>
+          <footer class="mv-card-footer"><span>Model prediction</span><button type="button" class="mv-compare" data-mv-compare="01_hold_button" data-mv-title="Hold button until color change" aria-haspopup="dialog" aria-controls="mv-comparison-dialog">Compare with reference <span aria-hidden="true">↗</span></button></footer>
+        </article>
+        <article class="mv-card">
+          <header class="mv-card-heading"><span class="mv-number">02</span><h3>Set button colors</h3></header>
+          <video class="mv-prediction" controls muted loop playsinline preload="none" data-user-paused="true" poster="assets/videos/robodojo-multiview/02_button_colors.jpg" aria-label="Fine-tuned Pelican-Sim prediction: Set button colors">
+            <source src="assets/videos/robodojo-multiview/02_button_colors.mp4" type="video/mp4" />Your browser does not support video playback.
+          </video>
+          <footer class="mv-card-footer"><span>Model prediction</span><button type="button" class="mv-compare" data-mv-compare="02_button_colors" data-mv-title="Set button colors" aria-haspopup="dialog" aria-controls="mv-comparison-dialog">Compare with reference <span aria-hidden="true">↗</span></button></footer>
+        </article>
+        <article class="mv-card">
+          <header class="mv-card-heading"><span class="mv-number">03</span><h3>Pick the different object</h3></header>
+          <video class="mv-prediction" controls muted loop playsinline preload="none" data-user-paused="true" poster="assets/videos/robodojo-multiview/03_pick_outlier.jpg" aria-label="Fine-tuned Pelican-Sim prediction: Pick the different object">
+            <source src="assets/videos/robodojo-multiview/03_pick_outlier.mp4" type="video/mp4" />Your browser does not support video playback.
+          </video>
+          <footer class="mv-card-footer"><span>Model prediction</span><button type="button" class="mv-compare" data-mv-compare="03_pick_outlier" data-mv-title="Pick the different object" aria-haspopup="dialog" aria-controls="mv-comparison-dialog">Compare with reference <span aria-hidden="true">↗</span></button></footer>
+        </article>
+        <article class="mv-card">
+          <header class="mv-card-heading"><span class="mv-number">04</span><h3>Pour liquid into a cup</h3></header>
+          <video class="mv-prediction" controls muted loop playsinline preload="none" data-user-paused="true" poster="assets/videos/robodojo-multiview/04_pour_liquid.jpg" aria-label="Fine-tuned Pelican-Sim prediction: Pour liquid into a cup">
+            <source src="assets/videos/robodojo-multiview/04_pour_liquid.mp4" type="video/mp4" />Your browser does not support video playback.
+          </video>
+          <footer class="mv-card-footer"><span>Model prediction</span><button type="button" class="mv-compare" data-mv-compare="04_pour_liquid" data-mv-title="Pour liquid into a cup" aria-haspopup="dialog" aria-controls="mv-comparison-dialog">Compare with reference <span aria-hidden="true">↗</span></button></footer>
+        </article>
+      </div>
+      <dialog id="mv-comparison-dialog" class="mv-dialog" aria-labelledby="mv-dialog-title" aria-describedby="mv-dialog-description">
+        <header class="mv-dialog-heading"><div><span class="mv-kicker">Rollout comparison</span><h3 id="mv-dialog-title">Compare with reference</h3></div><button type="button" class="mv-close" aria-label="Close comparison">Close <span aria-hidden="true">×</span></button></header>
+        <p id="mv-dialog-description">Left: model prediction · Center: recorded RGB · Right: action skeleton. Each panel contains the same three camera views.</p>
+        <div class="mv-comparison-stage" role="region" aria-label="Three-panel comparison, horizontally scrollable on small screens" tabindex="0"><video id="mv-comparison-video" controls muted loop playsinline preload="none" data-user-paused="true" aria-label="Prediction, recorded RGB and action-skeleton comparison"></video></div>
+      </dialog>
+    </section>
+
     <section id="contributors">
       <h2 class="section-title">Contributors</h2>
       <div class="mt-6 rounded-2xl border border-zinc-200 bg-white p-6 text-sm leading-6 text-zinc-600">
@@ -749,6 +792,7 @@
   </footer>
 
   <script type="module" src="assets/js/main.js"></script>
+  <script type="module" src="assets/js/multiview.js"></script>
   <script defer src="assets/js/visit-counter.js"></script>
 </body>
 </html>

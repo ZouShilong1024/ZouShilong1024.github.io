@@ -46,7 +46,7 @@ class StructureTests(unittest.TestCase):
 
     def test_navigation_follows_main_sections(self):
         expected = ["abstract", "method", "experiments", "applications",
-                    "ood-cases", "contributors", "citation"]
+                    "ood-cases", "robodojo-multiview", "contributors", "citation"]
         sections = [a["id"] for tag, a, stack in self.page.nodes
                     if tag == "section" and stack and stack[-1][0] == "main"]
         links = [a["href"][1:] for a in self.attrs

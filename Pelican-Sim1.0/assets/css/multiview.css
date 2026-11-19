@@ -1,0 +1,25 @@
+/* RoboDojo fine-tuning has its own chapter after the generalization examples. */
+.mv-kicker { display: block; color: #ad633e; font-size: .65rem; font-weight: 600; letter-spacing: .13em; text-transform: uppercase; margin-bottom: .55rem; }
+.mv-grid { margin-top: 1.5rem; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.1rem; }
+.mv-card { min-width: 0; overflow: hidden; border: 1px solid #e4e4e7; border-radius: 16px; background: white; box-shadow: 0 4px 18px #18181b04; }
+.mv-card-heading { display: flex; align-items: center; gap: .65rem; padding: .85rem 1rem; min-height: 4rem; }
+.mv-number { font-size: .65rem; color: #b77957; font-variant-numeric: tabular-nums; }
+.mv-card-heading h3 { font-weight: 600; font-size: .85rem; line-height: 1.4; margin: 0; flex: 1; }
+.mv-prediction { display: block; width: 100%; aspect-ratio: 4 / 3; background: #13232d; object-fit: contain; }
+.mv-card-footer { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: .5rem; padding: .8rem 1rem; }
+.mv-card-footer > span { font-size: .65rem; color: #71717a; }
+.mv-compare { font-size: .65rem; font-weight: 500; padding: .4rem .6rem; border: 1px solid #e4e4e7; background: #fafafa; border-radius: 7px; color: #3f3f46; cursor: pointer; transition: background .2s, border-color .2s; }
+.mv-compare:hover { border-color: #d7a78c; background: #fff5ee; color: #9a5737; }
+.mv-compare:focus-visible, .mv-close:focus-visible { outline: 2px solid #b77957; outline-offset: 4px; }
+.mv-dialog { width: min(1200px, calc(100% - 32px)); max-height: calc(100dvh - 40px); overflow: auto; border: 1px solid #e4e4e7; border-radius: 18px; padding: 1.2rem; color: #27272a; background: white; box-shadow: 0 25px 100px #0004; margin: auto; }
+.mv-dialog:not([open]) { display: none; }
+.mv-dialog::backdrop { background: #12232dc9; backdrop-filter: blur(5px); }
+.mv-dialog-heading { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+.mv-dialog-heading h3 { font-size: 1.1rem; font-weight: 600; margin: 0; }
+.mv-close { padding: .45rem .7rem; border: 1px solid #e4e4e7; border-radius: 7px; cursor: pointer; background: #fafafa; font-size: .75rem; white-space: nowrap; }
+.mv-dialog > p { font-size: .7rem; line-height: 1.7; color: #71717a; margin: .8rem 0; }
+#mv-comparison-video { display: block; width: 100%; background: #13232d; aspect-ratio: 1984 / 608; object-fit: contain; }
+@media (max-width: 700px) { .mv-grid { grid-template-columns: minmax(0, 1fr); } .mv-dialog { padding: .8rem; } .mv-dialog-heading h3 { font-size: .9rem; } }
+
+.mv-comparison-stage { overflow-x: auto; scrollbar-width: thin; border-radius: 8px; background: #13232d; }
+@media (max-width: 700px) { #mv-comparison-video { min-width: 720px; } }
